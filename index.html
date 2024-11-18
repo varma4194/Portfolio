@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,15 +45,64 @@
             background-color: rgba(44, 62, 80, 0.9);
             color: #fff;
             padding: 1rem 0;
-            position: Relative;
+            position: fixed; /* Changed from Relative to Fixed */
             width: 100%;
             top: 0;
             z-index: 10;
             transition: background-color 0.3s ease;
         }
-        about {
-            margin-top: 100px; 
+
+
+        #about {
+            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+            padding: 100px 20px; /* Adjust the padding as needed */
+            color: #fff; /* Make sure the text color is readable */
         }
+
+        /* General scaling for smaller screens */
+        @media (max-width: 1024px) {
+        .hero h1 {
+            font-size: 2.8rem; /* Smaller heading for tablets */
+        }
+
+        .hero p {
+            font-size: 1rem; /* Smaller paragraph text */
+        }
+
+        #about, #experience, #skills, #projects, #education, #contact {
+            padding: 60px 20px; /* Reduced padding for smaller screens */
+        }
+}
+
+        @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.2rem; /* Smaller heading for mobile devices */
+        }
+
+    .hero p {
+        font-size: 0.9rem; /* Smaller paragraph text */
+    }
+
+    .container {
+        width: 95%; /* Adjust container width for better spacing */
+    }
+
+    #about, #experience, #skills, #projects, #education, #contact {
+        padding: 40px 15px; /* Further reduced padding for mobile devices */
+    }
+}
+
+@media (max-height: 700px) {
+    /* Specific rules for devices with short height */
+    .hero {
+        padding: 100px 0 80px; /* Reduce top and bottom padding */
+    }
+
+    #about, #experience, #skills, #projects, #education, #contact {
+        padding: 40px 15px; /* Reduce section padding */
+    }
+}
+
 
         nav {
             display: flex;
@@ -150,7 +200,7 @@
             color: var(--primary-color);
         }
 
-        section {
+        #section {
             padding: 100px 0;
             position: relative;
         }
@@ -328,6 +378,13 @@
             background-color: var(--bg-color);
             padding: 80px 0;
         }
+        #about {
+             padding-bottom: 60px; /* Increase this to add more space below the About section */
+        }
+
+        #experience {
+            padding-top: 60px; /* Increase this to add more space above the Experience section */
+        }
 
         .contact-form {
             max-width: 600px;
@@ -407,22 +464,80 @@
 
  <section id="about" class="hero parallax" style="text-align: center; padding: 40px 20px;">
     <!-- Profile Image -->
-    <div style="flex: 1; text-align: center;">
-        <img src="Profile_image.jpeg" alt="Profile Picture" 
-             style="border-radius: 50%; width: 200px; height: 200px; border: 5px solid #28a745; margin-bottom: 20px;">
+    <div style="flex: 1; text-align: center; margin-top: 100px;">
+        <img src="profile_image.jpeg" alt="Profile Picture" 
+             style="border-radius: 50%; width: 250px; height: 250px; border: 5px solid; margin-bottom: 20px;">
     </div>
-       <!-- About Content -->
+    <!-- About Content -->
     <div class="hero-content container">
         <h1 style="margin-bottom: 10px;">Ravi Varma Gottumukkala</h1>
+        <!-- Add this inside the <body> tag where you want the animated text to appear, for example, below your hero section heading -->
+<!-- Add this inside the <body> tag where you want the animated text to appear, for example, below your hero section heading -->
+
+<div id="animated-text" style="font-size: 2rem; font-weight: 600; margin-top: 20px; height: 2.5rem;"></div>
+
+<!-- Add this inside the <body> tag where you want the animated text to appear, for example, below your hero section heading -->
+
+<div id="animated-text" style="font-size: 2rem; font-weight: 600; margin-top: 20px; margin-bottom: 20px; height: 2.5rem;"></div>
+
+<script>
+    // Words to display
+    const words = ["Software Developer", "Full Stack Developer","Java Developer"];
+    let currentWordIndex = 0;
+    let currentCharIndex = 0;
+    const textElement = document.getElementById("animated-text");
+
+    // Function to display each letter
+    function typeLetter() {
+        const word = words[currentWordIndex];
+        if (currentCharIndex < word.length) {
+            textElement.textContent += word[currentCharIndex];
+            currentCharIndex++;
+            setTimeout(typeLetter, 140); // Adjust speed of typing effect
+        } else {
+            setTimeout(eraseLetters, 1200); // Pause before erasing
+        }
+    }
+
+    // Function to erase each letter
+    function eraseLetters() {
+        const word = words[currentWordIndex];
+        if (currentCharIndex > 0) {
+            textElement.textContent = word.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+            setTimeout(eraseLetters, 100); // Adjust speed of erasing effect
+        } else {
+            currentWordIndex = (currentWordIndex + 1) % words.length; // Move to next word
+            setTimeout(typeLetter, 500); // Pause before typing the next word
+        }
+    }
+
+    // Start the typing effect
+    typeLetter();
+</script>
+
         <p style="font-size: 1.1em; margin-bottom: 20px;">
-            I’m Ravi Varma Gottumukkala, a Software Engineer with 5+ years of experience building scalable web applications, designing RESTful APIs, and implementing CI/CD pipelines. Skilled in Java, Spring Boot, React, Angular, and cloud technologies, I deliver high-performance solutions that solve real-world problems.
+            I’m  a Software Engineer with 5+ years of experience building scalable web applications, designing RESTful APIs, and implementing CI/CD pipelines. Skilled in Java, Spring Boot, React, Angular, and cloud technologies, I deliver high-performance solutions that solve real-world problems.
         </p>
         <div style="margin-top: 20px;">
             <a href="#experience" class="btn" style="margin-right: 10px;">View Experience</a>
             <a href="#contact" class="btn btn-outline">Contact Me</a>
         </div>
+        <!-- Contact Icons -->
+        <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
+            <a href="https://www.linkedin.com/in/ravi-varma-g" target="_blank" style="color: #fff; font-size: 1.5rem;" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:rvgottumukkala98@gmail.com" style="color: #fff; font-size: 1.5rem;" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="tel:+16674648539" style="color: #fff; font-size: 1.5rem;" title="Call">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
     </div>
 </section>
+
     
     <section id="experience">
         <div class="container">
@@ -686,6 +801,23 @@
             alert('Thank you for your message! I will get back to you soon.');
             this.reset();
         });
+        
+        window.addEventListener('resize', function() {
+        const height = window.innerHeight;
+        const width = window.innerWidth;
+
+        // Example: Adjust the font size of the hero heading based on the viewport width
+        const heroHeading = document.querySelector('.hero h1');
+        if (width < 768) {
+            heroHeading.style.fontSize = '2rem'; // Mobile size
+        } else if (width < 1024) {
+            heroHeading.style.fontSize = '2.8rem'; // Tablet size
+        } else {
+            heroHeading.style.fontSize = '3.5rem'; // Desktop size
+        }
+    });
     </script>
+
 </body>
 </html>
+
