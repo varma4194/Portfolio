@@ -52,6 +52,59 @@
             transition: background-color 0.3s ease;
         }
 
+       .experience-container {
+    display: flex;
+}
+
+.experience-titles {
+    width: 30%;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.experience-header {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    cursor: pointer;
+    color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.experience-header.active {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+}
+
+.company-info, .years {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.experience-descriptions {
+    width: 70%;
+    padding-left: 20px;
+}
+
+.experience-content {
+    display: none;
+    opacity: 0;
+    transform: translateX(-20px); /* Start slightly to the left, not fully off-screen */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth and slower transition */
+}
+
+.experience-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0); /* Slide into place */
+}
+
+
 
         #about {
             background: linear-gradient(135deg, var(--primary-color), #2980b9);
@@ -539,49 +592,71 @@
 </section>
 
     
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Work Experience</h2>
-            <div class="experience-item card">
-                <h3>Software Development Engineer</h3>
-                <p class="company">Albertsons | June 2023 – Present</p>
-                <ul>
-                    <li>Designed and implemented microservices using Java and Spring Boot.</li>
-                    <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
-                    <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
-                    <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
-                    <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG and Cucumber to ensure code quality and seamless integration.</li>
-                    <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
-                </ul>
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="experience-container">
+            <!-- Experience Titles (Left Column) -->
+            <div class="experience-titles">
+                <div class="experience-header active" data-target="experience-1">
+                    <h3>Software Development Engineer</h3>
+                    <p class="company-info">Albertsons</p>
+                    <p class="years">June 2023 – Present</p>
+                </div>
+                <div class="experience-header" data-target="experience-2">
+                    <h3>Application Development Engineer</h3>
+                    <p class="company-info">Tata Consultancy Services</p>
+                    <p class="years">Nov 2020 – Aug 2022</p>
+                </div>
+                <div class="experience-header" data-target="experience-3">
+                    <h3>Software Developer</h3>
+                    <p class="company-info">HCL Technologies</p>
+                    <p class="years">Apr 2019 – Nov 2020</p>
+                </div>
             </div>
-            <div class="experience-item card">
-                <h3>Application Development Engineer</h3>
-                <p class="company">Tata Consultancy Services | November 2020 – August 2022</p>
-                <ul>
-                    <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
-                    <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
-                    <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
-                    <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
-                    <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
-                    <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
-                    <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
-                </ul>
-            </div>
-            <div class="experience-item card">
-                <h3>Software Developer</h3>
-                <p class="company"> HCL Technologies | April 2019 – November 2020</p>
-                <ul>
-                    <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
-                    <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
-                    <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
-                    <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
-                    <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
-                    <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
-                    <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
-                </ul>
+
+            <!-- Experience Descriptions (Right Column) -->
+            <div class="experience-descriptions">
+                <div class="experience-content card active" id="experience-1">
+                    <ul>
+                        <li>Designed and implemented microservices using Java and Spring Boot.</li>
+                        <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
+                        <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
+                        <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
+                        <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG, and Cucumber to ensure code quality and seamless integration.</li>
+                        <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
+                    </ul>
+                </div>
+                <div class="experience-content card" id="experience-2">
+                    <ul>
+                        <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
+                        <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
+                        <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
+                        <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
+                        <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
+                        <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
+                        <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
+                    </ul>
+                </div>
+                <div class="experience-content card" id="experience-3">
+                    <ul>
+                        <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
+                        <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
+                        <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
+                        <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
+                        <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
+                        <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
+                        <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
+
 
     <section id="skills" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?code');">
         <div class="container">
@@ -816,6 +891,31 @@
             heroHeading.style.fontSize = '3.5rem'; // Desktop size
         }
     });
+
+   document.querySelectorAll('.experience-header').forEach(header => {
+    header.addEventListener('click', function() {
+        // Remove active class from all headers
+        document.querySelectorAll('.experience-header').forEach(h => h.classList.remove('active'));
+        // Remove active class and reset styles for all content
+        document.querySelectorAll('.experience-content').forEach(content => {
+            content.classList.remove('active');
+            content.style.display = 'none'; // Hide content
+        });
+
+        // Add active class to the clicked header
+        this.classList.add('active');
+        
+        // Get the target content and apply the transition
+        const content = document.getElementById(this.dataset.target);
+        content.style.display = 'block'; // Make the content visible
+        setTimeout(() => {
+            content.classList.add('active'); // Trigger the transition
+        }, 10); // Small delay to ensure the transition applies
+    });
+});
+
+
+
     </script>
 
 </body>
