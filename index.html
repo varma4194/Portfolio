@@ -9,9 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #3498db; /* You can keep this or adjust as needed */
+/*            --primary-color: #3498db; /* You can keep this or adjust as needed */*/
             --secondary-color: #ecf0f1; /* Light text color for contrast */
             --accent-color: #e74c3c; /* Accent color for highlights */
             --text-color: #ecf0f1; /* Light color for main text */
@@ -59,7 +63,11 @@
     border: none;
     object-fit: cover;
     object-position: top;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 
+        0 4px 8px rgba(255, 255, 255, 0.6), /* Subtle white shadow for highlight */
+        0 8px 16px #004953; /* Teal shadow for depth */
+    border: 3px solid #004953; /* Optional: Adds a teal border */
+    transform: translateY(-40px);
 }
 
 /* Buttons under the image */
@@ -117,7 +125,7 @@
         #animated-text {
         font-size: 2.0rem; /* Make the running text larger */
             font-weight: bold; /* Make the text bold for emphasis */
-            color: #ff6f61; /* Change the color to blue or your preferred highlight color */
+            color: #d4af37; /* Change the color to blue or your preferred highlight color */
     }
 
 
@@ -136,7 +144,7 @@
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: var(--bg-color);
+            background-color: #002b36;
             overflow-x: hidden;
         }
 
@@ -148,9 +156,10 @@
         }
 
         header {
-            background-color: #1a252f; /* Darker header background */
+/*            background-color: #1a252f;*/
+            background-color: white; 
             color: var(--text-color);
-            padding: 1rem 0;
+            padding: 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -187,17 +196,18 @@
     color: var(--text-color); /* Use the text color for better contrast */
     padding: 15px;
     border-radius: 5px;
-    background-color: #34495e; /* Darker background for non-active state */
+    background-color: rgba(0, 73, 83, 0.5); /* Darker background for non-active state */
     border: 1px solid #3a4a5a; /* Border to separate blocks */
     transition: background-color 0.3s ease, color 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .experience-header.active {
-    background-color: var(--primary-color); /* Highlight color for active state */
+    background-color: rgba(255, 255, 255, 0.3);
     color: #fff;
     font-weight: bold;
 }
+
 
 
 .company-info, .years {
@@ -252,19 +262,23 @@
             font-size: 1rem; /* Smaller paragraph text */
         }
 
-        #about,
-        #experience,
-        #skills,
-        #projects,
-        #education,
-        #contact {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 60px 20px; /* Adjust padding as needed */
-            padding-top: 100px; /* Space above the section */
-            padding-bottom: 100px;
-            scroll-margin-top: 74px;
-        }
+       #about,
+#experience,
+#skills,
+#projects,
+#education,
+#contact,
+#certificates {
+/*    background-color: var(--bg-color);*/
+    color: var(--text-color);
+    padding: 60px 20px; /* Consistent padding for left and right */
+    padding-top: 100px; /* Consistent space above each section */
+    padding-bottom: 100px; /* Consistent space below each section */
+    scroll-margin-top: 74px;
+}
+#projects {
+    padding-top: 100px !important; /* Use !important to override any other styles */
+}
 
 
 }
@@ -285,6 +299,7 @@
     #about, #experience, #skills, #projects, #education, #contact {
         padding: 40px 15px; /* Further reduced padding for mobile devices */
     }
+
 }
 
 @media (max-width: 768px) {
@@ -337,7 +352,7 @@
 
         .hero {
             
-            background-color: #34495e !important;
+/*            background-color: #34495e !important;*/
             color: #fff;
             padding: 150px 0 100px;
             text-align: center;
@@ -356,6 +371,7 @@
             opacity: 0.1;
             z-index: 0;
         }
+
 
         .hero-content {
             position: relative;
@@ -379,7 +395,7 @@
         }
         .btn {
             background-color: #fff;
-            color: var(--primary-color);
+            color: #004953;
             padding: 0.8rem 1.5rem;
             border-radius: 30px;
             text-decoration: none;
@@ -438,7 +454,7 @@
         }
 
         .card {
-            background-color: var(--card-bg);
+            background-color: #004953;
             color: var(--text-color);
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow for dark background */
@@ -447,16 +463,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
         }
 
         .card:hover {
@@ -515,9 +521,14 @@
 }
 
 .skill-category h3 {
+
+    font-weight: bold; /* Makes the headings bold */
+    color: #ffffff; /* Optional: Sets the color to white for better visibility */
+    text-transform: uppercase; /* Optional: Makes the text uppercase for emphasis */
+    margin-bottom: 10px; /* Optional: Adds spacing below the heading */
     font-size: 1.3rem; /* Adjusted font size for balance */
     margin-bottom: 0.75rem; /* Consistent spacing below headers */
-    color: var(--primary-color);
+    color: white;
     text-align: left; /* Left-align the headers */
 }
 
@@ -544,7 +555,7 @@
 /* Adjust icon styling */
 .skill-category ul li i {
     margin-right: 0.5rem;
-    color: var(--primary-color);
+    color: #d4af37;
     font-size: 1.2rem; /* Keep icon size consistent */
 }
 
@@ -559,13 +570,14 @@
 .project-item h3 {
     font-size: 1.5rem; /* Keep the original font size for the headings */
     margin-bottom: 1rem;
-    color: var(--primary-color);
+    color: #ffffff; /* Sets the project heading to white */
+    font-weight: bold; /* Makes the text bold */
 }
 
 .project-item p {
-    font-size: 1.2rem; /* Increased font size for the descriptions */
-    line-height: 1.6; /* Adjusted line height for better readability */
-    margin-bottom: 1rem;
+    color: #D4AF37; /* Sets the dates to gold */
+    font-weight: bold; /* Optional: Makes the dates bold for better visibility */
+    margin-top: 5px; /* Optional: Adds space between heading and date */
 }
 
 .project-item ul {
@@ -590,7 +602,7 @@
 .education-item p {
     font-size: 1.2rem; /* Increased font size for text */
     line-height: 1.6; /* Adjusted line height for readability */
-    color: #dcdcdc; /* Optional: change text color if needed */
+    color: #d4af37; /* Optional: change text color if needed */
 }
 /* Badge Image Styling */
 .badge-image {
@@ -609,7 +621,7 @@
 }
 
 .certification-card {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #004953;
     padding: 20px;
     border-radius: 10px;
     width: 250px; /* Fixed width to keep cards uniform */
@@ -638,13 +650,48 @@
 .certification-card h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    color: #ffffff;
 }
 
 .certification-card p {
-    font-size: 1rem;
-    color: #dcdcdc;
+    color: #D4AF37; /* Sets the organization name to gold */
+    font-weight: bold; /* Optional: Makes the text bold for better visibility */
+    text-align: center; /* Ensures the organization names are centered */
+    margin-top: 10px;
 }
+
+.navbar {
+    background-color: transparent !important; /* Ensures the navbar is fully transparent */
+    border: none; /* Removes any border */
+    width: 100%; /* Ensure the navbar spans the full width */
+}
+
+.navbar .navbar-brand,
+.navbar .nav-link {
+    color: #ffffff !important; /* Makes text white */
+}
+
+.navbar .navbar-toggler {
+    border-color: #ffffff; /* Makes the hamburger icon border white */
+}
+
+.navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+    /* Makes the hamburger icon lines white */
+}
+
+body {
+    margin: 0; /* Removes any default margin from the body */
+    padding: 0; /* Removes any default padding from the body */
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.container {
+    background-color: transparent !important; /* Ensures the container is transparent */
+}
+
+
+
 
 .wave-emoji {
     display: inline-block;
@@ -702,15 +749,16 @@
 
         .parallax {
             background-attachment: scroll;
-            background-color: #2c3e50 !important;
-            background-image: none !important;
+/*            background-color: #2c3e50 !important;*/
+            background: linear-gradient(135deg, teal, black, #002b36) !important;
+
+/*            background-image: url('Port_bg2.jpeg') !important;*/
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
         }
 
         #contact {
-            background-color: var(--bg-color);
             padding: 80px 0;
         }
         #about {
@@ -719,12 +767,18 @@
 
         #experience {
             padding-top: 60px; /* Increase this to add more space above the Experience section */
+
         }
+        #experience .years {
+    color: #D4AF37; /* Sets the text color to gold */
+    font-weight: bold; /* Makes the years bold for emphasis */
+    margin-top: 5px; /* Optional: Adds spacing above the text */
+}
 
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
-            background-color: var(--card-bg);
+            background-color: #004953;
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -745,7 +799,7 @@
         .form-group textarea {
             width: 100%;
             padding: 0.8rem;
-            background-color: #34495e;
+            background-color: #004953;
             color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -782,6 +836,10 @@
                 font-size: 2rem;
             }
         }
+
+        .color-blue{
+            background-color:rgba(0, 0, 0, 1) !important;
+        }
     </style>
 </head>
 <body>
@@ -793,53 +851,56 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <header>
-        <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <!-- Brand Name -->
-            <a class="navbar-brand" href="#">Ravi Varma</a>
-            <!-- Hamburger Button for Mobile View -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <!-- Collapsible Menu Items -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about" data-toggle="collapse" data-target=".navbar-collapse.show">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#experience" data-toggle="collapse" data-target=".navbar-collapse.show">Experience</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#skills" data-toggle="collapse" data-target=".navbar-collapse.show">Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#projects" data-toggle="collapse" data-target=".navbar-collapse.show">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#education" data-toggle="collapse" data-target=".navbar-collapse.show">Education</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact" data-toggle="collapse" data-target=".navbar-collapse.show">Contact</a>
-                    </li>
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg fixed-top color-blue">
+    <div class="container">
+        <!-- Brand Name -->
+        <a class="navbar-brand" href="#">Ravi Varma Gottumukkala</a>
+        <!-- Hamburger Button for Mobile View -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Collapsible Menu Items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about" data-toggle="collapse" data-target=".navbar-collapse.show">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#experience" data-toggle="collapse" data-target=".navbar-collapse.show">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#skills" data-toggle="collapse" data-target=".navbar-collapse.show">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projects" data-toggle="collapse" data-target=".navbar-collapse.show">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#education" data-toggle="collapse" data-target=".navbar-collapse.show">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact" data-toggle="collapse" data-target=".navbar-collapse.show">Contact</a>
+                </li>
+            </ul>
         </div>
-    </nav>s
-</header>
+    </div>
+</nav>
+
+
 
     </header>
 
  <section id="about" class="hero parallax" style="padding: 80px 20px;">
     <div class="hero-content container" style="text-align: left;">
         <!-- Main Introduction Heading -->
-       <h1 style="font-size: 3rem; margin-bottom: 10px; color: #ecf0f1;">
-    Hi, I’m <span style="font-size: 4.2rem; color: #ff6f61;" class="text-6">Ravi Varma</span> 
+       <h1 style="font-size: 2.5rem; margin-bottom: 10px; color: #ecf0f1;">
+    Hi, I’m <span style="font-size: 3.5rem; color: #d4af37; font-family: 'Aldrich', sans-serif" class="text-6">Ravi</span> 
     <span class="wave-emoji">👋</span> </h1>
 
 
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ecf0f1;">Welcome to My Portfolio...</h2>
+        <h2 style="font-size: 1.5rem; margin-bottom: 20px; color: #ecf0f1;">Welcome to My Portfolio...</h2>
+        <h2 style="font-size: 1.5rem; color: #ecf0f1;">
+    I'm a <span id="animated-text"></span>
+</h2>
 
        <div class="about-container">
             <!-- Overview Heading -->
@@ -862,7 +923,7 @@
                 <!-- About Description -->
                 <div class="col-md-8 col-12 about-description">
                     <ul>
-                        <li>I'm a <span id="animated-text"></span> with over 5 years of experience in software development and cloud technologies.</li>
+                        <li>I'm a Software Engineer with over 5 years of experience in software development and cloud technologies.</li>
                         <li>Building scalable, cloud-based software solutions that drive efficiency and performance in professional environments.</li>
                         <li>Delivered full-stack applications and microservices, leveraging AWS for robust and efficient cloud deployments.</li>
                         <li>Passionate about automating workflows and optimizing systems to solve complex challenges and boost reliability</li>
@@ -878,7 +939,7 @@
 <script>
     // Words to display
     document.addEventListener('DOMContentLoaded', () => {
-    const words = ["Software Developer", "Full Stack Developer", "Cloud Solutions Developer"];
+    const words = ["Software Developer", "Full Stack Engineer", "Tech Enthusiast"];
     let currentWordIndex = 0;
     let currentCharIndex = 0;
     const textElement = document.getElementById("animated-text");
@@ -1073,7 +1134,7 @@
 
 
 
-    <section id="skills" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?code');">
+    <section id="skills">
         <div class="container">
             <h2 class="section-heading">Skills</h2>
             <div class="skills-grid">
@@ -1177,7 +1238,7 @@
         </div>
     </section>
 
-    <section id="education" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?university');">
+    <section id="education"  style="background-image: url('https://source.unsplash.com/random/1600x900?university');">
         <div class="container">
             <h2 class="section-heading">Education</h2>
             <div class="education-item card">
@@ -1191,7 +1252,7 @@
         </div>
     </section>
     
-<section id="certifications" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?certification');">
+<section id="certifications" style="background-image: url('https://source.unsplash.com/random/1600x900?certification');">
     <div class="container">
         <h2 class="section-heading">Certifications</h2>
         <div class="certification-slider">
