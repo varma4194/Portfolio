@@ -287,6 +287,16 @@
     }
 }
 
+@media (max-width: 768px) {
+    .experience-container {
+        flex-direction: column; /* Stack vertically */
+    }
+    .experience-titles, .experience-descriptions {
+        width: 100%; /* Full width for both columns */
+        padding: 0; /* Remove extra padding */
+    }
+}
+
 @media (max-height: 700px) {
     /* Specific rules for devices with short height */
     .hero {
@@ -965,20 +975,58 @@
                 <p class="company-info">Albertsons</p>
                 <p class="years">June 2023 – Present</p>
             </div>
+
+            <div class="experience-content card active d-md-none" id="experience-1-mob">
+                <ul>
+                    <li>Designed and implemented microservices using Java and Spring Boot.</li>
+                    <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
+                    <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
+                    <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
+                    <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG, and Cucumber to ensure code quality and seamless integration.</li>
+                    <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
+                </ul>
+            </div>
+
             <div class="experience-header" data-target="experience-2">
                 <h3>Application Development Engineer</h3>
                 <p class="company-info">Tata Consultancy Services</p>
                 <p class="years">Nov 2020 – Aug 2022</p>
             </div>
+
+            <div class="experience-content card d-md-none" id="experience-2-mob">
+                <ul>
+                    <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
+                    <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
+                    <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
+                    <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
+                    <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
+                    <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
+                    <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
+                </ul>
+            </div>
+
+
             <div class="experience-header" data-target="experience-3">
                 <h3>Software Developer</h3>
                 <p class="company-info">HCL Technologies</p>
                 <p class="years">Apr 2019 – Nov 2020</p>
             </div>
+
+            <div class="experience-content card d-md-none" id="experience-3-mob">
+                <ul>
+                    <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
+                    <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
+                    <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
+                    <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
+                    <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
+                    <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
+                    <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Experience Descriptions (Right Column) -->
-        <div class="col-md-8 col-12 experience-descriptions">
+        <div class="col-md-8 col-12 experience-descriptions d-md-block d-none">
             <!-- Experience 1 Content -->
             <div class="experience-content card active" id="experience-1">
                 <ul>
@@ -1280,27 +1328,53 @@
         }
     });
 
-   document.querySelectorAll('.experience-header').forEach(header => {
+//    document.querySelectorAll('.experience-header').forEach(header => {
+//     header.addEventListener('click', function() {
+//         // Remove active class from all headers
+//         document.querySelectorAll('.experience-header').forEach(h => h.classList.remove('active'));
+//         // Remove active class and reset styles for all content
+//         document.querySelectorAll('.experience-content').forEach(content => {
+//             content.classList.remove('active');
+//             content.style.display = 'none'; // Hide content
+//         });
+
+//         // Add active class to the clicked header
+//         this.classList.add('active');
+        
+//         // Get the target content and apply the transition
+//         const content = document.getElementById(this.dataset.target);
+//         content.style.display = 'block'; // Make the content visible
+//         setTimeout(() => {
+//             content.classList.add('active'); // Trigger the transition
+//         }, 10); // Small delay to ensure the transition applies
+//     });
+
+// });
+
+        document.querySelectorAll('.experience-header').forEach(header => {
     header.addEventListener('click', function() {
         // Remove active class from all headers
         document.querySelectorAll('.experience-header').forEach(h => h.classList.remove('active'));
-        // Remove active class and reset styles for all content
-        document.querySelectorAll('.experience-content').forEach(content => {
-            content.classList.remove('active');
-            content.style.display = 'none'; // Hide content
-        });
+
+        // Remove active class from all content
+        document.querySelectorAll('.experience-content').forEach(content => content.classList.remove('active'));
 
         // Add active class to the clicked header
         this.classList.add('active');
-        
-        // Get the target content and apply the transition
-        const content = document.getElementById(this.dataset.target);
-        content.style.display = 'block'; // Make the content visible
-        setTimeout(() => {
-            content.classList.add('active'); // Trigger the transition
-        }, 10); // Small delay to ensure the transition applies
+
+        // Get the target content IDs for both mobile and desktop
+        const targetId = this.dataset.target;
+        const mobileContent = document.getElementById(targetId + '-mob');
+        const desktopContent = document.getElementById(targetId);
+
+        // Show the appropriate content
+        if (mobileContent) mobileContent.classList.add('active');
+        if (desktopContent) desktopContent.classList.add('active');
     });
-  document.addEventListener("DOMContentLoaded", function() {
+});
+
+
+   document.addEventListener("DOMContentLoaded", function() {
     const cards = document.querySelectorAll(".certification-card");
 
     const observer = new IntersectionObserver((entries, observer) => {
@@ -1315,10 +1389,6 @@
     cards.forEach(card => {
         observer.observe(card);
     });
-});
-
-
-
 });
 
 
