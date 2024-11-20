@@ -7,6 +7,7 @@
     <title>Ravi Varma Gottumukkala - Software Developer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         :root {
@@ -774,25 +775,57 @@
     </style>
 </head>
 <body>
+    <!-- Your existing content -->
+
+<!-- Bootstrap JavaScript and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <header>
-        <nav class="container">
-<!--             <h1>Ravi Varma Gottumukkala</h1> -->
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <!-- Brand Name -->
+            <a class="navbar-brand" href="#">Ravi Varma</a>
+            <!-- Hamburger Button for Mobile View -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapsible Menu Items -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about" data-toggle="collapse" data-target=".navbar-collapse.show">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience" data-toggle="collapse" data-target=".navbar-collapse.show">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills" data-toggle="collapse" data-target=".navbar-collapse.show">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects" data-toggle="collapse" data-target=".navbar-collapse.show">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#education" data-toggle="collapse" data-target=".navbar-collapse.show">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact" data-toggle="collapse" data-target=".navbar-collapse.show">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>s
+</header>
+
     </header>
 
  <section id="about" class="hero parallax" style="padding: 80px 20px;">
     <div class="hero-content container" style="text-align: left;">
         <!-- Main Introduction Heading -->
        <h1 style="font-size: 3rem; margin-bottom: 10px; color: #ecf0f1;">
-    Hi, I’m <span style="font-size: 4.2rem; color: #ff6f61;">Ravi Varma</span> 
+    Hi, I’m <span style="font-size: 4.2rem; color: #ff6f61;" class="text-6">Ravi Varma</span> 
     <span class="wave-emoji">👋</span> </h1>
 
 
@@ -802,28 +835,28 @@
             <!-- Overview Heading -->
             <h1 class="about-heading">Behind the Code</h1>
 
-            <div class="about-content">
+            <div class="about-content row">
                 <!-- Profile Picture -->
-                <div class="profile-picture-container">
+                <div class="col-md-3 col-12 profile-picture-container">
                     <div class="profile-picture">
                         <img src="Profile_image3.jpeg" alt="Profile Picture">
                     </div>
 
                     <!-- Buttons under the image -->
                     <div class="buttons-under-image">
-                        <a href="Resume_1114.pdf" class="btn resume-btn">Resume</a>
+                        <a href="your-resume-link.pdf" class="btn resume-btn">Resume</a>
                         <a href="https://www.linkedin.com/in/ravi-varma-g/" class="btn linkedin-btn">LinkedIn</a>
                     </div>
                 </div>
 
                 <!-- About Description -->
-                <div class="about-description">
+                <div class="col-md-8 col-12 about-description">
                     <ul>
                         <li>I'm a <span id="animated-text"></span> with over 5 years of experience in software development and cloud technologies.</li>
-                        <li>Currently pursuing a Master’s in Computer Science, passionate about building scalable software solutions.</li>
-                        <li>Led projects from full-stack development to cloud deployments, delivering impactful results.</li>
-                        <li>Enjoy automating workflows, optimizing systems, and solving complex challenges.</li>
-                        <li>Always curious and constantly learning new technologies.</li>
+                        <li>Building scalable, cloud-based software solutions that drive efficiency and performance in professional environments.</li>
+                        <li>Delivered full-stack applications and microservices, leveraging AWS for robust and efficient cloud deployments.</li>
+                        <li>Passionate about automating workflows and optimizing systems to solve complex challenges and boost reliability</li>
+                        <li>Always exploring new technologies, driven by curiosity and a commitment to continuous improvement.</li>
                     </ul>
                 </div>
             </div>
@@ -921,68 +954,72 @@
     </div>
 </section>
 
-    
-<section id="experience">
-    <div class="container">
-        <h2 class="section-heading">Work Experience</h2>
-        <div class="experience-container">
-            <!-- Experience Titles (Left Column) -->
-            <div class="experience-titles">
-                <div class="experience-header active" data-target="experience-1">
-                    <h3>Software Development Engineer</h3>
-                    <p class="company-info">Albertsons</p>
-                    <p class="years">June 2023 – Present</p>
-                </div>
-                <div class="experience-header" data-target="experience-2">
-                    <h3>Application Development Engineer</h3>
-                    <p class="company-info">Tata Consultancy Services</p>
-                    <p class="years">Nov 2020 – Aug 2022</p>
-                </div>
-                <div class="experience-header" data-target="experience-3">
-                    <h3>Software Developer</h3>
-                    <p class="company-info">HCL Technologies</p>
-                    <p class="years">Apr 2019 – Nov 2020</p>
-                </div>
+
+<section id="experience" class="container my-5">
+    <h2 class="section-heading text-center mb-4">Work Experience</h2>
+    <div class="row">
+        <!-- Experience Titles (Left Column) -->
+        <div class="col-md-4  col-12 experience-titles">
+            <div class="experience-header active" data-target="experience-1">
+                <h3>Software Development Engineer</h3>
+                <p class="company-info">Albertsons</p>
+                <p class="years">June 2023 – Present</p>
+            </div>
+            <div class="experience-header" data-target="experience-2">
+                <h3>Application Development Engineer</h3>
+                <p class="company-info">Tata Consultancy Services</p>
+                <p class="years">Nov 2020 – Aug 2022</p>
+            </div>
+            <div class="experience-header" data-target="experience-3">
+                <h3>Software Developer</h3>
+                <p class="company-info">HCL Technologies</p>
+                <p class="years">Apr 2019 – Nov 2020</p>
+            </div>
+        </div>
+
+        <!-- Experience Descriptions (Right Column) -->
+        <div class="col-md-8 col-12 experience-descriptions">
+            <!-- Experience 1 Content -->
+            <div class="experience-content card active" id="experience-1">
+                <ul>
+                    <li>Designed and implemented microservices using Java and Spring Boot.</li>
+                    <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
+                    <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
+                    <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
+                    <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG, and Cucumber to ensure code quality and seamless integration.</li>
+                    <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
+                </ul>
             </div>
 
-            <!-- Experience Descriptions (Right Column) -->
-            <div class="experience-descriptions">
-                <div class="experience-content card active" id="experience-1">
-                    <ul>
-                        <li>Designed and implemented microservices using Java and Spring Boot.</li>
-                        <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
-                        <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
-                        <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
-                        <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG, and Cucumber to ensure code quality and seamless integration.</li>
-                        <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
-                    </ul>
-                </div>
-                <div class="experience-content card" id="experience-2">
-                    <ul>
-                        <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
-                        <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
-                        <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
-                        <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
-                        <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
-                        <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
-                        <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
-                    </ul>
-                </div>
-                <div class="experience-content card" id="experience-3">
-                    <ul>
-                        <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
-                        <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
-                        <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
-                        <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
-                        <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
-                        <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
-                        <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
-                    </ul>
-                </div>
+            <!-- Experience 2 Content -->
+            <div class="experience-content card" id="experience-2">
+                <ul>
+                    <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
+                    <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
+                    <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
+                    <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
+                    <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
+                    <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
+                    <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
+                </ul>
+            </div>
+
+            <!-- Experience 3 Content -->
+            <div class="experience-content card" id="experience-3">
+                <ul>
+                    <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
+                    <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
+                    <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
+                    <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
+                    <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
+                    <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
+                    <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
+                </ul>
             </div>
         </div>
     </div>
 </section>
+
 
 
 
@@ -1113,11 +1150,12 @@
             <div class="certification-card">
                 <h3>AWS Certified Developer Associate</h3>
                 
-                <img src="Dev.png" alt="AWS Developer Badge" class="badge-image">
+                <img src="dev.png" alt="AWS Developer Badge" class="badge-image">
                 <p>Amazon Web Services</p>
             </div>
             <div class="certification-card">
                 <h3>AWS Certified Solutions Architect</h3>
+    
                 <img src="sol.png" alt="AWS Solutions Architect Badge" class="badge-image">
                 <p>Amazon Web Services</p>
             </div>
@@ -1284,7 +1322,19 @@
 });
 
 
-
+document.querySelectorAll('a.nav-link').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
 
 
     </script>
