@@ -7,15 +7,119 @@
     <title>Ravi Varma Gottumukkala - Software Developer Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --text-color: #333;
-            --bg-color: #f4f4f4;
-            --card-bg: #ffffff;
+            --primary-color: #3498db; /* You can keep this or adjust as needed */
+            --secondary-color: #ecf0f1; /* Light text color for contrast */
+            --accent-color: #e74c3c; /* Accent color for highlights */
+            --text-color: #ecf0f1; /* Light color for main text */
+            --bg-color: #2c3e50; /* Dark background color */
+            --card-bg: #34495e; /* Darker background for cards */
         }
+/* General Styling for the About Section */
+/* General Styling for the About Section */
+.about-section {
+    background-color: #0b1120;
+    color: #ffffff;
+    padding: 60px 20px;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.about-heading {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 20px; /* Reduced margin for a closer alignment */
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+/* Profile Picture Container Styling */
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align content */
+}
+
+.profile-picture img {
+    border-radius: 50%;
+    width: 250px;
+    height: 250px;
+    border: none;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons under the image */
+.buttons-under-image {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Button Styling */
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #1a73e8;
+    transition: background-color 0.3s ease;
+}
+
+.resume-btn {
+    background-color: #007bff;
+}
+
+.linkedin-btn {
+    background-color: #0e76a8;
+}
+
+./*github-btn {
+    background-color: #555;
+}*/
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* About Description Styling */
+.about-description ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin: 0;
+    font-size: 1.4rem; /* Increase font size for the list items */
+}
+
+.about-description li {
+    margin-bottom: 15px;
+    color: #ffffff; /* Keep the text color white for readability */
+}
+.about-description li {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+        #animated-text {
+        font-size: 2.0rem; /* Make the running text larger */
+            font-weight: bold; /* Make the text bold for emphasis */
+            color: #ff6f61; /* Change the color to blue or your preferred highlight color */
+    }
+
+
 
         * {
             margin: 0;
@@ -35,6 +139,7 @@
             overflow-x: hidden;
         }
 
+
         .container {
             width: 90%;
             max-width: 1200px;
@@ -42,10 +147,10 @@
         }
 
         header {
-            background-color: rgba(44, 62, 80, 0.9);
-            color: #fff;
+            background-color: #1a252f; /* Darker header background */
+            color: var(--text-color);
             padding: 1rem 0;
-            position: fixed; /* Changed from Relative to Fixed */
+            position: fixed;
             width: 100%;
             top: 0;
             z-index: 10;
@@ -55,6 +160,17 @@
        .experience-container {
     display: flex;
 }
+       a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #3498db; /* Primary color for hover effect */
+        }
+
+
 
 .experience-titles {
     width: 30%;
@@ -67,19 +183,21 @@
     font-size: 1.1rem;
     margin-bottom: 15px;
     cursor: pointer;
-    color: var(--secondary-color);
+    color: var(--text-color); /* Use the text color for better contrast */
     padding: 15px;
     border-radius: 5px;
+    background-color: #34495e; /* Darker background for non-active state */
+    border: 1px solid #3a4a5a; /* Border to separate blocks */
     transition: background-color 0.3s ease, color 0.3s ease;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .experience-header.active {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* Highlight color for active state */
     color: #fff;
     font-weight: bold;
 }
+
 
 .company-info, .years {
     font-size: 0.9rem;
@@ -97,6 +215,12 @@
     transform: translateX(-20px); /* Start slightly to the left, not fully off-screen */
     transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth and slower transition */
 }
+/* Increase the font size for the Work Experience content */
+.experience-content ul {
+    font-size: 1.2rem; /* Increase this value as needed */
+    line-height: 1.6; /* Adjust for better readability */
+}
+
 
 .experience-content.active {
     display: block;
@@ -106,11 +230,16 @@
 
 
 
-        #about {
-            background: linear-gradient(135deg, var(--primary-color), #2980b9);
-            padding: 100px 20px; /* Adjust the padding as needed */
-            color: #fff; /* Make sure the text color is readable */
-        }
+        
+      #about {
+    padding: 80px 20px; /* Keep the padding as defined */
+    background-image: url('images/Port_bg.jpeg'); /* Relative path to your image */
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    color: #ecf0f1; /* Ensure text is readable */
+}
+
 
         /* General scaling for smaller screens */
         @media (max-width: 1024px) {
@@ -122,9 +251,21 @@
             font-size: 1rem; /* Smaller paragraph text */
         }
 
-        #about, #experience, #skills, #projects, #education, #contact {
-            padding: 60px 20px; /* Reduced padding for smaller screens */
+        #about,
+        #experience,
+        #skills,
+        #projects,
+        #education,
+        #contact {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 60px 20px; /* Adjust padding as needed */
+            padding-top: 100px; /* Space above the section */
+            padding-bottom: 100px;
+            scroll-margin-top: 74px;
         }
+
+
 }
 
         @media (max-width: 768px) {
@@ -184,7 +325,8 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, var(--primary-color), #2980b9);
+            
+            background-color: #34495e !important;
             color: #fff;
             padding: 150px 0 100px;
             text-align: center;
@@ -208,6 +350,9 @@
             position: relative;
             z-index: 1;
         }
+        .hero-content p {
+            transition: opacity 0.3s ease;
+        }
 
         .hero h1 {
             font-size: 3.5rem;
@@ -221,9 +366,7 @@
             animation: fadeInUp 1s ease 0.2s;
             animation-fill-mode: both;
         }
-
         .btn {
-            display: inline-block;
             background-color: #fff;
             color: var(--primary-color);
             padding: 0.8rem 1.5rem;
@@ -232,14 +375,14 @@
             transition: all 0.3s ease;
             margin: 0 10px;
             font-weight: 600;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
         .btn:hover {
             background-color: var(--primary-color);
             color: #fff;
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
         }
 
         .btn-outline {
@@ -265,6 +408,14 @@
             color: var(--secondary-color);
             position: relative;
         }
+        /* General styling for all section headings */
+.section-heading {
+    font-size: 3.5rem; /* Adjust this size as needed */
+    font-weight: bold;
+    text-align: center; /* Make the text bold for emphasis */
+    margin-bottom: 20px; /* Adjust spacing below the headings if necessary */
+}
+
 
         .section-title::after {
             content: '';
@@ -277,8 +428,9 @@
 
         .card {
             background-color: var(--card-bg);
+            color: var(--text-color);
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow for dark background */
             padding: 2rem;
             margin-bottom: 2rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -333,64 +485,179 @@
             color: var(--primary-color);
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem; /* Adjusted gap for consistent spacing */
+    align-items: stretch; /* Ensure all items have the same height */
+}
 
-        .skill-category h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
+/* Style for skill category headers and content */
+.skill-category {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; /* Make sure all skill categories have equal height */
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: left; /* Ensure all content is left-aligned */
+}
 
-        .skill-category ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+.skill-category h3 {
+    font-size: 1.3rem; /* Adjusted font size for balance */
+    margin-bottom: 0.75rem; /* Consistent spacing below headers */
+    color: var(--primary-color);
+    text-align: left; /* Left-align the headers */
+}
 
-        .skill-category ul li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
+/* Styling for the list of skills */
+.skill-category ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0; /* Remove default margin for consistency */
+    flex: 1; /* Make the list take up remaining space in the skill card */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the top */
+    text-align: left; /* Ensure list items are left-aligned */
+}
 
-        .skill-category ul li i {
-            margin-right: 0.5rem;
-            color: var(--primary-color);
-        }
+/* Adjust font size and spacing for skill items */
+.skill-category ul li {
+    font-size: 1.1rem; /* Uniform font size for readability */
+    margin-bottom: 0.5rem; /* Consistent spacing between items */
+    display: flex;
+    align-items: center;
+}
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+/* Adjust icon styling */
+.skill-category ul li i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    font-size: 1.2rem; /* Keep icon size consistent */
+}
 
-        .project-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
 
-        .project-item p {
-            margin-bottom: 1rem;
-        }
 
-        .education-item h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
+      .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
 
-        .education-item p {
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
+.project-item h3 {
+    font-size: 1.5rem; /* Keep the original font size for the headings */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.project-item p {
+    font-size: 1.2rem; /* Increased font size for the descriptions */
+    line-height: 1.6; /* Adjusted line height for better readability */
+    margin-bottom: 1rem;
+}
+
+.project-item ul {
+    list-style-type: disc; /* Ensure the list has bullets */
+    padding-left: 20px; /* Add some padding for indentation */
+    font-size: 1.2rem; /* Increase font size for the list text */
+    line-height: 1.6; /* Adjust line height for better readability */
+}
+
+.project-item ul li {
+    margin-bottom: 1rem; /* Add space between list items */
+}
+
+
+
+        ..education-item h3 {
+    font-size: 1.8rem; /* Increased font size for headings */
+    margin-bottom: 0.5rem; /* Adjusted margin for spacing */
+    color: var(--primary-color); /* Keep or adjust the color as needed */
+}
+
+.education-item p {
+    font-size: 1.2rem; /* Increased font size for text */
+    line-height: 1.6; /* Adjusted line height for readability */
+    color: #dcdcdc; /* Optional: change text color if needed */
+}
+/* Badge Image Styling */
+.badge-image {
+    width: 60px; /* Adjust the size of the badges */
+    height: auto;
+    margin: 10px 0; /* Add vertical spacing around the badge */
+    display: block;
+    text-align: center; /* Center the badge horizontally if needed */
+}
+
+.certification-slider {
+    display: flex;
+    flex-wrap: wrap; /* Allows the cards to wrap to the next line if needed */
+    gap: 2rem; /* Space between the cards */
+    justify-content: center; /* Center the cards horizontally */
+}
+
+.certification-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px; /* Fixed width to keep cards uniform */
+    text-align: center; /* Center-align the text inside the card */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transform-origin: center;
+}
+
+.certification-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.badge-image {
+    width: 120px; /* Increased size for the badges */
+    height: auto; /* Maintain aspect ratio */
+    margin: 15px 0; /* Adjusted spacing around the badge */
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* Center the badge horizontally */
+}
+
+
+.certification-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.certification-card p {
+    font-size: 1rem;
+    color: #dcdcdc;
+}
+
+.wave-emoji {
+    display: inline-block;
+    animation: wave 2s infinite; /* Waving animation that repeats infinitely */
+}
+
+@keyframes wave {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    30% { transform: rotate(14deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+}
+
+
+
+
 
         footer {
-            background-color: var(--secondary-color);
-            color: #fff;
+            background-color: #1a252f; /* Dark background for the footer */
+            color: #ecf0f1; /* Light text color for contrast */
             text-align: center;
             padding: 2rem 0;
         }
@@ -399,14 +666,16 @@
             margin-bottom: 1rem;
         }
 
+        
         footer a {
-            color: #fff;
+            color: #ecf0f1; /* Light color for footer links */
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
+       
         footer a:hover {
-            color: var(--primary-color);
+            color: var(--primary-color); /* Highlight color for links on hover */
         }
 
         @keyframes fadeInUp {
@@ -421,7 +690,9 @@
         }
 
         .parallax {
-            background-attachment: fixed;
+            background-attachment: scroll;
+            background-color: #2c3e50 !important;
+            background-image: none !important;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -463,6 +734,8 @@
         .form-group textarea {
             width: 100%;
             padding: 0.8rem;
+            background-color: #34495e;
+            color: #ffffff;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-family: 'Poppins', sans-serif;
@@ -515,30 +788,87 @@
         </nav>
     </header>
 
- <section id="about" class="hero parallax" style="text-align: center; padding: 40px 20px;">
-    <!-- Profile Image -->
-    <div style="flex: 1; text-align: center; margin-top: 100px;">
-        <img src="Profile_image.jpeg" alt="Profile Picture" 
-             style="border-radius: 50%; width: 250px; height: 250px; border: 5px solid; margin-bottom: 20px;">
+ <section id="about" class="hero parallax" style="padding: 80px 20px;">
+    <div class="hero-content container" style="text-align: left;">
+        <!-- Main Introduction Heading -->
+       <h1 style="font-size: 3rem; margin-bottom: 10px; color: #ecf0f1;">
+    Hi, I’m <span style="font-size: 4.2rem; color: #ff6f61;">Ravi Varma</span> 
+    <span class="wave-emoji">👋</span> </h1>
+
+
+        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ecf0f1;">Welcome to My Portfolio...</h2>
+
+       <div class="about-container">
+            <!-- Overview Heading -->
+            <h1 class="about-heading">Behind the Code</h1>
+
+            <div class="about-content">
+                <!-- Profile Picture -->
+                <div class="profile-picture-container">
+                    <div class="profile-picture">
+                        <img src="Profile_image3.jpeg" alt="Profile Picture">
+                    </div>
+
+                    <!-- Buttons under the image -->
+                    <div class="buttons-under-image">
+                        <a href="Resume_1114.pdf" class="btn resume-btn">Resume</a>
+                        <a href="https://www.linkedin.com/in/ravi-varma-g/" class="btn linkedin-btn">LinkedIn</a>
+                    </div>
+                </div>
+
+                <!-- About Description -->
+                <div class="about-description">
+                    <ul>
+                        <li>I'm a <span id="animated-text"></span> with over 5 years of experience in software development and cloud technologies.</li>
+                        <li>Currently pursuing a Master’s in Computer Science, passionate about building scalable software solutions.</li>
+                        <li>Led projects from full-stack development to cloud deployments, delivering impactful results.</li>
+                        <li>Enjoy automating workflows, optimizing systems, and solving complex challenges.</li>
+                        <li>Always curious and constantly learning new technologies.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- About Content -->
-    <div class="hero-content container">
-        <h1 style="margin-bottom: 10px;">Ravi Varma Gottumukkala</h1>
-        <!-- Add this inside the <body> tag where you want the animated text to appear, for example, below your hero section heading -->
-<!-- Add this inside the <body> tag where you want the animated text to appear, for example, below your hero section heading -->
+</section>
 
-<div id="animated-text" style="font-size: 2rem; font-weight: 600; margin-top: 20px; height: 2.5rem;"></div>
-
-<!-- Add this inside the <body> tag where you want the animated text to appear, for example, below your hero section heading -->
-
-<div id="animated-text" style="font-size: 2rem; font-weight: 600; margin-top: 20px; margin-bottom: 20px; height: 2.5rem;"></div>
 
 <script>
     // Words to display
-    const words = ["Software Developer", "Full Stack Developer","Java Developer"];
+    document.addEventListener('DOMContentLoaded', () => {
+    const words = ["Software Developer", "Full Stack Developer", "Cloud Solutions Developer"];
     let currentWordIndex = 0;
     let currentCharIndex = 0;
     const textElement = document.getElementById("animated-text");
+
+    // Function to display each letter
+    function typeLetter() {
+        const word = words[currentWordIndex];
+        if (currentCharIndex < word.length) {
+            textElement.textContent += word[currentCharIndex];
+            currentCharIndex++;
+            setTimeout(typeLetter, 140); // Typing speed
+        } else {
+            setTimeout(eraseLetters, 1200); // Pause before erasing
+        }
+    }
+
+    // Function to erase each letter
+    function eraseLetters() {
+        const word = words[currentWordIndex];
+        if (currentCharIndex > 0) {
+            textElement.textContent = word.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+            setTimeout(eraseLetters, 100); // Erasing speed
+        } else {
+            currentWordIndex = (currentWordIndex + 1) % words.length; // Move to next word
+            setTimeout(typeLetter, 500); // Pause before typing the next word
+        }
+    }
+
+    // Start the typing effect
+    typeLetter();
+});
+
 
     // Function to display each letter
     function typeLetter() {
@@ -568,7 +898,7 @@
     // Start the typing effect
     typeLetter();
 </script>
-
+<!-- 
         <p style="font-size: 1.1em; margin-bottom: 20px;">
             I’m  a Software Engineer with 5+ years of experience building scalable web applications, designing RESTful APIs, and implementing CI/CD pipelines. Skilled in Java, Spring Boot, React, Angular, and cloud technologies, I deliver high-performance solutions that solve real-world problems.
         </p>
@@ -576,7 +906,7 @@
             <a href="#experience" class="btn" style="margin-right: 10px;">View Experience</a>
             <a href="#contact" class="btn btn-outline">Contact Me</a>
         </div>
-        <!-- Contact Icons -->
+        
         <div style="margin-top: 20px; display: flex; justify-content: center; gap: 20px;">
             <a href="https://www.linkedin.com/in/ravi-varma-g" target="_blank" style="color: #fff; font-size: 1.5rem;" title="LinkedIn">
                 <i class="fab fa-linkedin"></i>
@@ -587,14 +917,14 @@
             <a href="tel:+16674648539" style="color: #fff; font-size: 1.5rem;" title="Call">
                 <i class="fas fa-phone"></i>
             </a>
-        </div>
+        </div> -->
     </div>
 </section>
 
     
 <section id="experience">
     <div class="container">
-        <h2 class="section-title">Work Experience</h2>
+        <h2 class="section-heading">Work Experience</h2>
         <div class="experience-container">
             <!-- Experience Titles (Left Column) -->
             <div class="experience-titles">
@@ -660,7 +990,7 @@
 
     <section id="skills" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?code');">
         <div class="container">
-            <h2 class="section-title">Skills & Abilities</h2>
+            <h2 class="section-heading">Skills</h2>
             <div class="skills-grid">
                 <div class="skill-category card">
                     <h3><i class="fas fa-code"></i> Programming & Frameworks</h3>
@@ -736,11 +1066,11 @@
 
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Academic Projects</h2>
+            <h2 class="section-heading">Projects</h2>
             <div class="project-grid">
                 <div class="project-item card">
                     <h3>Mood Based Music Recommendation Service</h3>
-                    <p>Aug 2023 - Dec 2023</p>
+                    <p>Jan 2024 - May 2024</p>
                     <ul>
                         <li>Built a real-time website using Angular and RxJS, achieving 95% accuracy in detecting user emotions and curating playlists from a 500+ track library via Spotify and Amazon Rekognition APIs, with a response time of under 2 seconds. Deployed on AWS Elastic Beanstalk with Docker and Kubernetes, achieving 99.9% uptime and supporting 200+ users. Automated CI/CD pipeline cut build and deployment time by 50%, enhancing scalability and version control.</li>
                         
@@ -749,6 +1079,7 @@
                 </div>
                 <div class="project-item card">
                     <h3>E-Commerce Platform</h3>
+                    <p> Aug 2023 - Dec 2023</p>
                     <ul>
                         <li>Developed a full-stack e-commerce platform using Angular and Spring Boot.</li>
                         <li>Implemented Elasticsearch for product search functionality.</li>
@@ -763,26 +1094,46 @@
 
     <section id="education" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?university');">
         <div class="container">
-            <h2 class="section-title">Education</h2>
+            <h2 class="section-heading">Education</h2>
             <div class="education-item card">
                 <h3>Master's in Computer Science</h3>
-                <p>University of Maryland, Baltimore County | May 2024</p>
+                <p>University of Maryland, Baltimore County</p>
             </div>
             <div class="education-item card">
                 <h3>Bachelor of Technology in Computer Science and Engineering</h3>
-                <p>Andhra University | July 2020</p>
+                <p>Andhra University </p>
             </div>
         </div>
     </section>
     
-    <section id="Certifications" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?university');">
-        <div class="container">
-            <h2 class="section-title">Certifications</h2>
-            <div class="education-item card">
-                <h3> AWS Certified Developer - Associate </h3> 
+<section id="certifications" class="parallax" style="background-image: url('https://source.unsplash.com/random/1600x900?certification');">
+    <div class="container">
+        <h2 class="section-heading">Certifications</h2>
+        <div class="certification-slider">
+            <div class="certification-card">
+                <h3>AWS Certified Developer Associate</h3>
+                
+                <img src="dev.png" alt="AWS Developer Badge" class="badge-image">
+                <p>Amazon Web Services</p>
+            </div>
+            <div class="certification-card">
+                <h3>AWS Certified Solutions Architect</h3>
+    
+                <img src="sol.png" alt="AWS Solutions Architect Badge" class="badge-image">
+                <p>Amazon Web Services</p>
+            </div>
+            <div class="certification-card">
+                <h3>GitHub Foundation Certification</h3>
+                
+                <img src="git.png" alt="GitHub Foundation Badge" class="badge-image">
+                <p>GitHub</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+
     
 
     <section id="contact">
@@ -912,7 +1263,28 @@
             content.classList.add('active'); // Trigger the transition
         }, 10); // Small delay to ensure the transition applies
     });
+  document.addEventListener("DOMContentLoaded", function() {
+    const cards = document.querySelectorAll(".certification-card");
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible"); // Add class when in view
+                observer.unobserve(entry.target); // Stop observing after animation
+            }
+        });
+    }, { threshold: 0.1 }); // Trigger when 10% of the card is visible
+
+    cards.forEach(card => {
+        observer.observe(card);
+    });
 });
+
+
+
+});
+
+
 
 
 
