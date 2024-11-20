@@ -67,7 +67,7 @@
         0 4px 8px rgba(255, 255, 255, 0.6), /* Subtle white shadow for highlight */
         0 8px 16px #004953; /* Teal shadow for depth */
     border: 3px solid #004953; /* Optional: Adds a teal border */
-   
+
 }
 
 /* Buttons under the image */
@@ -238,6 +238,23 @@
     display: block;
     opacity: 1;
     transform: translateX(0); /* Slide into place */
+}
+
+/* Responsive Adjustments for Mobile */
+@media (max-width: 768px) {
+    .experience-header {
+        padding: 8px 10px; /* Smaller padding for mobile */
+        font-size: 0.9rem; /* Reduce font size for mobile */
+        margin-bottom: 8px; /* Less space between cards */
+    }
+
+    .company-info, .years {
+        font-size: 0.8rem; /* Smaller font for company and years on mobile */
+    }
+
+    .experience-header h3 {
+        font-size: 1rem; /* Slightly smaller font size for the role title */
+    }
 }
 
 
@@ -471,7 +488,7 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .experience-item h3 {
+        /*.experience-item h3 {
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
             color: var(--primary-color);
@@ -501,7 +518,7 @@
             position: absolute;
             left: 0;
             color: var(--primary-color);
-        }
+        }*/
 
 .skills-grid {
     display: grid;
@@ -1031,66 +1048,30 @@ body {
     <h2 class="section-heading text-center mb-4">Work Experience</h2>
     <div class="row">
         <!-- Experience Titles (Left Column) -->
-        <div class="col-md-4  col-12 experience-titles">
-            <div class="experience-header active" data-target="experience-1">
-                <h3>Software Development Engineer</h3>
-                <p class="company-info">Albertsons</p>
-                <p class="years">June 2023 – Present</p>
+        <div class="col-md-4 col-12 experience-titles">
+            <div class="experience-header py-2 px-3 px-md-4 mb-2 mb-md-3 active" data-target="experience-1">
+                <h3 class="fs-6 fs-md-5">Software Development Engineer</h3>
+                <p class="company-info fs-7 fs-md-6">Albertsons</p>
+                <p class="years fs-7 fs-md-6">June 2023 – Present</p>
             </div>
 
-            <div class="experience-content card active d-md-none" id="experience-1-mob">
-                <ul>
-                    <li>Designed and implemented microservices using Java and Spring Boot.</li>
-                    <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
-                    <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
-                    <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
-                    <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG, and Cucumber to ensure code quality and seamless integration.</li>
-                    <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
-                </ul>
+            <div class="experience-header py-2 px-3 px-md-4 mb-2 mb-md-3" data-target="experience-2">
+                <h3 class="fs-6 fs-md-5">Application Development Engineer</h3>
+                <p class="company-info fs-7 fs-md-6">Tata Consultancy Services</p>
+                <p class="years fs-7 fs-md-6">Nov 2020 – Aug 2022</p>
             </div>
 
-            <div class="experience-header" data-target="experience-2">
-                <h3>Application Development Engineer</h3>
-                <p class="company-info">Tata Consultancy Services</p>
-                <p class="years">Nov 2020 – Aug 2022</p>
-            </div>
-
-            <div class="experience-content card d-md-none" id="experience-2-mob">
-                <ul>
-                    <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
-                    <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
-                    <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
-                    <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
-                    <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
-                    <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
-                    <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
-                </ul>
-            </div>
-
-
-            <div class="experience-header" data-target="experience-3">
-                <h3>Software Developer</h3>
-                <p class="company-info">HCL Technologies</p>
-                <p class="years">Apr 2019 – Nov 2020</p>
-            </div>
-
-            <div class="experience-content card d-md-none" id="experience-3-mob">
-                <ul>
-                    <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
-                    <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
-                    <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
-                    <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
-                    <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
-                    <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
-                    <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
-                </ul>
+            <div class="experience-header py-2 px-3 px-md-4 mb-2 mb-md-3" data-target="experience-3">
+                <h3 class="fs-6 fs-md-5">Software Developer</h3>
+                <p class="company-info fs-7 fs-md-6">HCL Technologies</p>
+                <p class="years fs-7 fs-md-6">Apr 2019 – Nov 2020</p>
             </div>
         </div>
 
         <!-- Experience Descriptions (Right Column) -->
-        <div class="col-md-8 col-12 experience-descriptions d-md-block d-none">
+        <div class="col-md-8 col-12 experience-descriptions">
             <!-- Experience 1 Content -->
-            <div class="experience-content card active" id="experience-1">
+            <div class="experience-content card active" id="experience-1" style="opacity: 1; transform: translateX(0);">
                 <ul>
                     <li>Designed and implemented microservices using Java and Spring Boot.</li>
                     <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
@@ -1102,7 +1083,7 @@ body {
             </div>
 
             <!-- Experience 2 Content -->
-            <div class="experience-content card" id="experience-2">
+            <div class="experience-content card" id="experience-2" style="opacity: 0; transform: translateX(-20px);">
                 <ul>
                     <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
                     <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
@@ -1115,7 +1096,7 @@ body {
             </div>
 
             <!-- Experience 3 Content -->
-            <div class="experience-content card" id="experience-3">
+            <div class="experience-content card" id="experience-3" style="opacity: 0; transform: translateX(-20px);">
                 <ul>
                     <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
                     <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
@@ -1129,6 +1110,35 @@ body {
         </div>
     </div>
 </section>
+
+<script>
+    // JavaScript for toggling content
+    document.querySelectorAll('.experience-header').forEach(header => {
+        header.addEventListener('click', () => {
+            // Remove active class from all headers and contents
+            document.querySelectorAll('.experience-header').forEach(h => h.classList.remove('active'));
+            document.querySelectorAll('.experience-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to the clicked header and corresponding content
+            header.classList.add('active');
+            const targetId = header.getAttribute('data-target');
+            const targetContent = document.getElementById(targetId);
+            
+            // Ensure all contents are hidden first
+            document.querySelectorAll('.experience-content').forEach(content => {
+                content.style.opacity = '0';
+                content.style.transform = 'translateX(-20px)';
+                content.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+
+            // Show the target content
+            targetContent.classList.add('active');
+            targetContent.style.opacity = '1';
+            targetContent.style.transform = 'translateX(0)';
+        });
+    });
+</script>
+
 
 
 
@@ -1211,47 +1221,62 @@ body {
         </div>
     </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-heading">Projects</h2>
-            <div class="project-grid">
-                <div class="project-item card">
-                    <h3>Mood Based Music Recommendation Service</h3>
-                    <p>Jan 2024 - May 2024</p>
-                    <ul>
-                        <li>Built a real-time website using Angular and RxJS, achieving 95% accuracy in detecting user emotions and curating playlists from a 500+ track library via Spotify and Amazon Rekognition APIs, with a response time of under 2 seconds. Deployed on AWS Elastic Beanstalk with Docker and Kubernetes, achieving 99.9% uptime and supporting 200+ users. Automated CI/CD pipeline cut build and deployment time by 50%, enhancing scalability and version control.</li>
-                        
-        
-                    </ul>
-                </div>
-                <div class="project-item card">
-                    <h3>E-Commerce Platform</h3>
-                    <p> Aug 2023 - Dec 2023</p>
-                    <ul>
-                        <li>Developed a full-stack e-commerce platform using Angular and Spring Boot.</li>
-                        <li>Implemented Elasticsearch for product search functionality.</li>
-                        <li>Hosted on AWS using S3, CloudFront, and Route 53.</li>
-                        <li>Deployed backend on AWS EC2 using VPC, ALB, and security groups.</li>
-                        <li>Automated deployments using GitHub Actions.</li>
-                    </ul>
-                </div>
+<section id="projects" class="container my-5">
+    <h2 class="section-heading text-center mb-4">Projects</h2>
+    <div class="row">
+        <!-- Project 1 -->
+        <div class="col-md-6 col-12 mb-4">
+            <div class="project-item card h-100 p-3 shadow">
+                <h3 class="card-title">Mood Based Music Recommendation Service</h3>
+                <p>Jan 2024 - May 2024</p>
+                <ul class="card-text mt-3">
+                    <li>Built a real-time website using Angular and RxJS, achieving 95% accuracy in detecting user emotions and curating playlists from a 500+ track library via Spotify and Amazon Rekognition APIs.</li>
+                    <li>Achieved a response time of under 2 seconds, deployed on AWS Elastic Beanstalk with Docker and Kubernetes.</li>
+                    <li>Automated CI/CD pipeline reduced build and deployment time by 50%, enhancing scalability and version control.</li>
+                    <li>Supported 200+ users with 99.9% uptime.</li>
+                </ul>
             </div>
         </div>
-    </section>
 
-    <section id="education"  style="background-image: url('https://source.unsplash.com/random/1600x900?university');">
-        <div class="container">
-            <h2 class="section-heading">Education</h2>
-            <div class="education-item card">
-                <h3>Master's in Computer Science</h3>
+        <!-- Project 2 -->
+        <div class="col-md-6 col-12 mb-4">
+            <div class="project-item card h-100 p-3 shadow">
+                <h3 class="card-title">E-Commerce Platform</h3>
+                <p>Aug 2023 - Dec 2023</p>
+                <ul class="card-text mt-3">
+                    <li>Developed a full-stack e-commerce platform using Angular and Spring Boot.</li>
+                    <li>Implemented Elasticsearch for product search functionality.</li>
+                    <li>Hosted on AWS using S3, CloudFront, and Route 53 for global reach.</li>
+                    <li>Deployed backend on AWS EC2 using VPC, ALB, and security groups.</li>
+                    <li>Automated deployments using GitHub Actions.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <section id="education" class="container my-5">
+    <h2 class="section-heading text-center mb-4">Education</h2>
+    <div class="row">
+        <!-- Education 1 -->
+        <div class="col-md-6 col-12 mb-4">
+            <div class="education-item card h-100 p-3 shadow">
+                <h3 class="card-title">Master's in Computer Science</h3>
                 <p>University of Maryland, Baltimore County</p>
             </div>
-            <div class="education-item card">
-                <h3>Bachelor of Technology in Computer Science and Engineering</h3>
-                <p>Andhra University </p>
+        </div>
+
+        <!-- Education 2 -->
+        <div class="col-md-6 col-12 mb-4">
+            <div class="education-item card h-100 p-3 shadow">
+                <h3 class="card-title">Bachelor of Technology in Computer Science and Engineering</h3>
+                <p>Andhra University</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     
 <section id="certifications" style="background-image: url('https://source.unsplash.com/random/1600x900?certification');">
     <div class="container">
@@ -1413,13 +1438,18 @@ body {
 
 // });
 
-        document.querySelectorAll('.experience-header').forEach(header => {
+     document.querySelectorAll('.experience-header').forEach(header => {
     header.addEventListener('click', function() {
         // Remove active class from all headers
         document.querySelectorAll('.experience-header').forEach(h => h.classList.remove('active'));
 
-        // Remove active class from all content
-        document.querySelectorAll('.experience-content').forEach(content => content.classList.remove('active'));
+        // Remove active class from all content and reset styles
+        document.querySelectorAll('.experience-content').forEach(content => {
+            content.classList.remove('active');
+            content.style.opacity = '0';
+            content.style.transform = 'translateX(-20px)';
+            content.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
 
         // Add active class to the clicked header
         this.classList.add('active');
@@ -1429,9 +1459,17 @@ body {
         const mobileContent = document.getElementById(targetId + '-mob');
         const desktopContent = document.getElementById(targetId);
 
-        // Show the appropriate content
-        if (mobileContent) mobileContent.classList.add('active');
-        if (desktopContent) desktopContent.classList.add('active');
+        // Activate and style the appropriate content
+        if (mobileContent) {
+            mobileContent.classList.add('active');
+            mobileContent.style.opacity = '1';
+            mobileContent.style.transform = 'translateX(0)';
+        }
+        if (desktopContent) {
+            desktopContent.classList.add('active');
+            desktopContent.style.opacity = '1';
+            desktopContent.style.transform = 'translateX(0)';
+        }
     });
 });
 
