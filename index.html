@@ -11,7 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Russo+One&family=Teko:wght@300..700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -38,7 +38,8 @@
 }
 
 .about-heading {
-    font-size: 3rem;
+    margin-top: 20px;
+    font-size: 2rem;
     font-weight: bold;
     text-align: left;
     margin-bottom: 20px; /* Reduced margin for a closer alignment */
@@ -92,7 +93,7 @@
 }
 
 .resume-btn {
-    background-color: #007bff;
+    background-color: black;
 }
 
 .linkedin-btn {
@@ -112,22 +113,19 @@
     list-style-type: disc;
     padding-left: 20px;
     margin: 0;
-    font-size: 1.4rem; /* Increase font size for the list items */
 }
 
 .about-description li {
+    list-style: none;
+    font-size: 1rem;
     margin-bottom: 15px;
-    color: #ffffff; /* Keep the text color white for readability */
-}
-.about-description li {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    color: #ffffff;
+    color: lightgray;
 }
         #animated-text {
-        font-size: 2.0rem; /* Make the running text larger */
             font-weight: bold; /* Make the text bold for emphasis */
             color: #d4af37; /* Change the color to blue or your preferred highlight color */
+            text-transform: uppercase;
+            font-family: "Russo One", sans-serif;
     }
 
 
@@ -139,7 +137,8 @@
         }
 
         html {
-            scroll-behavior: smooth;
+/*            scroll-behavior: smooth;*/
+            width: 100%;
         }
 
         body {
@@ -147,12 +146,12 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: #002b36;
-            width: 100vw;
+            width: 100%;
         }
 
 
         .container {
-            width: 100vw;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -183,62 +182,9 @@
         }
 
 
-
-.experience-titles {
-    width: 30%;
-    padding-right: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.experience-header {
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    cursor: pointer;
-    color: var(--text-color); /* Use the text color for better contrast */
-    padding: 15px;
-    border-radius: 5px;
-    background-color: rgba(0, 73, 83, 0.5); /* Darker background for non-active state */
-    border: 1px solid #3a4a5a; /* Border to separate blocks */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-}
-
-.experience-header.active {
-    background-color: rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-weight: bold;
-}
-
-
-
 .company-info, .years {
     font-size: 0.9rem;
     margin-top: 5px;
-}
-
-.experience-descriptions {
-    width: 70%;
-    padding-left: 20px;
-}
-
-.experience-content {
-    display: none;
-    opacity: 0;
-    transform: translateX(-20px); /* Start slightly to the left, not fully off-screen */
-    transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth and slower transition */
-}
-/* Increase the font size for the Work Experience content */
-.experience-content ul {
-    font-size: 1.2rem; /* Increase this value as needed */
-    line-height: 1.6; /* Adjust for better readability */
-}
-
-
-.experience-content.active {
-    display: block;
-    opacity: 1;
-    transform: translateX(0); /* Slide into place */
 }
 
 /* Responsive Adjustments for Mobile */
@@ -281,24 +227,6 @@
             font-size: 1rem; /* Smaller paragraph text */
         }
 
-       #about,
-#experience,
-#skills,
-#projects,
-#education,
-#contact,
-#certificates {
-/*    background-color: var(--bg-color);*/
-    color: var(--text-color);
-    padding: 60px 20px; /* Consistent padding for left and right */
-    padding-top: 100px; /* Consistent space above each section */
-    padding-bottom: 100px; /* Consistent space below each section */
-    scroll-margin-top: 74px;
-}
-#projects {
-    padding-top: 100px !important; /* Use !important to override any other styles */
-}
-
 
 }
 
@@ -315,17 +243,13 @@
         width: 95%; /* Adjust container width for better spacing */
     }
 
-    #about, #experience, #skills, #projects, #education, #contact {
-        padding: 40px 15px; /* Further reduced padding for mobile devices */
-    }
-
 }
 
 @media (max-width: 768px) {
     .experience-container {
         flex-direction: column; /* Stack vertically */
     }
-    .experience-titles, .experience-descriptions {
+    .experience-titles {
         width: 100%; /* Full width for both columns */
         padding: 0; /* Remove extra padding */
     }
@@ -413,8 +337,8 @@
             animation-fill-mode: both;
         }
         .btn {
-            background-color: #fff;
-            color: #004953;
+            background-color: #333;
+            color: gold;
             padding: 0.8rem 1.5rem;
             border-radius: 30px;
             text-decoration: none;
@@ -456,7 +380,7 @@
         }
         /* General styling for all section headings */
 .section-heading {
-    font-size: 3.5rem; /* Adjust this size as needed */
+    font-size: 3rem; /* Adjust this size as needed */
     font-weight: bold;
     text-align: center; /* Make the text bold for emphasis */
     margin-bottom: 20px; /* Adjust spacing below the headings if necessary */
@@ -477,8 +401,6 @@
             color: var(--text-color);
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adjust shadow for dark background */
-            padding: 2rem;
-            margin-bottom: 2rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -545,7 +467,7 @@
     color: #ffffff; /* Optional: Sets the color to white for better visibility */
     text-transform: uppercase; /* Optional: Makes the text uppercase for emphasis */
     margin-bottom: 10px; /* Optional: Adds spacing below the heading */
-    font-size: 1.3rem; /* Adjusted font size for balance */
+    font-size: 1.1rem; /* Adjusted font size for balance */
     margin-bottom: 0.75rem; /* Consistent spacing below headers */
     color: white;
     text-align: left; /* Left-align the headers */
@@ -565,7 +487,7 @@
 
 /* Adjust font size and spacing for skill items */
 .skill-category ul li {
-    font-size: 1.1rem; /* Uniform font size for readability */
+    font-size: 0.9rem; /* Uniform font size for readability */
     margin-bottom: 0.5rem; /* Consistent spacing between items */
     display: flex;
     align-items: center;
@@ -595,15 +517,15 @@
 
 .project-item p {
     color: #D4AF37; /* Sets the dates to gold */
-    font-weight: bold; /* Optional: Makes the dates bold for better visibility */
+    
     margin-top: 5px; /* Optional: Adds space between heading and date */
 }
 
 .project-item ul {
     list-style-type: disc; /* Ensure the list has bullets */
     padding-left: 20px; /* Add some padding for indentation */
-    font-size: 1.2rem; /* Increase font size for the list text */
-    line-height: 1.6; /* Adjust line height for better readability */
+    font-size: 1rem; /* Increase font size for the list text */
+    line-height: 1.4; /* Adjust line height for better readability */
 }
 
 .project-item ul li {
@@ -612,16 +534,18 @@
 
 
 
-        ..education-item h3 {
-    font-size: 1.8rem; /* Increased font size for headings */
-    margin-bottom: 0.5rem; /* Adjusted margin for spacing */
-    color: var(--primary-color); /* Keep or adjust the color as needed */
+        .education-item h3 {
+    font-size: 1.5rem; /* Keep the original font size for the headings */
+    margin-bottom: 1rem;
+    color: #ffffff; /* Sets the project heading to white */
+    font-weight: bold; /* Makes the text bold */
+   
 }
 
 .education-item p {
-    font-size: 1.2rem; /* Increased font size for text */
-    line-height: 1.6; /* Adjusted line height for readability */
-    color: #d4af37; /* Optional: change text color if needed */
+    color: #D4AF37; /* Sets the dates to gold */
+     /* Optional: Makes the dates bold for better visibility */
+    margin-top: 5px; /* Optional: change text color if needed */
 }
 /* Badge Image Styling */
 .badge-image {
@@ -667,31 +591,48 @@
 
 
 .certification-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold; /* Optional: Makes the text bold for better visibility */
     margin-bottom: 0.5rem;
     color: #ffffff;
 }
 
 .certification-card p {
     color: #D4AF37; /* Sets the organization name to gold */
-    font-weight: bold; /* Optional: Makes the text bold for better visibility */
     text-align: center; /* Ensures the organization names are centered */
     margin-top: 10px;
 }
 
 .navbar {
-    background-color: transparent !important; /* Ensures the navbar is fully transparent */
+    background-color: transparent !important; 
+    transition: background-color 0.3s ease;
     border: none; /* Removes any border */
     width: 100%; /* Ensure the navbar spans the full width */
 }
-
-.navbar .navbar-brand,
-.navbar .nav-link {
-    color: #ffffff !important; /* Makes text white */
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8) !important; /* Darker background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
 }
 
-.navbar .navbar-toggler {
-    border-color: #ffffff; /* Makes the hamburger icon border white */
+
+.navbar .navbar-brand,
+.navbar {
+    color: lightgray !important;
+    font-size: 1em; /* Default size for large screens */
+    transition: font-size 0.3s ease;
+
+}
+.nav-link {
+    color: white !important;
+    font-size: 1em; /* Default size for large screens */
+    font-weight: bold; /* Optional: Makes it bold */
+    transition: font-size 0.3s ease;
+
+}
+
+
+.navbar-toggler {
+   border: 0px !important;
 }
 
 .navbar .navbar-toggler-icon {
@@ -699,10 +640,25 @@
     /* Makes the hamburger icon lines white */
 }
 
+/* Default styles for non-mobile screens */
+.collapse.navbar-collapse {
+    background-color: transparent !important; /* Transparent on larger screens */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+    .collapse.navbar-collapse {
+        background-color: black !important; /* Black for mobile screens */
+        opacity: 0.8; /* Optional: Slight transparency for a softer effect */
+    }
+}
+
+
 body {
     margin: 0; /* Removes any default margin from the body */
     padding: 0; /* Removes any default padding from the body */
     overflow-x: hidden; /* Prevents horizontal scrolling */
+    width: 100%;
 }
 
 .container {
@@ -767,7 +723,7 @@ body {
         }
 
         .parallax {
-            width: 100vw;
+            width: 100%;
             background-attachment: scroll;
 /*            background-color: #2c3e50 !important;*/
             background: linear-gradient(135deg, teal, black, #002b36) !important;
@@ -784,14 +740,9 @@ body {
         #about {
              padding-bottom: 60px; /* Increase this to add more space below the About section */
         }
-
-        #experience {
-            padding-top: 60px; /* Increase this to add more space above the Experience section */
-
-        }
         #experience .years {
-    color: #D4AF37; /* Sets the text color to gold */
-    font-weight: bold; /* Makes the years bold for emphasis */
+    color: #D4AF37 !important; /* Sets the text color to gold */
+    
     margin-top: 5px; /* Optional: Adds spacing above the text */
 }
 
@@ -858,8 +809,244 @@ body {
         }
 
         .color-blue{
-            background-color:rgba(0, 0, 0, 1) !important;
+            background-color:rgba(0, 0, 0, 0) !important;
         }
+
+        /* Default styles for mobile (small screens) */
+.intro-heading {
+    font-size: 2.5rem; /* Default mobile size */
+    margin-bottom: 0px;
+    margin-top: 40px;
+    color: #ecf0f1;
+    font-weight: bolder;
+    text-align: left;
+    font-family: "Teko", sans-serif ;
+}
+
+.highlighted-text {
+    font-size: 2.5rem;
+    color: #d4af37;
+}
+
+.intro-subheading {
+    font-size: 1rem;
+    color: #ecf0f1;
+    font-weight: bold;
+    margin-bottom: 0px;
+    text-align: left;
+}
+
+ .welcome-message {
+        margin-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: #b0bec5; /* Light gray */
+    font-style: italic;
+    }
+
+.about-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    color: #ecf0f1;
+}
+
+/* Base Styling */
+.experience-header {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    padding: 5px 20px;
+    border-radius: 10px; 
+    color: #ffffff; 
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover effect */
+    font-family: 'Poppins', sans-serif; /* Clean and modern font */
+}
+
+/* Header Text Styling */
+.experience-header h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0px;
+    font-weight: 700;
+    color: white; /* Golden highlight for titles */
+    text-transform: uppercase; /* Professional uppercase text */
+    letter-spacing: 0.5px; /* Subtle spacing for readability */
+}
+
+/* Company Info Styling */
+.experience-header .company-info {
+    font-size: 1.2rem;
+    margin-bottom: 0px;
+    font-weight: 500;
+    color: #ecf0f1; /* Subtle contrast with title */
+}
+
+/* Years Styling */
+.experience-header .years {
+    font-size: 1rem;
+    font-weight: 400;
+    color: white !important;
+    margin-bottom: 0px!important;
+}
+
+/* Hover Effect */
+.experience-header:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+    background: #004953;
+}
+
+/* Active State */
+.experience-header.active {
+    background: #004953;
+}
+
+
+.experience-content {
+    display: none;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+    padding: 10px;
+    font-size: 1rem;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+.experience-content ul {
+    line-height: 1.6; 
+    list-style-type: disc; /* Ensure bullet points are dots */
+    padding-left: 20px; /* Add left padding for bullets to appear */
+    margin-left: 0; /* Reset any margins that may offset the list */
+}
+
+.experience-content ul li {
+    margin-bottom: 5px; /* Optional: Add spacing between list items */
+    list-style-position: outside; /* Ensures bullets appear outside the text */
+}
+
+
+
+.experience-content.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+}
+.role-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem; /* Add spacing between the heading and list */
+    text-align: left;
+    color: white; /* Adjust color to fit your design */
+
+}
+/* Company Name Styling */
+.role-subheading {
+    font-size: 1rem; /* Slightly larger for emphasis */
+    color: lightgray; /* Dark gray for professionalism */
+    text-align: left;
+    margin-bottom: 0.2rem; /* Space between the company name and years */
+    line-height: 1.4; /* Adds a little extra spacing between lines */
+}
+
+/* Years Styling */
+.role-subheadings {
+    font-size: 0.9rem; /* Slightly smaller for secondary info */
+    font-weight: normal; /* Regular weight for contrast */
+    color: lightslategray;/* Medium gray to differentiate from the company name */
+    text-align: left;
+    margin-bottom: 1rem; /* Space below the years */
+    line-height: 1.4; /* Adds a little extra spacing between lines */
+}
+
+
+/* Larger font sizes for non-mobile screens */
+@media (min-width: 768px) {
+    .intro-heading {
+        font-size: 3.5rem;
+
+    }
+
+    .highlighted-text {
+        font-size: 3.5rem;
+    }
+
+    .intro-subheading {
+        font-size: 1.5rem; /* Slightly larger for desktop */
+    }
+
+    .welcome-message {
+        margin-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5rem;
+    color: #b0bec5; /* Light gray */
+    text-align: justify;
+    font-style: italic;
+    }
+
+    .about-heading {
+        font-size: 2.5rem; /* Larger about heading */
+    }
+
+    .experience-content {
+        margin: 0px;
+    }
+
+    .about-description li {
+        font-size: 1.3rem;
+        text-align: justify;
+        color: white !important;
+
+    }
+    .navbar {
+        background-color: transparent !important; /* Transparent initially */
+        transition: background-color 0.3s ease; /* Smooth transition */
+    }
+    .navbar.scrolled {
+        background-color: rgba(0, 0, 0, 0.8) !important; /* Darker background */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
+    }
+    .navbar-brand {
+        font-size: 1.5rem !important; 
+        font-weight: normal;
+    }
+    .skill-category h3 {
+
+    font-weight: bold; /* Makes the headings bold */
+    color: #ffffff; /* Optional: Sets the color to white for better visibility */
+    text-transform: uppercase; /* Optional: Makes the text uppercase for emphasis */
+    margin-bottom: 10px; /* Optional: Adds spacing below the heading */
+    font-size: 1.3rem; /* Adjusted font size for balance */
+    margin-bottom: 0.75rem; /* Consistent spacing below headers */
+    color: white;
+    text-align: left; /* Left-align the headers */
+}
+
+/* Styling for the list of skills */
+.skill-category ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0; /* Remove default margin for consistency */
+    flex: 1; /* Make the list take up remaining space in the skill card */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align items to the top */
+    text-align: left; /* Ensure list items are left-aligned */
+}
+
+/* Adjust font size and spacing for skill items */
+.skill-category ul li {
+    font-size: 1.1rem; /* Uniform font size for readability */
+    margin-bottom: 0.5rem; /* Consistent spacing between items */
+    display: flex;
+    align-items: center;
+}
+}
+
+
     </style>
 </head>
 <body>
@@ -880,7 +1067,7 @@ body {
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Collapsible Menu Items -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse bg-transparent" style="text-align:right;" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="#about" data-toggle="collapse" data-target=".navbar-collapse.show">About</a>
@@ -903,7 +1090,7 @@ body {
             </ul>
         </div>
     </div>
-</nav>
+    </nav>
 
 
 
@@ -911,20 +1098,22 @@ body {
 
  <section id="about" class="hero parallax" style="padding: 80px 20px;">
     <div class="hero-content container" style="text-align: left;">
-        <!-- Main Introduction Heading -->
-       <h1 style="font-size: 2.5rem; margin-bottom: 10px; color: #ecf0f1;">
-    Hi, I’m <span style="font-size: 3.5rem; color: #d4af37; font-family: 'Aldrich', sans-serif" class="text-6">Ravi</span> 
-    <span class="wave-emoji">👋</span> </h1>
+        
+            <h1 class="intro-heading">
+        Hi, I’m <span class="highlighted-text">Ravi</span> 
+        <span class="wave-emoji">👋</span>
+    </h1>
+    <h2 class="intro-subheading">
+        I'm a <span id="animated-text"></span>
+    </h2>
+    <h2 class="welcome-message">Welcome to My Portfolio, Step into a space where innovation meets impact. From building scalable solutions to designing intuitive user experiences, I aim to turn ideas into reality with every line of code.</h2>
+    <h3 class="about-heading">Let's dive in. 👨‍💻</h3>
 
-
-        <h2 style="font-size: 1.5rem; margin-bottom: 20px; color: #ecf0f1;">Welcome to My Portfolio...</h2>
-        <h2 style="font-size: 1.5rem; color: #ecf0f1;">
-    I'm a <span id="animated-text"></span>
-</h2>
+        
 
        <div class="about-container">
             <!-- Overview Heading -->
-            <h1 class="about-heading">All about me!!!</h1>
+            <!-- <h3 class="about-heading">Let's dive in. 👨‍💻</h3> -->
 
             <div class="about-content row">
                 <!-- Profile Picture -->
@@ -932,6 +1121,8 @@ body {
                     <div class="profile-picture">
                         <img src="Profile_image3.jpeg" alt="Profile Picture">
                     </div>
+
+                     <!-- <h3 class="about-heading">Let's dive in. 👨‍💻</h3> -->
 
                     <!-- Buttons under the image -->
                     <div class="buttons-under-image">
@@ -941,13 +1132,15 @@ body {
                 </div>
 
                 <!-- About Description -->
-                <div class="col-md-8 col-12 about-description">
+                <div class="col-md-8 col-12 about-description" style='font-family: "Lato", sans-serif;'>
                     <ul>
-                        <li>I'm a Software Engineer with over 5 years of experience in software development and cloud technologies.</li>
-                        <li>Building scalable, cloud-based software solutions that drive efficiency and performance in professional environments.</li>
-                        <li>Delivered full-stack applications and microservices, leveraging AWS for robust and efficient cloud deployments.</li>
-                        <li>Passionate about automating workflows and optimizing systems to solve complex challenges and boost reliability</li>
-                        <li>Always exploring new technologies, driven by curiosity and a commitment to continuous improvement.</li>
+                        <ul>
+    <li>💻 I'm a Software Engineer with over 5 years of experience in software development and cloud technologies.</li>
+    <li>☁️ Building scalable, cloud-based software solutions that drive efficiency and performance in professional environments.</li>
+    <li>⚙️ Delivered full-stack applications and microservices, leveraging AWS for robust and efficient cloud deployments.</li>
+    <li>🚀 Passionate about automating workflows and optimizing systems to solve complex challenges and boost reliability.</li>
+    <li>🌟 Always exploring new technologies, driven by curiosity and a commitment to continuous improvement.</li>
+</ul>
                     </ul>
                 </div>
             </div>
@@ -1046,34 +1239,81 @@ body {
 </section>
 
 
-<section id="experience" class="container my-5">
+<section id="experience" class="container my-4">
     <h2 class="section-heading text-center mb-4">Work Experience</h2>
     <div class="row">
         <!-- Experience Titles (Left Column) -->
-        <div class="col-md-4 col-12 experience-titles">
-            <div class="experience-header py-2 px-3 px-md-4 mb-2 mb-md-3 active" data-target="experience-1">
-                <h3 class="fs-6 fs-md-5">Software Development Engineer</h3>
-                <p class="company-info fs-7 fs-md-6">Albertsons</p>
-                <p class="years fs-7 fs-md-6">June 2023 – Present</p>
+        <div class="col-md-4  col-12 experience-titles">
+            <div class="experience-header active" data-target="experience-1">
+                <h3>Software Development Engineer</h3>
+                <p class="company-info">Albertsons</p>
+                <p class="years">June 2023 – Present</p>
             </div>
 
-            <div class="experience-header py-2 px-3 px-md-4 mb-2 mb-md-3" data-target="experience-2">
-                <h3 class="fs-6 fs-md-5">Application Development Engineer</h3>
-                <p class="company-info fs-7 fs-md-6">Tata Consultancy Services</p>
-                <p class="years fs-7 fs-md-6">Nov 2020 – Aug 2022</p>
+            <div class="experience-content card active d-md-none" id="experience-1-mob">
+                <h4 class="role-subheading">Albertsons</h4>
+                <h4 class="role-subheadings">Jun 2023 – Present (1 yr 5 mos)</h4>
+                <ul>
+                    <li>Designed and implemented microservices using Java and Spring Boot.</li>
+                    <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
+                    <li>Developed Kafka producers and consumers to support efficient pub/sub messaging systems.</li>
+                    <li>Utilized Docker for containerization and Kubernetes for orchestration, ensuring smooth deployment and scalability.</li>
+                    <li>Set up CI/CD pipelines with Jenkins, using TDD and BDD strategies with tools such as JUnit, TestNG, and Cucumber to ensure code quality and seamless integration.</li>
+                    <li>Integrated automated tests to the pipeline, improving system stability and reducing manual testing.</li>
+                </ul>
             </div>
 
-            <div class="experience-header py-2 px-3 px-md-4 mb-2 mb-md-3" data-target="experience-3">
-                <h3 class="fs-6 fs-md-5">Software Developer</h3>
-                <p class="company-info fs-7 fs-md-6">HCL Technologies</p>
-                <p class="years fs-7 fs-md-6">Apr 2019 – Nov 2020</p>
+            <div class="experience-header" data-target="experience-2">
+                <h3>Application Development Engineer</h3>
+                <p class="company-info">Tata Consultancy Services</p>
+                <p class="years">Nov 2020 – Aug 2022</p>
+            </div>
+
+            <div class="experience-content card d-md-none" id="experience-2-mob">
+
+                <h4 class="role-subheading">Tata Consultancy Services</h4>
+                <h4 class="role-subheadings">Nov 2020 – Aug 2022 (1 yr 10 mos)</h4>
+                <ul>
+                    <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
+                    <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
+                    <li>Utilized front-end development tools like npm and Gulp to automate builds and optimize the codebase.</li>
+                    <li>Hosted the application on Red Hat JBoss Server, connecting to the database and efficient fetching.</li>
+                    <li>Focused on front-end testing, including unit, functional, and integration tests, using Jest, Selenium, and Mocha, which enhanced test coverage.</li>
+                    <li>Involved in Agile Scrum activities such as daily stand-ups and sprint planning to help prioritize tasks and deliver features on time.</li>
+                    <li>Set up automated builds and tests in Jenkins to provide seamless continuous integration.</li>
+                </ul>
+            </div>
+
+
+            <div class="experience-header" data-target="experience-3">
+                <h3>Software Developer</h3>
+                <p class="company-info">HCL Technologies</p>
+                <p class="years">Apr 2019 – Nov 2020</p>
+            </div>
+
+            <div class="experience-content card d-md-none" id="experience-3-mob">
+
+                <h4 class="role-subheading">HCL Technologies</h4>
+                <h4 class="role-subheadings">Apr 2019 – Nov 2020 (1 yr 6 mos)</h4>
+                <ul>
+                    <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
+                    <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
+                    <li>Integrated Google Cloud Platform (GCP) services for deployment and scalability, like Cloud SQL for database management and Cloud Storage for file management.</li>
+                    <li>Developed unit and integration tests to ensure high code quality, using JUnit and Mockito for effective testing strategies and achieving over 90% test coverage.</li>
+                    <li>Integrated MySQL databases with JDBC for efficient data handling, optimizing queries to improve application response times.</li>
+                    <li>Collaborated with cross-functional teams in Agile practices, participating in daily stand-ups and sprint planning.</li>
+                    <li>Managed tasks using Jira, tracking progress and issues to ensure timely completion.</li>
+                </ul>
             </div>
         </div>
 
         <!-- Experience Descriptions (Right Column) -->
-        <div class="col-md-8 col-12 experience-descriptions">
+        <div class="col-md-8 col-12 experience-descriptions d-md-block d-none">
             <!-- Experience 1 Content -->
-            <div class="experience-content card active" id="experience-1" style="opacity: 1; transform: translateX(0);">
+            <div class="experience-content card active" id="experience-1">
+
+                <h4 class="role-subheading">Albertsons</h4>
+                <h4 class="role-subheadings">Jun 2023 – Present (1 yr 5 mos)</h4>
                 <ul>
                     <li>Designed and implemented microservices using Java and Spring Boot.</li>
                     <li>Leveraged AWS technologies such as EKS, ECS, Lambda, DynamoDB, S3, and EC2 to design and deploy.</li>
@@ -1085,7 +1325,10 @@ body {
             </div>
 
             <!-- Experience 2 Content -->
-            <div class="experience-content card" id="experience-2" style="opacity: 0; transform: translateX(-20px);">
+            <div class="experience-content card" id="experience-2">
+
+                <h4 class="role-subheading">Tata Consultancy Services</h4>
+                <h4 class="role-subheadings">Nov 2020 – Aug 2022 (1 yr 10 mos)</h4>
                 <ul>
                     <li>Built the internal invoicing application using Angular for the front end and Spring Boot with Java for the back end, ensuring high performance and scalability.</li>
                     <li>Implemented REST APIs to facilitate smooth interactions between the front end and back end, enhancing transaction efficiency.</li>
@@ -1098,7 +1341,10 @@ body {
             </div>
 
             <!-- Experience 3 Content -->
-            <div class="experience-content card" id="experience-3" style="opacity: 0; transform: translateX(-20px);">
+            <div class="experience-content card" id="experience-3">
+
+                <h4 class="role-subheading">HCL Technologies</h4>
+                <h4 class="role-subheadings">Apr 2019 – Nov 2020 (1 yr 6 mos)</h4>
                 <ul>
                     <li>Worked on microservices architecture, developing and deploying microservices, and implementing new functionalities using Spring Boot.</li>
                     <li>Developed RESTful APIs for efficient communication between microservices, improving application integration.</li>
@@ -1111,6 +1357,7 @@ body {
             </div>
         </div>
     </div>
+
 </section>
 
 <script>
@@ -1230,6 +1477,7 @@ body {
         <div class="col-md-6 col-12 mb-4">
             <div class="project-item card h-100 p-3 shadow">
                 <h3 class="card-title">Mood Based Music Recommendation Service</h3>
+
                 <p>Jan 2024 - May 2024</p>
                 <ul class="card-text mt-3">
                     <li>Built a real-time website using Angular and RxJS, achieving 95% accuracy in detecting user emotions and curating playlists from a 500+ track library via Spotify and Amazon Rekognition APIs.</li>
@@ -1282,7 +1530,7 @@ body {
     
 <section id="certifications" style="background-image: url('https://source.unsplash.com/random/1600x900?certification');">
     <div class="container">
-        <h2 class="section-heading">Certifications</h2>
+        <h3 class="section-heading">Certifications</h3>
         <div class="certification-slider">
             <div class="certification-card">
                 <h3>AWS Certified Developer Associate</h3>
@@ -1508,6 +1756,26 @@ document.querySelectorAll('a.nav-link').forEach(anchor => {
     });
 });
 
+  // Detect scroll to toggle 'scrolled' class
+    window.addEventListener('scroll', function () {
+        var navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) { // Adjust scroll threshold as needed
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+window.addEventListener('scroll', function () {
+        var navbar = document.querySelector('.navbar');
+        if (window.innerWidth >= 992) { // Apply only on large screens
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+    });
 
     </script>
 
