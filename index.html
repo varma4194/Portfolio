@@ -558,9 +558,9 @@
 
 .certification-slider {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+    flex-wrap: wrap; /* Allows the cards to wrap to the next line if needed */
+    gap: 2rem; /* Space between the cards */
+    justify-content: center; /* Center the cards horizontally */
 }
 
 .certification-card {
@@ -581,89 +581,27 @@
 }
 
 .badge-image {
-    width: 120px;
-    height: auto;
-    margin: 15px 0;
+    width: 120px; /* Increased size for the badges */
+    height: auto; /* Maintain aspect ratio */
+    margin: 15px 0; /* Adjusted spacing around the badge */
     display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; /* Center the badge horizontally */
 }
+
 
 .certification-card h3 {
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: bold; /* Optional: Makes the text bold for better visibility */
     margin-bottom: 0.5rem;
     color: #ffffff;
 }
 
 .certification-card p {
-    color: #D4AF37;
+    color: #D4AF37; /* Sets the organization name to gold */
+    text-align: center; /* Ensures the organization names are centered */
     margin-top: 10px;
 }
-
-/* --- Popup Styles --- */
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: opacity 0.3s ease;
-    border-radius: 15px; /* Adjust the value for desired roundness */
-    overflow: hidden; /* Ensures content respects the rounded corners */
-}
-
-
-.popup.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.popup-content {
-    background-color: black;
-    padding: 20px; /* Increased padding for overall spacing */
-    border-radius: 8px;
-    text-align: center;
-    max-width: 80%; /* Adjust width for smaller screens */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    position: relative;
-    animation: fadeIn 0.3s ease; /* Smooth fade-in animation */
-    display: flex; /* Use flexbox for alignment */
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center elements horizontally */
-    justify-content: flex-start; /* Start content from top */
-    gap: 15px; /* Space between elements */
-    font-size: 0.5rem;
-    padding-top: 50px !important; /* Add space above the content */
-}
-
-.close-btn {
-    position: absolute;
-    top: 1px;
-    right: 10px;
-    font-size: 40px;
-    cursor: pointer;
-    color: white;
-}
-
-.view-link {
-    display: block;
-    margin-top: 15px;
-    font-size: 1rem;
-    color: #007BFF;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.view-link:hover {
-    text-decoration: underline;
-}
-
 
 .navbar {
     background-color: transparent !important; 
@@ -799,6 +737,14 @@ body {
         #contact {
             padding: 80px 0;
         }
+        .contact-intro {
+    font-size: 1.1rem; /* Adjust font size as needed */
+    color: gold; /* Adjust text color to fit your theme */
+    text-align: center; /* Aligns the text to the left, matching the form */
+    margin-bottom: 1rem; /* Space between the intro text and the form */
+    padding-left: 5px; /* Adds slight padding to align with form's padding */
+}
+
         #about {
              padding-bottom: 60px; /* Increase this to add more space below the About section */
         }
@@ -1106,24 +1052,13 @@ body {
     display: flex;
     align-items: center;
 }
-  .certification-card {
-        width: 50%; /* Reduce card size on smaller screens */
-    }
-
-    .certification-slider {
-        gap: 1rem; /* Reduce gap for smaller screens */
-    }
-
-    .badge-image {
-        width: 80px; /* Adjust badge size for small screens */
-    }
-
-    .popup-content {
-        width: 30%;
-        height: 30%;
-        padding-top: 2px; 
-        font-size: 0.6rem;
-    }
+  .contact-intro {
+    font-size: 1.3rem; /* Adjust font size as needed */
+    color: gold; /* Adjust text color to fit your theme */
+    text-align: center; /* Aligns the text to the left, matching the form */
+    margin-bottom: 1rem; /* Space between the intro text and the form */
+    padding-left: 5px; /* Adds slight padding to align with form's padding */
+}
 }
 
 
@@ -1612,70 +1547,52 @@ body {
     <div class="container">
         <h3 class="section-heading">Certifications</h3>
         <div class="certification-slider">
-            <!-- AWS Developer Certification -->
-            <div class="certification-card" 
-                 data-certificate="AWS Certified Developer Associate" 
-                 data-file="devcert.pdf">
+            <div class="certification-card">
                 <h3>AWS Certified Developer Associate</h3>
+                
                 <img src="Dev.png" alt="AWS Developer Badge" class="badge-image">
                 <p>Amazon Web Services</p>
             </div>
-
-            <!-- AWS Solutions Architect Certification -->
-            <div class="certification-card" 
-                 data-certificate="AWS Certified Solutions Architect" 
-                 data-file="certificates/aws-architect.pdf">
+            <div class="certification-card">
                 <h3>AWS Certified Solutions Architect</h3>
+    
                 <img src="sol.png" alt="AWS Solutions Architect Badge" class="badge-image">
                 <p>Amazon Web Services</p>
             </div>
-
-            <!-- GitHub Foundation Certification -->
-            <div class="certification-card" 
-                 data-certificate="GitHub Foundation Certification" 
-                 data-file="certificates/github-foundation.pdf">
-                <h3>GitHub Foundation Certification</h3>
-                <img src="git.png" alt="GitHub Foundation Badge" class="badge-image">
-                <p>GitHub</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup -->
-    <div id="certificate-popup" class="popup hidden">
-        <div class="popup-content">
-            <span class="close-btn">&times;</span>
-            <h3 class="popup-title"></h3>
-            <a id="certificate-link" href="#" target="_blank" class="view-link">View Certificate</a>
         </div>
     </div>
 </section>
 
 
 
-
     
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Me</h2>
-            <form class="contact-form" id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
-    </section>
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+        
+        <!-- Get in Touch Text -->
+        <p class="contact-intro">
+    Get in touch at 
+    <a href="tel:+1 667-464-8539 "><strong>+1 667-464-8539</strong></a>
+</p>
+        <form class="contact-form" id="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </div>
+</section>
 
     <footer>
         <div class="container">
@@ -1822,48 +1739,22 @@ body {
 });
 
 
-document.addEventListener("DOMContentLoaded", function () {
+   document.addEventListener("DOMContentLoaded", function() {
     const cards = document.querySelectorAll(".certification-card");
-    const popup = document.getElementById("certificate-popup");
-    const popupTitle = popup.querySelector(".popup-title");
-    const popupLink = popup.querySelector("#certificate-link");
-    const closeBtn = popup.querySelector(".close-btn");
 
-    // Add click event to each card
-    cards.forEach(card => {
-        card.addEventListener("click", () => {
-            const certificateName = card.getAttribute("data-certificate");
-            const certificateFile = card.getAttribute("data-file");
-
-            popupTitle.textContent = certificateName;
-
-            // Update the link in the popup
-            if (certificateFile) {
-                popupLink.href = certificateFile;
-                popupLink.textContent = "View Certificate";
-                popupLink.style.display = "block"; // Ensure the link is visible
-            } else {
-                popupLink.style.display = "none"; // Hide the link if no file is provided
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible"); // Add class when in view
+                observer.unobserve(entry.target); // Stop observing after animation
             }
-
-            // Show the popup
-            popup.classList.remove("hidden");
         });
-    });
+    }, { threshold: 0.1 }); // Trigger when 10% of the card is visible
 
-    // Close the popup when the close button is clicked
-    closeBtn.addEventListener("click", () => {
-        popup.classList.add("hidden");
-    });
-
-    // Close popup on clicking outside the content
-    popup.addEventListener("click", (e) => {
-        if (e.target === popup) {
-            popup.classList.add("hidden");
-        }
+    cards.forEach(card => {
+        observer.observe(card);
     });
 });
-
 
 
 document.querySelectorAll('a.nav-link').forEach(anchor => {
