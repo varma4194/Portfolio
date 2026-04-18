@@ -259,6 +259,10 @@ body.cg #cursor-ring { width:52px; height:52px; border-color:rgba(255,107,53,0.2
 }
 .l-hero-reveal.vis { opacity:1; transform:none; }
 .l-hero-reveal .gr { background:var(--og); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+@media(max-width:640px){
+  .l-hero-reveal{ font-size:clamp(1.9rem,8.6vw,2.8rem); letter-spacing:-1.5px; }
+  .lt{ gap:16px; padding:0 14px; }
+}
 
 /* ── Role pill (glass, sits directly under name) ── */
 .l-sub-role {
@@ -282,6 +286,10 @@ body.cg #cursor-ring { width:52px; height:52px; border-color:rgba(255,107,53,0.2
 .l-sub-role .lsr-sep { width:4px; height:4px; border-radius:50%; background:rgba(255,179,71,0.55); box-shadow:0 0 8px rgba(255,179,71,0.6); }
 .l-sub-role .lsr-loc { color:#e8ddcb; }
 .l-sub-role .lsr-pin { color:var(--o2); margin-right:4px; font-size:0.9em; }
+@media(max-width:640px){
+  .l-sub-role{ padding:7px 14px; gap:9px; font-size:0.58rem; letter-spacing:1.5px; max-width:92vw; }
+  .l-sub-role .lsr-sep{ width:3px; height:3px; }
+}
 
 /* ── Status pill (glass, bottom, cycles messages) ── */
 .l-status {
@@ -2453,7 +2461,9 @@ gsap.ticker.lagSmoothing(0);
       const ge = gt<0.5 ? 4*gt*gt*gt : 1-Math.pow(-2*gt+2,3)/2;
       // camera zoom: globe grows as camera approaches
       const zoom = 0.82 + ge*0.25 + Math.min(1,Math.max(0,(t-0.7)/0.3))*0.12;
-      const R = ge * Math.min(W,H) * 0.26 * zoom;
+      // Responsive globe radius — bigger on mobile so it balances the name/role pill
+      const baseFactor = W < 640 ? 0.40 : 0.26;
+      const R = ge * Math.min(W,H) * baseFactor * zoom;
       const cx = W/2, cy = H*0.50;
       ga += 0.0055;
 
