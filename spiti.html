@@ -888,7 +888,7 @@ const card = document.getElementById('story-card');
 
 ScrollTrigger.create({
   trigger:'#journey-scroll',
-  start:'top 85%',end:'bottom 15%',
+  start:'top 85%',end:'bottom bottom',
   onToggle(self){
     const vis = self.isActive;
     ['loc-badge','alt-pill','ch-dots','music-player','trip-pill','scroll-down-btn'].forEach(id=>{
@@ -904,6 +904,25 @@ ScrollTrigger.create({
       clearWater(); clearSnow();
       atmosphere.style.opacity = '0';
     }
+  }
+});
+
+/* ─ extra safety: hide card the moment outro enters viewport ─ */
+ScrollTrigger.create({
+  trigger:'#outro',
+  start:'top 92%',
+  onEnter:()=>{
+    ['loc-badge','alt-pill','ch-dots','music-player','trip-pill','scroll-down-btn','story-card'].forEach(id=>{
+      const el = document.getElementById(id); if(el) el.classList.remove('vis');
+    });
+    gsap.killTweensOf(card);
+    gsap.set(card,{opacity:0});
+  },
+  onLeaveBack:()=>{
+    ['loc-badge','alt-pill','ch-dots','music-player','trip-pill','scroll-down-btn','story-card'].forEach(id=>{
+      const el = document.getElementById(id); if(el) el.classList.add('vis');
+    });
+    gsap.set(card,{opacity:1});
   }
 });
 
