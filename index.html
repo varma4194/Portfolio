@@ -4,6 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ravi Varma Gottumukkala — Full Stack Engineer</title>
+
+<!-- PAGE-PORTAL-TRANSITION: start -->
+<script>
+(function(){ if(sessionStorage.getItem('portalIn')){ document.documentElement.classList.add('portal-pending'); } })();
+</script>
+<style>
+html.portal-pending{ background:#0a0908 !important; }
+html.portal-pending body{ visibility:hidden; }
+html.portal-pending body .page-portal{ visibility:visible; }
+html.portal-pending::before{
+  content:''; position:fixed; inset:0;
+  background:#0a0908; z-index:99998; pointer-events:none;
+}
+.page-portal{
+  position:fixed; inset:0; z-index:99999;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:#0a0908; gap:22px;
+  opacity:1; pointer-events:auto;
+}
+.page-portal.exit{ opacity:0; transition: opacity 0.6s ease; pointer-events:none; }
+.page-portal .pp-orb{
+  position:relative; width:140px; height:140px;
+  display:flex; align-items:center; justify-content:center;
+}
+.page-portal .pp-orb .pp-wave{
+  position:absolute; inset:0;
+  border-radius:50%;
+  border:1px solid var(--pp-c1,#ff9a3c);
+  opacity:0; will-change:transform,opacity;
+  animation: pp-wave 2.4s cubic-bezier(0.16,1,0.3,1) infinite;
+}
+.page-portal .pp-orb .pp-wave:nth-child(2){ animation-delay:0.8s; }
+.page-portal .pp-orb .pp-wave:nth-child(3){ animation-delay:1.6s; }
+.page-portal .pp-orb .pp-core{
+  width:22px; height:22px; border-radius:50%;
+  background: var(--pp-c1,#ff9a3c);
+  box-shadow: 0 0 20px var(--pp-c1,#ff9a3c), 0 0 50px var(--pp-c2,#ffb347), 0 0 90px -10px var(--pp-c1,#ff9a3c);
+  animation: pp-breath 1.8s ease-in-out infinite;
+  will-change:transform,opacity;
+}
+.page-portal .pp-text{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.68rem; letter-spacing:3px; text-transform:uppercase;
+  color: var(--pp-eye, rgba(255,179,71,0.65));
+}
+.page-portal .pp-name{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(2rem,6vw,3.6rem); font-weight:800; letter-spacing:-1.5px;
+  color:#f5e6c8; text-align:center; line-height:1.05; padding:0 20px;
+}
+.page-portal .pp-name .pp-accent{
+  background: var(--pp-accent, linear-gradient(135deg,#ff9a3c,#ffb347));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.page-portal .pp-tagline{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.95rem; color:rgba(245,230,200,0.55);
+  text-align:center; max-width:80%; padding:0 20px;
+}
+@keyframes pp-wave{ 0%{ transform:scale(0.25); opacity:0; } 20%{ opacity:0.55; } 100%{ transform:scale(1); opacity:0; } }
+@keyframes pp-breath{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.18); opacity:0.88; } }
+.page-portal.theme-personal{ --pp-c1:#ff9a3c; --pp-c2:#ffb347; --pp-eye:rgba(255,179,71,0.7); --pp-accent:linear-gradient(135deg,#ff9a3c,#ffb347,#ffd700); background:radial-gradient(circle at 50% 50%, #1a0f06 0%, #0a0504 70%); }
+.page-portal.theme-portfolio{ --pp-c1:#ff6b35; --pp-c2:#f7931e; --pp-eye:rgba(247,147,30,0.7); --pp-accent:linear-gradient(135deg,#ff6b35,#f7931e); background:radial-gradient(circle at 50% 50%, #12090a 0%, #070405 70%); }
+.page-portal.theme-ladakh{ --pp-c1:#8ec5fc; --pp-c2:#e0c3fc; --pp-eye:rgba(142,197,252,0.8); --pp-accent:linear-gradient(135deg,#8ec5fc,#e0c3fc,#a8e6ff); background:radial-gradient(circle at 50% 50%, #0a1628 0%, #030810 70%); }
+.page-portal.theme-spiti{ --pp-c1:#ff9a3c; --pp-c2:#c0392b; --pp-eye:rgba(255,154,60,0.8); --pp-accent:linear-gradient(135deg,#ff9a3c,#e67e22,#c0392b); background:radial-gradient(circle at 50% 50%, #18100a 0%, #080402 70%); }
+</style>
+<script>
+(function(){
+  var THEMES = {
+    personal:  { cls:'theme-personal',  eye:"entering ravi's world",    name:'Beyond the <span class="pp-accent">Screen.</span>',     tag:'Buckle up. This is the good stuff.' },
+    portfolio: { cls:'theme-portfolio', eye:'back to the code',         name:'Ravi <span class="pp-accent">Varma.</span>',            tag:'Where the shipping happens.' },
+    ladakh:    { cls:'theme-ladakh',    eye:'heading north',            name:'Into <span class="pp-accent">Ladakh.</span>',           tag:'Land of high passes. Route that changed everything.' },
+    spiti:     { cls:'theme-spiti',     eye:'into the cold desert',     name:'Into <span class="pp-accent">Spiti Valley.</span>',     tag:'Middle Land. Last villages on earth.' }
+  };
+  function build(key){
+    var t = THEMES[key]; if(!t) return null;
+    var el = document.createElement('div');
+    el.className = 'page-portal ' + t.cls;
+    el.innerHTML = '<div class="pp-orb"><div class="pp-wave"></div><div class="pp-wave"></div><div class="pp-wave"></div><div class="pp-core"></div></div>'
+                 + '<div class="pp-text">'+t.eye+'</div>'
+                 + '<div class="pp-name">'+t.name+'</div>'
+                 + '<div class="pp-tagline">'+t.tag+'</div>';
+    return el;
+  }
+  var pending = sessionStorage.getItem('portalIn');
+  if(pending){
+    sessionStorage.removeItem('portalIn');
+    var showIn = function(){
+      var el = build(pending);
+      if(!el){ document.documentElement.classList.remove('portal-pending'); return; }
+      document.body.appendChild(el);
+      void el.offsetHeight;
+      document.documentElement.classList.remove('portal-pending');
+      setTimeout(function(){
+        el.classList.add('exit');
+        setTimeout(function(){ el.remove(); }, 700);
+      }, 650);
+    };
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded', showIn);
+    } else { showIn(); }
+  }
+  var navigating = false;
+  window.pagePortal = function(key, url){
+    if(navigating) return false;
+    navigating = true;
+    var el = build(key);
+    if(!el){ window.location.href = url; return false; }
+    document.body.appendChild(el);
+    sessionStorage.setItem('portalIn', key);
+    setTimeout(function(){ window.location.href = url; }, 550);
+    return false;
+  };
+})();
+</script>
+<!-- PAGE-PORTAL-TRANSITION: end -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Exact same font weight as Rameshwar: Clash Display + Cal Sans equivalent -->
@@ -302,9 +418,10 @@ nav {
 .sl { font-size:0.62rem; color:var(--ink3); text-transform:uppercase; letter-spacing:2px; margin-top:3px; }
 /* Scroll hint */
 .h-scroll {
-  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  position:absolute; bottom:32px; left:0; right:0; margin-left:auto; margin-right:auto; width:fit-content;
   z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px;
   opacity:0; animation:aFU 0.6s 4.6s var(--ease) forwards;
+  pointer-events:none;
 }
 .mico { width:22px; height:36px; border:1.5px solid var(--ink3); border-radius:100px; position:relative; }
 .mico::after { content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%); width:3px; height:6px; background:var(--ink3); border-radius:100px; animation:scrolld 1.8s infinite; }
@@ -2042,7 +2159,7 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
 <!-- ═══ FLIP TO PERSONAL WORLD CARD ═══ -->
 <div id="flip-section">
-  <div id="flip-card" onclick="flipToPersonal()">
+  <a id="flip-card" href="personal.html" onclick="return pagePortal('personal','personal.html')" style="text-decoration:none;color:inherit;display:block">
     <div class="fc-eyebrow">
       <span class="fc-dot"></span>
       not just an engineer
@@ -2050,7 +2167,7 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
     <div class="fc-title">There's a whole other<br>side of <span class="warm">Ravi.</span></div>
     <p class="fc-sub">Mountains, motorbikes, rivers you probably shouldn't cross, and places so remote your phone gives up. Come see what I do when I'm not shipping code.</p>
     <div class="fc-btn"><i class="fas fa-compass"></i> Step into my world &nbsp;→</div>
-  </div>
+  </a>
 </div>
 
 <footer>
@@ -2128,233 +2245,6 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 <!-- Copy toast -->
 <div id="copy-toast" class="copy-toast">Email copied!</div>
 
-<!-- Flip trigger -->
-<!-- ═══ THE OTHER SIDE — portal intro ═══ -->
-<div id="fw-portal-intro" style="display:none">
-  <div class="fpi-ring"><div class="fpi-ring-inner"></div></div>
-  <div class="fpi-text">entering ravi's world</div>
-  <div class="fpi-name">Beyond the <span class="warm">Screen.</span></div>
-  <div class="fpi-tagline">Buckle up. This is the good stuff.</div>
-</div>
-
-<div id="flip-world">
-
-  <!-- Nav sits outside fw-content so Lenis translateY doesn't move it -->
-  <div class="fw-nav">
-    <div class="fw-nav-title">Ravi <span>Beyond Code</span></div>
-    <button class="fw-back" onclick="flipBack()"><i class="fas fa-arrow-left"></i> Back to Portfolio</button>
-  </div>
-
-<div id="fw-content">
-
-  <!-- height spacer so content starts below the fixed nav (~68px) -->
-  <div style="height:72px"></div>
-
-  <!-- hero -->
-  <div class="fw-hero">
-    <div class="fw-eyebrow">The other side of me</div>
-    <h1 class="fw-title">Mountains, bikes<br>and <span class="warm">open roads.</span></h1>
-    <p class="fw-subtitle">When I'm not writing code, I'm chasing horizons. These are some of the trips that changed how I think, live and see the world.</p>
-    <div style="margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:2px;color:rgba(255,179,71,0.4)">PRESS ESC TO RETURN</div>
-  </div>
-
-  <div class="fw-sections">
-
-    <!-- ── BIKES & RIDES ── -->
-    <div class="fw-section-title"><i class="fas fa-motorcycle"></i>&nbsp; Bikes & Rides</div>
-    <div class="fw-bikes-grid">
-      <!-- Landscape bike photo — spans full width -->
-    <div class="fw-photo-card">
-      <img src="ravi-bike.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-    </div>
-      <!-- Two-wheel Therapy card -->
-      <div class="fw-card">
-        <span class="fw-card-ico">🏍️</span>
-        <div class="fw-card-title">Two-wheel Therapy</div>
-        <div class="fw-card-body">Nothing clears the head like a long ride. Highway or mountain road — it doesn't matter. The throttle is the best reset button I know. Some of my clearest thinking happens at 80 kmph with the wind in my face and no notifications.</div>
-        <span class="fw-card-tag">Weekend ritual</span>
-      </div>
-      <!-- Compact Music Player card -->
-      <div class="fw-card bmp-card" id="bmp-card">
-        <div class="bmp-listening-label"><i class="fas fa-headphones"></i>&nbsp; The Ride Playlist</div>
-        <!-- Art + track info + controls in one row -->
-        <div class="bmp-top-row">
-          <div class="bmp-art-wrap" id="bmp-art-wrap">
-            <img class="bmp-art-img" id="bmp-art-img" alt="Album art">
-            <div class="bmp-emoji-inner" id="bmp-emoji">🏔️</div>
-            <div class="bmp-art-glow"></div>
-          </div>
-          <div class="bmp-track-info">
-            <div class="bmp-title" id="bmp-title">Mountains Calling</div>
-            <div class="bmp-artist" id="bmp-artist">Add your music here</div>
-            <div class="bmp-controls">
-              <button class="bmp-ctrl-btn" onclick="mpPrev()" title="Previous"><i class="fas fa-backward-step"></i></button>
-              <button class="bmp-play-btn" id="bmp-play-btn" onclick="mpPlayPause()"><i class="fas fa-play" id="bmp-play-ico"></i></button>
-              <button class="bmp-ctrl-btn" onclick="mpNext()" title="Next"><i class="fas fa-forward-step"></i></button>
-              <span class="bmp-tracknum-inline" id="bmp-tracknum">1 / 4</span>
-            </div>
-          </div>
-        </div>
-        <!-- Progress bar + times -->
-        <div class="bmp-progress-wrap">
-          <div class="bmp-progress" id="bmp-progress" onclick="mpSeek2(event)">
-            <div class="bmp-fill" id="bmp-fill"></div>
-          </div>
-          <div class="bmp-times">
-            <span id="bmp-cur">0:00</span>
-            <span id="bmp-dur">0:00</span>
-          </div>
-        </div>
-        <div class="bmp-tagline">Somewhere between a mountain pass and a wrong turn</div>
-      </div>
-    </div>
-
-    <!-- ── LADAKH ── -->
-    <div class="fw-section-title"><i class="fas fa-mountain"></i>&nbsp; Ladakh — The Roof of the World</div>
-
-    <!-- Ladakh Trip Card — links to immersive journey page -->
-    <div style="margin-bottom:60px">
-      <a href="ladakh.html" style="display:block;text-decoration:none;cursor:pointer">
-        <div style="position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(255,179,71,0.2);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.4)"
-             onmouseover="this.style.transform='translateY(-6px) scale(1.01)';this.style.borderColor='rgba(255,107,53,0.5)';this.style.boxShadow='0 20px 60px rgba(255,107,53,0.15)'"
-             onmouseout="this.style.transform='translateY(0) scale(1)';this.style.borderColor='rgba(255,179,71,0.2)';this.style.boxShadow='0 8px 40px rgba(0,0,0,0.4)'">
-          <!-- Photo collage header -->
-          <div style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:180px 120px;gap:3px;height:300px">
-            <div style="grid-row:span 2;overflow:hidden">
-              <img src="ravi7.jpeg" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s" alt="Ladakh">
-            </div>
-            <div style="overflow:hidden"><img src="ravi9.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Ladakh"></div>
-            <div style="overflow:hidden"><img src="ravi10.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Khardung La"></div>
-            <div style="overflow:hidden"><img src="ravi3.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Leh"></div>
-            <div style="overflow:hidden"><img src="ravi12.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Pangong"></div>
-          </div>
-          <!-- Info strip -->
-          <div style="padding:24px 28px;background:linear-gradient(135deg,rgba(12,12,12,0.98),rgba(20,12,8,0.98));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
-            <div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(255,107,53,0.7);text-transform:uppercase;margin-bottom:8px">Trip 01 · Ladakh · 7 Days</div>
-              <div style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:#f4f4f4;margin-bottom:6px">The Roof of the World&nbsp;🏔️</div>
-              <div style="font-size:0.85rem;color:#707070;line-height:1.6">Leh → Khardung La → Nubra → Pangong → Man Village</div>
-            </div>
-            <div style="display:flex;gap:24px;flex-shrink:0">
-              <div style="text-align:center">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#ffb347">5,602m</div>
-                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Peak</div>
-              </div>
-              <div style="text-align:center">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#4fc3f7">~700km</div>
-                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Rode</div>
-              </div>
-            </div>
-            <div style="display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:100px;background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(255,179,71,0.1));border:1px solid rgba(255,107,53,0.35);color:#ffb347;font-size:0.8rem;font-weight:700;white-space:nowrap;transition:background 0.2s">
-              🏍️&nbsp; Ride the Route →
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-
-    <!-- ── SPITI VALLEY ── -->
-    <div class="fw-section-title"><i class="fas fa-route"></i>&nbsp; Spiti Valley — The Journey Itself Is the Destination</div>
-
-    <!-- Spiti Trip Card — links to immersive journey page -->
-    <div style="margin-bottom:40px">
-      <a href="spiti.html" style="display:block;text-decoration:none;cursor:pointer">
-        <div style="position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(125,211,252,0.22);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.4)"
-             onmouseover="this.style.transform='translateY(-6px) scale(1.01)';this.style.borderColor='rgba(56,189,248,0.5)';this.style.boxShadow='0 20px 60px rgba(56,189,248,0.15)'"
-             onmouseout="this.style.transform='translateY(0) scale(1)';this.style.borderColor='rgba(125,211,252,0.22)';this.style.boxShadow='0 8px 40px rgba(0,0,0,0.4)'">
-          <!-- Photo collage header — mirror layout vs. Ladakh for subtle distinction -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 2fr;grid-template-rows:180px 120px;gap:3px;height:300px">
-            <div style="overflow:hidden"><img src="ravi11.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Spiti water crossing"></div>
-            <div style="overflow:hidden"><img src="ravi14.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Kunzum Pass"></div>
-            <div style="grid-row:span 2;overflow:hidden">
-              <img src="ravi13.jpeg" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s" alt="Kaza valley">
-            </div>
-            <div style="overflow:hidden"><img src="ravi16.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Key Monastery"></div>
-            <div style="overflow:hidden"><img src="ravi6.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Spiti roads"></div>
-          </div>
-          <!-- Info strip -->
-          <div style="padding:24px 28px;background:linear-gradient(135deg,rgba(12,12,12,0.98),rgba(10,18,26,0.98));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
-            <div>
-              <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(56,189,248,0.8);text-transform:uppercase;margin-bottom:8px">Trip 02 · Spiti Valley · 8 Days</div>
-              <div style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:#f4f4f4;margin-bottom:6px">The Journey Is the Destination&nbsp;🏞️</div>
-              <div style="font-size:0.85rem;color:#707070;line-height:1.6">Delhi → Manali → Kunzum La → Kaza → Hikkim → Key Monastery</div>
-            </div>
-            <div style="display:flex;gap:24px;flex-shrink:0">
-              <div style="text-align:center">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#7dd3fc">4,551m</div>
-                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Kunzum</div>
-              </div>
-              <div style="text-align:center">
-                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#ffb347">~900km</div>
-                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Rode</div>
-              </div>
-            </div>
-            <div style="display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:100px;background:linear-gradient(135deg,rgba(56,189,248,0.15),rgba(125,211,252,0.1));border:1px solid rgba(56,189,248,0.35);color:#7dd3fc;font-size:0.8rem;font-weight:700;white-space:nowrap;transition:background 0.2s">
-              🏍️&nbsp; Ride the Route →
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-
-
-    <div class="fw-grid-3" style="margin-bottom:60px">
-      <div class="fw-card">
-        <span class="fw-card-ico">⚡</span>
-        <div class="fw-card-title">The Roads</div>
-        <div class="fw-card-body">Spiti roads are not roads — they're suggestions. Loose gravel, blind corners, single-lane paths cut into cliffsides. Every kilometre earns your respect.</div>
-        <span class="fw-card-tag">Earned every metre</span>
-      </div>
-      <div class="fw-card">
-        <span class="fw-card-ico">🌌</span>
-        <div class="fw-card-title">Nights in the Valley</div>
-        <div class="fw-card-body">No light pollution, no sound. Spiti at night has the kind of sky that makes you feel small in the best possible way. Stars so dense it looks like someone spilled milk across the sky.</div>
-        <span class="fw-card-tag">Best skies I've seen</span>
-      </div>
-      <div class="fw-card">
-        <span class="fw-card-ico">🤝</span>
-        <div class="fw-card-title">The People</div>
-        <div class="fw-card-body">In the most remote villages, complete strangers offered food, shelter and help without being asked. That generosity — no transaction, no reason — stays with you longer than any photo.</div>
-        <span class="fw-card-tag">Changed my perspective</span>
-      </div>
-    </div>
-
-    <!-- ── Currently ── -->
-    <div class="fw-section-title"><i class="fas fa-seedling"></i>&nbsp; What I'm into right now</div>
-    <div class="fw-grid-3" style="margin-bottom:80px">
-      <div class="fw-card">
-        <span class="fw-card-ico">📚</span>
-        <div class="fw-card-title">Reading</div>
-        <div class="fw-card-body">Designing Data-Intensive Applications. Also anything about how people make decisions under uncertainty — turns out Spiti prepared me well for that.</div>
-      </div>
-      <div class="fw-card">
-        <span class="fw-card-ico">🤖</span>
-        <div class="fw-card-title">Exploring</div>
-        <div class="fw-card-body">Agentic AI systems, LangGraph, multi-agent patterns. The same curiosity that took me to Spiti drives how I approach new technology.</div>
-      </div>
-      <div class="fw-card">
-        <span class="fw-card-ico">🗺️</span>
-        <div class="fw-card-title">Planning</div>
-        <div class="fw-card-body">Next route is already being researched. If you have a suggestion — mountains preferred, guardrails optional — I'm listening.</div>
-      </div>
-    </div>
-
-    <div class="fw-cta-section">
-      <div class="fw-cta-text">Got a route suggestion?<br><span class="warm">Let's talk about it.</span></div>
-      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px">
-        <a href="mailto:rvgottumukkala98@gmail.com" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:100px;background:linear-gradient(135deg,rgba(255,107,53,0.18),rgba(255,179,71,0.12));border:1px solid rgba(255,179,71,0.3);color:#f5e6c8;font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:600;transition:all 0.3s"><i class="fas fa-envelope"></i> Say hello</a>
-        <button onclick="flipBack()" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:100px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:rgba(245,230,200,0.6);font-family:'Plus Jakarta Sans',sans-serif;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.3s"><i class="fas fa-code"></i> Back to Portfolio</button>
-      </div>
-      <div style="margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:2px;color:rgba(255,179,71,0.3)">OR PRESS ESC</div>
-    </div>
-
-  </div>
-
-  <div style="height:60px"></div>
-
-</div><!-- end #fw-content -->
-
-</div>
 
 <!-- Terminal -->
 <div id="term-backdrop" onclick="toggleTerm()"></div>
@@ -2369,12 +2259,6 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
 <script>
 /* ═══════════ LENIS SMOOTH SCROLL ═══════════ */
-/* Detect touch / narrow viewports — used ONLY for the personal world
-   (flip-world), which previously didn't scroll on mobile because Lenis
-   was transforming its content. The main page is always Lenis-driven. */
-const IS_TOUCH = (window.matchMedia('(hover:none) and (pointer:coarse)').matches) ||
-                 ('ontouchstart' in window && window.innerWidth < 1024);
-
 /* ── Portfolio smooth scroll ── */
 const lenis = new Lenis({
   duration: 1.6,
@@ -2386,25 +2270,9 @@ const lenis = new Lenis({
   infinite: false,
 });
 
-/* ── Personal world smooth scroll (same feel, different wrapper) ── */
-const fwWrapper = document.getElementById('flip-world');
-const fwContent = document.getElementById('fw-content');
-const lenisPersonal = new Lenis({
-  wrapper:  fwWrapper,
-  content:  fwContent,
-  duration: 1.6,
-  easing:   t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-  wheelMultiplier: 0.85,
-  touchMultiplier: 1.5,
-  infinite: false,
-});
-lenisPersonal.stop(); /* paused until personal world is open */
-
-/* Single RAF loop ticks both Lenis instances */
+/* Single RAF loop */
 function raf(time) {
   lenis.raf(time);
-  lenisPersonal.raf(time);
   requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
@@ -2920,259 +2788,6 @@ window.copyEmail = function(btn){
   });
 })();
 
-/* ═══════ FLIP TO PERSONAL WORLD ═══════ */
-const flipWorld = document.getElementById('flip-world');
-const fwPortal  = document.getElementById('fw-portal-intro');
-
-window.flipToPersonal = function(){
-  /* Pause portfolio Lenis */
-  lenis.stop();
-  /* Show portal intro */
-  if(fwPortal){ fwPortal.style.display='flex'; fwPortal.classList.remove('hide'); }
-  /* After short delay: show world, start personal Lenis */
-  setTimeout(()=>{
-    flipWorld.style.display='block';
-    /* Reset personal scroll to top */
-    if(IS_TOUCH){ flipWorld.scrollTop = 0; }
-    else        { lenisPersonal.scrollTo(0, { immediate:true }); }
-    flipWorld.classList.remove('flip-exit');
-    flipWorld.classList.add('flip-enter');
-    document.body.style.overflow='hidden';
-    flipWorld.addEventListener('animationend', ()=>{
-      flipWorld.classList.remove('flip-enter');
-      /* MOBILE-SCROLL-FIX: native scroll inside personal world on touch */
-      if(!IS_TOUCH){ lenisPersonal.start(); }
-    }, {once:true});
-  }, 300);
-  if(fwPortal){ fwPortal.classList.add('hide'); setTimeout(()=>{ fwPortal.style.display='none'; }, 3100); }
-};
-
-window.flipBack = function(){
-  lenisPersonal.stop(); /* Pause personal Lenis */
-  flipWorld.classList.add('flip-exit');
-  document.body.style.overflow='';
-  lenis.start(); /* Resume portfolio Lenis */
-  /* Pause music if playing */
-  if(typeof fwAudio !== 'undefined' && fwAudio){ fwAudio.pause(); fwPlaying=false; updatePlayerUI(); }
-  flipWorld.addEventListener('animationend', ()=>{
-    flipWorld.style.display='none';
-    flipWorld.classList.remove('flip-exit');
-  }, {once:true});
-};
-
-/* ESC key closes the personal world — accessibility support */
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape' && flipWorld.style.display === 'block'){
-    flipBack();
-  }
-});
-/* ═══════════════════════════════════════════════════════════════════
-   DEPLOYMENT GUIDE — HOW TO ADD MUSIC, PHOTOS & GO LIVE
-   ═══════════════════════════════════════════════════════════════════
-
-   📁 FOLDER STRUCTURE (all next to index.html):
-   ───────────────────────────────────────────────
-   index.html
-   pro_image1.jpeg          ← your profile photo (already in use)
-   Resume_eqx_2.pdf         ← your resume (already in use)
-   images/
-     ride_blur.jpg           ← motion-blur bike shot for music section
-     pangong.jpg             ← Pangong Lake
-     khardung.jpg            ← Khardung La / highest road
-     village_man.jpg         ← Village Man near Pangong
-     spiti_wide.jpg          ← panoramic Spiti Valley
-     spiti_river.jpg         ← river crossing
-     spiti_night.jpg         ← midnight ride
-   music/
-     track1.mp3              ← your songs (MP3, 128–320 kbps)
-     track2.mp3
-     ...
-
-   🎵 ADDING SONGS — edit the tracks array below:
-   ─────────────────────────────────────────────────
-     title  → Song name shown in the player
-     artist → Artist name
-     emoji  → Album art fallback (any emoji: 🏔️ 🏍️ 🌊 🌌)
-     src    → Path to .mp3 file e.g. 'music/ladakh-vibes.mp3'
-     art    → Album art image (optional) e.g. 'music/cover.jpg'
-
-   📸 ADDING PHOTOS — find each placeholder and uncomment/replace:
-   ────────────────────────────────────────────────────────────────
-   Search for "Add your photo" in the HTML. Each placeholder looks like:
-     <div class="fw-photo-placeholder">...</div>
-   Replace the whole .fw-photo-card div with:
-     <div class="fw-photo-card" style="background:url('images/pangong.jpg')
-          center/cover no-repeat"></div>
-
-   For the ride blur photo in the music section, find:
-     <!-- <img src="images/ride_blur.jpg" alt="On the road"> -->
-   and remove the <!-- and --> comment markers.
-
-   🚀 GITHUB PAGES DEPLOY:
-   ─────────────────────────
-   1. Commit index.html + images/ + music/ to your repo root
-   2. GitHub repo → Settings → Pages → Source: Deploy from branch → main → / (root)
-   3. Save. Live in ~60 seconds at: https://[username].github.io/[repo]
-   Tip: Keep each MP3 under 8MB for fast loading. Use ffmpeg or
-   online tools to compress: ffmpeg -i input.mp3 -b:a 128k output.mp3
-   ═══════════════════════════════════════════════════════════════════ */
-(function(){
-  const tracks = [
-    /* ── ADD YOUR SONGS HERE ── */
-    { title:'Let it Ride',  artist:'Anno Domini Beats',           emoji:'🏔️', src:'let_it_ride.mp3', art:'' },
-    { title:'You and I',          artist:'Telecasted',    emoji:'🏍️', src:'you&I.mp3', art:'' },
-    { title:'Pangong Blue',       artist:'then update the src paths',     emoji:'🌊', src:'', art:'' },
-    { title:'Spiti Night',        artist:'art is optional — emoji works', emoji:'🌌', src:'', art:'' },
-  ];
-
-  let idx=0, muted=false, prevVol=0.8;
-  window.fwAudio   = new Audio();
-  window.fwAudio.volume = 0.8;
-  window.fwPlaying = false;
-
-  /* ── Full Ride Playlist player elements ── */
-  const player   = document.getElementById('fw-music-player');
-  const playIco  = document.getElementById('mp-play-ico');
-  const titleEl  = document.getElementById('mp-title');
-  const artistEl = document.getElementById('mp-artist');
-  const emojiEl  = document.getElementById('mp-emoji');
-  const artImg   = document.getElementById('mp-art-img');
-  const fillEl   = document.getElementById('mp-fill');
-  const fillGlow = document.getElementById('mp-fill-glow');
-  const curEl    = document.getElementById('mp-cur');
-  const durEl    = document.getElementById('mp-dur');
-  const tnumEl   = document.getElementById('mp-tracknum');
-  const volIco   = document.getElementById('mp-vol-ico');
-
-  /* ── Compact bike player elements ── */
-  const bmpPlayIco  = document.getElementById('bmp-play-ico');
-  const bmpTitle    = document.getElementById('bmp-title');
-  const bmpArtist   = document.getElementById('bmp-artist');
-  const bmpEmoji    = document.getElementById('bmp-emoji');
-  const bmpArtImg   = document.getElementById('bmp-art-img');
-  const bmpArtWrap  = document.getElementById('bmp-art-wrap');
-  const bmpFill     = document.getElementById('bmp-fill');
-  const bmpCur      = document.getElementById('bmp-cur');
-  const bmpDur      = document.getElementById('bmp-dur');
-  const bmpTrackNum = document.getElementById('bmp-tracknum');
-
-  function fmt(s){ if(isNaN(s)||!isFinite(s)) return '0:00'; const m=Math.floor(s/60),sec=Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
-
-  function load(i, autoplay){
-    const t = tracks[i];
-    /* Update full player */
-    if(titleEl)  titleEl.textContent  = t.title;
-    if(artistEl) artistEl.textContent = t.artist;
-    if(emojiEl)  emojiEl.textContent  = t.emoji;
-    if(tnumEl)   tnumEl.textContent   = `${i+1} / ${tracks.length}`;
-    if(t.art && artImg){
-      artImg.src = t.art; artImg.style.display = 'block';
-      if(emojiEl) emojiEl.style.display = 'none';
-    } else if(artImg){
-      artImg.style.display = 'none';
-      if(emojiEl) emojiEl.style.display = 'flex';
-    }
-    if(fillEl) fillEl.style.width='0%';
-    if(fillGlow) fillGlow.style.width='0%';
-    if(curEl) curEl.textContent='0:00';
-    if(durEl) durEl.textContent='0:00';
-
-    /* Update compact player */
-    if(bmpTitle)    bmpTitle.textContent    = t.title;
-    if(bmpArtist)   bmpArtist.textContent   = t.artist;
-    if(bmpEmoji)    bmpEmoji.textContent     = t.emoji;
-    if(bmpTrackNum) bmpTrackNum.textContent  = `${i+1} / ${tracks.length}`;
-    if(t.art && bmpArtImg){
-      bmpArtImg.src = t.art; bmpArtImg.style.display = 'block';
-      if(bmpEmoji) bmpEmoji.style.display = 'none';
-    } else if(bmpArtImg){
-      bmpArtImg.style.display = 'none';
-      if(bmpEmoji) bmpEmoji.style.display = 'flex';
-    }
-    if(bmpFill) bmpFill.style.width='0%';
-    if(bmpCur)  bmpCur.textContent='0:00';
-    if(bmpDur)  bmpDur.textContent='0:00';
-
-    if(t.src){
-      fwAudio.src = t.src;
-      fwAudio.load();
-      if(autoplay){ fwAudio.play().then(()=>{ fwPlaying=true; updatePlayerUI(); }).catch(()=>{}); }
-    } else {
-      if(autoplay){
-        if(artistEl) artistEl.textContent='Add .mp3 src path to this track';
-        if(bmpArtist) bmpArtist.textContent='Add .mp3 src path to this track';
-      }
-    }
-  }
-
-  window.updatePlayerUI = function(){
-    /* Full player icon */
-    if(playIco) playIco.className = fwPlaying ? 'fas fa-pause' : 'fas fa-play';
-    if(player){ fwPlaying ? player.classList.add('playing') : player.classList.remove('playing'); }
-    /* Compact player icon */
-    if(bmpPlayIco) bmpPlayIco.className = fwPlaying ? 'fas fa-pause' : 'fas fa-play';
-    if(bmpArtWrap){ fwPlaying ? bmpArtWrap.classList.add('playing') : bmpArtWrap.classList.remove('playing'); }
-  };
-
-  window.mpPlayPause = function(){
-    if(!tracks[idx].src){
-      if(artistEl) artistEl.textContent='Add .mp3 file path in tracks array';
-      if(bmpArtist) bmpArtist.textContent='Add .mp3 file path in tracks array';
-      return;
-    }
-    if(fwPlaying){ fwAudio.pause(); fwPlaying=false; }
-    else          { fwAudio.play().catch(()=>{}); fwPlaying=true; }
-    updatePlayerUI();
-  };
-
-  window.mpNext = function(){ idx=(idx+1)%tracks.length; load(idx, fwPlaying); };
-  window.mpPrev = function(){ idx=(idx-1+tracks.length)%tracks.length; load(idx, fwPlaying); };
-
-  /* Seek from full player progress bar */
-  window.mpSeek = function(e){
-    if(!fwAudio.duration) return;
-    const rect = document.getElementById('mp-progress').getBoundingClientRect();
-    fwAudio.currentTime = ((e.clientX-rect.left)/rect.width) * fwAudio.duration;
-  };
-
-  /* Seek from compact player progress bar */
-  window.mpSeek2 = function(e){
-    if(!fwAudio.duration) return;
-    const rect = document.getElementById('bmp-progress').getBoundingClientRect();
-    fwAudio.currentTime = ((e.clientX-rect.left)/rect.width) * fwAudio.duration;
-  };
-
-  window.mpSetVol = function(v){
-    fwAudio.volume=parseFloat(v); muted=(v==0);
-    if(volIco) volIco.className = v==0 ? 'fas fa-volume-xmark mp-vol-icon' : 'fas fa-volume-low mp-vol-icon';
-  };
-
-  window.mpToggleMute = function(){
-    const vol = document.getElementById('mp-vol');
-    if(muted){ fwAudio.volume=prevVol; if(vol) vol.value=prevVol; muted=false; if(volIco) volIco.className='fas fa-volume-low mp-vol-icon'; }
-    else      { prevVol=fwAudio.volume; fwAudio.volume=0; if(vol) vol.value=0; muted=true; if(volIco) volIco.className='fas fa-volume-xmark mp-vol-icon'; }
-  };
-
-  fwAudio.addEventListener('timeupdate',()=>{
-    if(!fwAudio.duration) return;
-    const pct = (fwAudio.currentTime/fwAudio.duration)*100;
-    if(fillEl)  fillEl.style.width  = pct+'%';
-    if(fillGlow) fillGlow.style.width = pct+'%';
-    if(bmpFill) bmpFill.style.width = pct+'%';
-    if(curEl)   curEl.textContent   = fmt(fwAudio.currentTime);
-    if(bmpCur)  bmpCur.textContent  = fmt(fwAudio.currentTime);
-  });
-  fwAudio.addEventListener('loadedmetadata',()=>{
-    const d = fmt(fwAudio.duration);
-    if(durEl)  durEl.textContent = d;
-    if(bmpDur) bmpDur.textContent = d;
-  });
-  fwAudio.addEventListener('ended', ()=>{ idx=(idx+1)%tracks.length; load(idx, true); });
-  fwAudio.addEventListener('play',  ()=>{ fwPlaying=true;  updatePlayerUI(); });
-  fwAudio.addEventListener('pause', ()=>{ fwPlaying=false; updatePlayerUI(); });
-
-  load(0, false); /* Load first track info — no autoplay */
-})();
 </script>
 </body>
 </html>
