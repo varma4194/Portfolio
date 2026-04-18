@@ -190,6 +190,7 @@ nav {
 }
 
 /* Mobile nav */
+@keyframes aMNav { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:none} }
 .mnav {
   display:none;
   position:fixed; top:0; left:0; right:0; z-index:500;
@@ -198,7 +199,7 @@ nav {
   background:rgba(7,7,7,0.88);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
-  opacity:0; animation: aNav 0.7s 3.6s var(--ease) forwards;
+  opacity:0; animation: aMNav 0.7s 3.6s var(--ease) forwards;
 }
 .mlogo { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.2rem; font-weight:800; }
 .mlogo span { background:var(--og); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
@@ -1392,6 +1393,242 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
   .cmodal-left { border-right:none; border-bottom:1px solid rgba(255,255,255,0.07); }
   .cmodal-row { grid-template-columns:1fr; }
 }
+
+/* ═══════════════ BIKES GRID (landscape photo top + 2 cards below) ═══════════════ */
+.fw-bikes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+.fw-bikes-grid > .fw-photo-card:first-child {
+  grid-column: span 2;
+  aspect-ratio: 16 / 6;
+  min-height: unset;
+}
+@media(max-width:768px) {
+  .fw-bikes-grid { grid-template-columns: 1fr; }
+  .fw-bikes-grid > .fw-photo-card:first-child { grid-column: span 1; aspect-ratio: 16/9; }
+}
+
+/* ── Compact music player card (horizontal layout) ── */
+.bmp-card {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 18px 16px;
+  background: rgba(255,107,53,0.04);
+  border: 1px solid rgba(255,107,53,0.15) !important;
+  cursor: default; gap: 10px;
+}
+.bmp-listening-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,179,71,0.55);
+}
+/* Top row: square art + track info side by side */
+.bmp-top-row {
+  display: flex; align-items: center; gap: 12px;
+}
+.bmp-art-wrap {
+  width: 60px; height: 60px; flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255,107,53,0.14), rgba(255,179,71,0.07));
+  border: 1px solid rgba(255,107,53,0.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  transition: box-shadow 0.4s;
+}
+.bmp-art-wrap.playing { box-shadow: 0 0 20px rgba(255,107,53,0.35); }
+.bmp-art-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: none; border-radius: 10px;
+}
+.bmp-emoji-inner {
+  font-size: 1.7rem; z-index: 1; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.bmp-art-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255,107,53,0.18), transparent 70%);
+  pointer-events: none;
+}
+.bmp-track-info { flex: 1; min-width: 0; }
+.bmp-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem; font-weight: 700; color: #f5e6c8;
+  margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bmp-artist {
+  font-size: 0.7rem; color: rgba(245,230,200,0.45);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-bottom: 6px;
+}
+/* Controls inline with track info */
+.bmp-controls {
+  display: flex; align-items: center; gap: 6px;
+}
+.bmp-ctrl-btn {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(245,230,200,0.6); border-radius: 50%;
+  width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; font-size: 0.62rem;
+}
+.bmp-ctrl-btn:hover { background: rgba(255,107,53,0.18); border-color: rgba(255,107,53,0.35); color: #f5e6c8; }
+.bmp-play-btn {
+  background: linear-gradient(135deg, #ff6b35, #ff9a3c);
+  border: none; color: #fff; border-radius: 50%;
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.25s; font-size: 0.75rem;
+  box-shadow: 0 3px 10px rgba(255,107,53,0.4);
+}
+.bmp-play-btn:hover { transform: scale(1.08); box-shadow: 0 5px 18px rgba(255,107,53,0.55); }
+.bmp-tracknum-inline {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+  color: rgba(255,179,71,0.45); margin-left: 4px;
+}
+/* Progress row */
+.bmp-progress-wrap { display: flex; flex-direction: column; gap: 3px; }
+.bmp-progress {
+  width: 100%; height: 3px; border-radius: 3px;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer; position: relative; overflow: hidden;
+}
+.bmp-fill {
+  height: 100%; border-radius: 3px; width: 0%;
+  background: linear-gradient(to right, #ff6b35, #ffb347);
+  transition: width 0.2s linear; pointer-events: none;
+}
+.bmp-times {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.55rem;
+  color: rgba(245,230,200,0.3);
+}
+.bmp-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.56rem; color: rgba(255,179,71,0.28); letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+/* ═══════════════ FULL RIDE PLAYLIST PLAYER ═══════════════ */
+#fw-music-player {
+  border-radius: 20px; overflow: hidden;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,200,100,0.1);
+  margin-bottom: 60px;
+}
+.mp-section-grid { display: grid; grid-template-columns: 1fr 1.3fr; }
+.mp-photo-side {
+  position: relative; min-height: 300px;
+  background: rgba(255,255,255,0.03);
+  display: flex; align-items: flex-end; overflow: hidden;
+}
+.mp-photo-side img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.75;
+}
+.mp-photo-placeholder-inner {
+  position: relative; z-index: 1; width: 100%; height: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; color: rgba(245,230,200,0.25); padding: 40px 20px;
+}
+.mp-photo-placeholder-inner i { font-size: 2.5rem; }
+.mp-photo-placeholder-inner span {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+  letter-spacing: 2px; text-align: center;
+}
+.mp-photo-label {
+  position: absolute; bottom: 16px; left: 16px; right: 16px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+  letter-spacing: 2px; color: rgba(255,179,71,0.5); z-index: 2;
+}
+.mp-player-card {
+  padding: 32px 28px; display: flex; flex-direction: column; justify-content: center;
+  background: rgba(255,107,53,0.03);
+}
+.mp-listening-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,179,71,0.6); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.mp-info { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.mp-art {
+  width: 64px; height: 64px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.2);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.mp-art-inner {
+  font-size: 1.8rem; z-index: 1; position: relative;
+  display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;
+}
+.mp-art-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: none;
+}
+.mp-art-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255,107,53,0.2), transparent 70%);
+  pointer-events: none;
+}
+.mp-text { flex: 1; min-width: 0; }
+.mp-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem; font-weight: 700; color: #f5e6c8;
+  margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mp-artist { font-size: 0.82rem; color: rgba(245,230,200,0.5); margin-bottom: 5px; }
+.mp-track-num { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: rgba(255,179,71,0.5); }
+.mp-progress-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+.mp-time {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  color: rgba(245,230,200,0.4); flex-shrink: 0; min-width: 28px;
+}
+.mp-progress {
+  flex: 1; height: 4px; border-radius: 4px;
+  background: rgba(255,255,255,0.1); cursor: pointer; position: relative; overflow: hidden;
+}
+.mp-progress-fill {
+  height: 100%; border-radius: 4px; width: 0%;
+  background: linear-gradient(to right, #ff6b35, #ffb347);
+  transition: width 0.2s linear; pointer-events: none;
+}
+.mp-controls-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.mp-btns { display: flex; align-items: center; gap: 10px; }
+.mp-btn {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(245,230,200,0.6); border-radius: 50%;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; font-size: 0.8rem;
+}
+.mp-btn:hover { background: rgba(255,107,53,0.15); border-color: rgba(255,107,53,0.3); color: #f5e6c8; }
+.mp-play {
+  background: linear-gradient(135deg, #ff6b35, #ff9a3c);
+  border: none; color: #fff; border-radius: 50%;
+  width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.25s; font-size: 1rem;
+  box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+}
+.mp-play:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(255,107,53,0.55); }
+.mp-right { display: flex; align-items: center; gap: 8px; }
+.mp-vol-icon { font-size: 0.8rem; color: rgba(245,230,200,0.5); cursor: pointer; }
+.mp-vol-icon:hover { color: rgba(245,230,200,0.9); }
+.mp-vol {
+  -webkit-appearance: none; appearance: none;
+  width: 80px; height: 3px; border-radius: 3px;
+  background: rgba(255,255,255,0.15); outline: none; cursor: pointer;
+}
+.mp-vol::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 12px; height: 12px; border-radius: 50%; background: #ff9a3c; cursor: pointer;
+}
+.mp-tagline {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  color: rgba(255,179,71,0.3); line-height: 1.6; letter-spacing: 0.5px;
+}
+@media(max-width:768px) {
+  .mp-section-grid { grid-template-columns: 1fr; }
+  .mp-photo-side { min-height: 200px; }
+}
 </style>
 </head>
 <body>
@@ -1888,10 +2125,10 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
     <!-- ── BIKES & RIDES ── -->
     <div class="fw-section-title"><i class="fas fa-motorcycle"></i>&nbsp; Bikes & Rides</div>
-    <div class="fw-grid-2" style="margin-bottom:60px; align-items:stretch">
-      <!-- Large bike photo placeholder — replace with your motion blur shot -->
+    <div class="fw-bikes-grid">
+      <!-- Landscape bike photo — spans full width -->
     <div class="fw-photo-card">
-      <img src="bike-photo.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
+      <img src="bike-photo-stale.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
     </div>
       <!-- Two-wheel Therapy card -->
       <div class="fw-card">
@@ -1899,6 +2136,39 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
         <div class="fw-card-title">Two-wheel Therapy</div>
         <div class="fw-card-body">Nothing clears the head like a long ride. Highway or mountain road — it doesn't matter. The throttle is the best reset button I know. Some of my clearest thinking happens at 80 kmph with the wind in my face and no notifications.</div>
         <span class="fw-card-tag">Weekend ritual</span>
+      </div>
+      <!-- Compact Music Player card -->
+      <div class="fw-card bmp-card" id="bmp-card">
+        <div class="bmp-listening-label"><i class="fas fa-headphones"></i>&nbsp; The Ride Playlist</div>
+        <!-- Art + track info + controls in one row -->
+        <div class="bmp-top-row">
+          <div class="bmp-art-wrap" id="bmp-art-wrap">
+            <img class="bmp-art-img" id="bmp-art-img" alt="Album art">
+            <div class="bmp-emoji-inner" id="bmp-emoji">🏔️</div>
+            <div class="bmp-art-glow"></div>
+          </div>
+          <div class="bmp-track-info">
+            <div class="bmp-title" id="bmp-title">Mountains Calling</div>
+            <div class="bmp-artist" id="bmp-artist">Add your music here</div>
+            <div class="bmp-controls">
+              <button class="bmp-ctrl-btn" onclick="mpPrev()" title="Previous"><i class="fas fa-backward-step"></i></button>
+              <button class="bmp-play-btn" id="bmp-play-btn" onclick="mpPlayPause()"><i class="fas fa-play" id="bmp-play-ico"></i></button>
+              <button class="bmp-ctrl-btn" onclick="mpNext()" title="Next"><i class="fas fa-forward-step"></i></button>
+              <span class="bmp-tracknum-inline" id="bmp-tracknum">1 / 4</span>
+            </div>
+          </div>
+        </div>
+        <!-- Progress bar + times -->
+        <div class="bmp-progress-wrap">
+          <div class="bmp-progress" id="bmp-progress" onclick="mpSeek2(event)">
+            <div class="bmp-fill" id="bmp-fill"></div>
+          </div>
+          <div class="bmp-times">
+            <span id="bmp-cur">0:00</span>
+            <span id="bmp-dur">0:00</span>
+          </div>
+        </div>
+        <div class="bmp-tagline">Somewhere between a mountain pass and a wrong turn</div>
       </div>
     </div>
 
@@ -2039,60 +2309,6 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
         <span class="fw-card-ico">🗺️</span>
         <div class="fw-card-title">Planning</div>
         <div class="fw-card-body">Next route is already being researched. If you have a suggestion — mountains preferred, guardrails optional — I'm listening.</div>
-      </div>
-    </div>
-
-    <!-- ═══ RIDE PLAYLIST ═══ -->
-    <div class="fw-section-title"><i class="fas fa-headphones"></i>&nbsp; The Ride Playlist</div>
-    <div id="fw-music-player">
-      <div class="mp-section-grid">
-
-        <!-- Left: motion blur bike photo -->
-        <div class="mp-photo-side">
-          <!-- Replace src below with your motion-blur bike shot e.g. src="images/ride_blur.jpg" -->
-          <!-- <img src="images/ride_blur.jpg" alt="On the road"> -->
-          <div class="mp-photo-placeholder-inner">
-            <i class="fas fa-camera"></i>
-            <span>Add motion blur ride photo</span>
-          </div>
-          <div class="mp-photo-label">Your ride · Add photo</div>
-        </div>
-
-        <!-- Right: player card -->
-        <div class="mp-player-card">
-          <div class="mp-listening-label"><i class="fas fa-music"></i> Listening to</div>
-          <div class="mp-info">
-            <div class="mp-art">
-              <div class="mp-art-inner" id="mp-emoji">🏔️</div>
-              <div class="mp-art-glow"></div>
-            </div>
-            <div class="mp-text">
-              <div class="mp-title" id="mp-title">Mountains Calling</div>
-              <div class="mp-artist" id="mp-artist">Add your music here</div>
-              <span class="mp-track-num" id="mp-tracknum">— / —</span>
-            </div>
-          </div>
-          <div class="mp-progress-wrap">
-            <span class="mp-time" id="mp-cur">0:00</span>
-            <div class="mp-progress" id="mp-progress" onclick="mpSeek(event)">
-              <div class="mp-progress-fill" id="mp-fill"></div>
-            </div>
-            <span class="mp-time" id="mp-dur">0:00</span>
-          </div>
-          <div class="mp-controls-row">
-            <div class="mp-btns">
-              <button class="mp-btn" onclick="mpPrev()" title="Previous"><i class="fas fa-backward-step"></i></button>
-              <button class="mp-play" id="mp-play-btn" onclick="mpPlayPause()"><i class="fas fa-play" id="mp-play-ico"></i></button>
-              <button class="mp-btn" onclick="mpNext()" title="Next"><i class="fas fa-forward-step"></i></button>
-            </div>
-            <div class="mp-right">
-              <i class="fas fa-volume-low mp-vol-icon" onclick="mpToggleMute()" id="mp-vol-ico"></i>
-              <input type="range" class="mp-vol" id="mp-vol" min="0" max="1" step="0.02" value="0.8" oninput="mpSetVol(this.value)">
-            </div>
-          </div>
-          <div class="mp-tagline">These are the tracks that were playing somewhere between a mountain pass and a wrong turn. Put on your headphones.</div>
-        </div>
-
       </div>
     </div>
 
@@ -2768,68 +2984,107 @@ document.addEventListener('keydown', e => {
 (function(){
   const tracks = [
     /* ── ADD YOUR SONGS HERE ── */
-    { title:'Mountains Calling',  artist:'Add your music here',          emoji:'🏔️', src:'', art:'' },
-    { title:'Open Road',          artist:'Drop .mp3 files in /music/',   emoji:'🏍️', src:'', art:'' },
-    { title:'Pangong Blue',       artist:'then update the src paths',    emoji:'🌊', src:'', art:'' },
+    { title:'Mountains Calling',  artist:'Add your music here',           emoji:'🏔️', src:'', art:'' },
+    { title:'Open Road',          artist:'Drop .mp3 files in /music/',    emoji:'🏍️', src:'', art:'' },
+    { title:'Pangong Blue',       artist:'then update the src paths',     emoji:'🌊', src:'', art:'' },
     { title:'Spiti Night',        artist:'art is optional — emoji works', emoji:'🌌', src:'', art:'' },
   ];
 
   let idx=0, muted=false, prevVol=0.8;
-  window.fwAudio  = new Audio();
+  window.fwAudio   = new Audio();
   window.fwAudio.volume = 0.8;
   window.fwPlaying = false;
 
-  const player  = document.getElementById('fw-music-player');
-  const playIco = document.getElementById('mp-play-ico');
-  const titleEl = document.getElementById('mp-title');
-  const artistEl= document.getElementById('mp-artist');
-  const emojiEl = document.getElementById('mp-emoji');
-  const artImg  = document.getElementById('mp-art-img');
-  const fillEl  = document.getElementById('mp-fill');
-  const fillGlow= document.getElementById('mp-fill-glow');
-  const curEl   = document.getElementById('mp-cur');
-  const durEl   = document.getElementById('mp-dur');
-  const tnumEl  = document.getElementById('mp-tracknum');
-  const volIco  = document.getElementById('mp-vol-ico');
+  /* ── Full Ride Playlist player elements ── */
+  const player   = document.getElementById('fw-music-player');
+  const playIco  = document.getElementById('mp-play-ico');
+  const titleEl  = document.getElementById('mp-title');
+  const artistEl = document.getElementById('mp-artist');
+  const emojiEl  = document.getElementById('mp-emoji');
+  const artImg   = document.getElementById('mp-art-img');
+  const fillEl   = document.getElementById('mp-fill');
+  const fillGlow = document.getElementById('mp-fill-glow');
+  const curEl    = document.getElementById('mp-cur');
+  const durEl    = document.getElementById('mp-dur');
+  const tnumEl   = document.getElementById('mp-tracknum');
+  const volIco   = document.getElementById('mp-vol-ico');
+
+  /* ── Compact bike player elements ── */
+  const bmpPlayIco  = document.getElementById('bmp-play-ico');
+  const bmpTitle    = document.getElementById('bmp-title');
+  const bmpArtist   = document.getElementById('bmp-artist');
+  const bmpEmoji    = document.getElementById('bmp-emoji');
+  const bmpArtImg   = document.getElementById('bmp-art-img');
+  const bmpArtWrap  = document.getElementById('bmp-art-wrap');
+  const bmpFill     = document.getElementById('bmp-fill');
+  const bmpCur      = document.getElementById('bmp-cur');
+  const bmpDur      = document.getElementById('bmp-dur');
+  const bmpTrackNum = document.getElementById('bmp-tracknum');
 
   function fmt(s){ if(isNaN(s)||!isFinite(s)) return '0:00'; const m=Math.floor(s/60),sec=Math.floor(s%60); return m+':'+(sec<10?'0':'')+sec; }
 
   function load(i, autoplay){
     const t = tracks[i];
-    titleEl.textContent  = t.title;
-    artistEl.textContent = t.artist;
-    emojiEl.textContent  = t.emoji;
-    tnumEl.textContent   = `${i+1} / ${tracks.length}`;
-    /* Album art: show image if provided, fall back to emoji */
+    /* Update full player */
+    if(titleEl)  titleEl.textContent  = t.title;
+    if(artistEl) artistEl.textContent = t.artist;
+    if(emojiEl)  emojiEl.textContent  = t.emoji;
+    if(tnumEl)   tnumEl.textContent   = `${i+1} / ${tracks.length}`;
     if(t.art && artImg){
-      artImg.src = t.art;
-      artImg.style.display = 'block';
-      emojiEl.style.display = 'none';
-    } else if(artImg) {
+      artImg.src = t.art; artImg.style.display = 'block';
+      if(emojiEl) emojiEl.style.display = 'none';
+    } else if(artImg){
       artImg.style.display = 'none';
-      emojiEl.style.display = 'flex';
+      if(emojiEl) emojiEl.style.display = 'flex';
     }
-    fillEl.style.width='0%';
+    if(fillEl) fillEl.style.width='0%';
     if(fillGlow) fillGlow.style.width='0%';
-    curEl.textContent='0:00'; durEl.textContent='0:00';
+    if(curEl) curEl.textContent='0:00';
+    if(durEl) durEl.textContent='0:00';
+
+    /* Update compact player */
+    if(bmpTitle)    bmpTitle.textContent    = t.title;
+    if(bmpArtist)   bmpArtist.textContent   = t.artist;
+    if(bmpEmoji)    bmpEmoji.textContent     = t.emoji;
+    if(bmpTrackNum) bmpTrackNum.textContent  = `${i+1} / ${tracks.length}`;
+    if(t.art && bmpArtImg){
+      bmpArtImg.src = t.art; bmpArtImg.style.display = 'block';
+      if(bmpEmoji) bmpEmoji.style.display = 'none';
+    } else if(bmpArtImg){
+      bmpArtImg.style.display = 'none';
+      if(bmpEmoji) bmpEmoji.style.display = 'flex';
+    }
+    if(bmpFill) bmpFill.style.width='0%';
+    if(bmpCur)  bmpCur.textContent='0:00';
+    if(bmpDur)  bmpDur.textContent='0:00';
+
     if(t.src){
       fwAudio.src = t.src;
       fwAudio.load();
       if(autoplay){ fwAudio.play().then(()=>{ fwPlaying=true; updatePlayerUI(); }).catch(()=>{}); }
     } else {
-      if(autoplay){ artistEl.textContent='Add .mp3 src path to this track'; }
+      if(autoplay){
+        if(artistEl) artistEl.textContent='Add .mp3 src path to this track';
+        if(bmpArtist) bmpArtist.textContent='Add .mp3 src path to this track';
+      }
     }
   }
 
   window.updatePlayerUI = function(){
-    if(!playIco) return;
-    playIco.className = fwPlaying ? 'fas fa-pause' : 'fas fa-play';
-    if(fwPlaying){ player.classList.add('playing'); }
-    else          { player.classList.remove('playing'); }
+    /* Full player icon */
+    if(playIco) playIco.className = fwPlaying ? 'fas fa-pause' : 'fas fa-play';
+    if(player){ fwPlaying ? player.classList.add('playing') : player.classList.remove('playing'); }
+    /* Compact player icon */
+    if(bmpPlayIco) bmpPlayIco.className = fwPlaying ? 'fas fa-pause' : 'fas fa-play';
+    if(bmpArtWrap){ fwPlaying ? bmpArtWrap.classList.add('playing') : bmpArtWrap.classList.remove('playing'); }
   };
 
   window.mpPlayPause = function(){
-    if(!tracks[idx].src){ artistEl.textContent='Add .mp3 file path in tracks array'; return; }
+    if(!tracks[idx].src){
+      if(artistEl) artistEl.textContent='Add .mp3 file path in tracks array';
+      if(bmpArtist) bmpArtist.textContent='Add .mp3 file path in tracks array';
+      return;
+    }
     if(fwPlaying){ fwAudio.pause(); fwPlaying=false; }
     else          { fwAudio.play().catch(()=>{}); fwPlaying=true; }
     updatePlayerUI();
@@ -2838,31 +3093,45 @@ document.addEventListener('keydown', e => {
   window.mpNext = function(){ idx=(idx+1)%tracks.length; load(idx, fwPlaying); };
   window.mpPrev = function(){ idx=(idx-1+tracks.length)%tracks.length; load(idx, fwPlaying); };
 
+  /* Seek from full player progress bar */
   window.mpSeek = function(e){
     if(!fwAudio.duration) return;
     const rect = document.getElementById('mp-progress').getBoundingClientRect();
     fwAudio.currentTime = ((e.clientX-rect.left)/rect.width) * fwAudio.duration;
   };
 
+  /* Seek from compact player progress bar */
+  window.mpSeek2 = function(e){
+    if(!fwAudio.duration) return;
+    const rect = document.getElementById('bmp-progress').getBoundingClientRect();
+    fwAudio.currentTime = ((e.clientX-rect.left)/rect.width) * fwAudio.duration;
+  };
+
   window.mpSetVol = function(v){
     fwAudio.volume=parseFloat(v); muted=(v==0);
-    volIco.className = v==0 ? 'fas fa-volume-xmark fmc-vol-ico' : 'fas fa-volume-low fmc-vol-ico';
+    if(volIco) volIco.className = v==0 ? 'fas fa-volume-xmark mp-vol-icon' : 'fas fa-volume-low mp-vol-icon';
   };
 
   window.mpToggleMute = function(){
     const vol = document.getElementById('mp-vol');
-    if(muted){ fwAudio.volume=prevVol; vol.value=prevVol; muted=false; volIco.className='fas fa-volume-low fmc-vol-ico'; }
-    else      { prevVol=fwAudio.volume; fwAudio.volume=0; vol.value=0; muted=true; volIco.className='fas fa-volume-xmark fmc-vol-ico'; }
+    if(muted){ fwAudio.volume=prevVol; if(vol) vol.value=prevVol; muted=false; if(volIco) volIco.className='fas fa-volume-low mp-vol-icon'; }
+    else      { prevVol=fwAudio.volume; fwAudio.volume=0; if(vol) vol.value=0; muted=true; if(volIco) volIco.className='fas fa-volume-xmark mp-vol-icon'; }
   };
 
   fwAudio.addEventListener('timeupdate',()=>{
     if(!fwAudio.duration) return;
     const pct = (fwAudio.currentTime/fwAudio.duration)*100;
-    fillEl.style.width = pct+'%';
+    if(fillEl)  fillEl.style.width  = pct+'%';
     if(fillGlow) fillGlow.style.width = pct+'%';
-    curEl.textContent = fmt(fwAudio.currentTime);
+    if(bmpFill) bmpFill.style.width = pct+'%';
+    if(curEl)   curEl.textContent   = fmt(fwAudio.currentTime);
+    if(bmpCur)  bmpCur.textContent  = fmt(fwAudio.currentTime);
   });
-  fwAudio.addEventListener('loadedmetadata',()=>{ durEl.textContent = fmt(fwAudio.duration); });
+  fwAudio.addEventListener('loadedmetadata',()=>{
+    const d = fmt(fwAudio.duration);
+    if(durEl)  durEl.textContent = d;
+    if(bmpDur) bmpDur.textContent = d;
+  });
   fwAudio.addEventListener('ended', ()=>{ idx=(idx+1)%tracks.length; load(idx, true); });
   fwAudio.addEventListener('play',  ()=>{ fwPlaying=true;  updatePlayerUI(); });
   fwAudio.addEventListener('pause', ()=>{ fwPlaying=false; updatePlayerUI(); });
