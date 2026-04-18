@@ -432,6 +432,51 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(255,107,53,0.2);}
   .h-cta{padding:12px 24px;font-size:.82rem;}
 }
 
+/* ══ SMALLER TABLETS — tighten chapter-dot column so it doesn't crowd the story card ══ */
+@media(max-width:900px){
+  #ch-dots{right:10px;}
+}
+
+/* ══ NARROW PHONES (<360px) — stop overlay chips from overflowing the viewport ══ */
+@media(max-width:360px){
+  #loc-badge{padding:6px 12px;font-size:.72rem;top:62px;}
+  #alt-pill{top:108px;padding:6px 10px;gap:6px;}
+  #music-player{top:108px;width:calc(100vw - 150px);max-width:180px;}
+  #music-player .mp-track{font-size:.66rem;}
+  #music-player .mp-sub{font-size:.5rem;}
+  #story-card{max-height:64vh;}
+  .sc-head{padding:12px 14px 8px;}
+  .sc-body{padding:10px 14px;}
+  .sc-foot{padding:6px 14px 8px;}
+  .sc-location{font-size:1rem;word-break:break-word;}
+  .sc-subtitle{font-size:.7rem;padding-left:34px;}
+  .sc-photo{width:66px;height:66px;}
+  .sc-story{font-size:.82rem;line-height:1.66;}
+  .sc-pull{font-size:.8rem;}
+  .hero-inner{padding:0 12px;}
+  .h-title{font-size:clamp(2.2rem,7vw,3.4rem);letter-spacing:-.02em;}
+  .h-sub{font-size:.84rem;}
+  .h-stats{gap:14px;}
+  .hst-val{font-size:1.1rem;}
+  #outro{padding:60px 20px;}
+  .ou-h{font-size:clamp(1.9rem,5.5vw,3.2rem);}
+  .ou-sub{font-size:.9rem;}
+  .ou-quote{font-size:.92rem;padding:14px 18px;}
+  .btn-main,.btn-ghost{padding:11px 20px;font-size:.8rem;}
+}
+
+/* ══ SHORT / LANDSCAPE VIEWPORTS — keep hero usable when laptop/phone is in landscape ══ */
+@media(max-height:620px){
+  #hero{padding-top:24px;padding-bottom:24px;box-sizing:border-box;}
+  .h-title{font-size:clamp(2rem,5.5vw,3.4rem);margin-bottom:14px;}
+  .h-sub{margin-bottom:20px;}
+  .h-quote{margin-bottom:18px;}
+  .h-stats{margin-bottom:26px;gap:20px;}
+  .h-cta{padding:10px 22px;}
+  #story-card{max-height:72vh;}
+  .sc-body{max-height:42vh;}
+}
+
 /* ══ LARGE MONITORS — scale up for big screens ══ */
 @media(min-width:1920px){
   #story-card{width:clamp(540px,30vw,680px);}
