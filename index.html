@@ -1897,6 +1897,57 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
   .mp-section-grid { grid-template-columns: 1fr; }
   .mp-photo-side { min-height: 200px; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   GLOBAL RESPONSIVE SAFETY NET — catches narrow phones, tablets &
+   short/landscape viewports so nothing overflows or crowds the edge.
+   All rules are additive; nothing in the desktop layout is changed.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet (max-width:900px): modal/grid cleanup ── */
+@media(max-width:900px){
+  .cmodal-box{grid-template-columns:1fr;}
+  .about-bento{grid-template-columns:1fr 1fr;}
+}
+
+/* ── Small tablet / large phone (max-width:640px): reduce big display text + padding ── */
+@media(max-width:640px){
+  .rib-item{padding:16px 28px; font-size:0.88rem;}
+  .div-card{padding:42px 20px;}
+  .div-card-num{right:18px; top:18px; font-size:3.8rem;}
+  .ti:nth-child(odd){padding-right:36px;}
+  .ti:nth-child(even){padding-left:36px;}
+  #flip-card{padding:40px 28px; border-radius:18px;}
+}
+
+/* ── Narrow phones (max-width:400px): protect against overflow on ~360/375px devices ── */
+@media(max-width:400px){
+  .rib-item{padding:14px 22px; font-size:0.8rem;}
+  .div-card{padding:32px 16px;}
+  .div-card-num{font-size:3rem; right:14px; top:14px;}
+  .div-card h3{font-size:1.35rem;}
+  .div-card p{font-size:0.88rem;}
+  .contact-big{font-size:clamp(1.8rem,7vw,2.8rem); letter-spacing:-1px;}
+  #flip-card{padding:32px 20px;}
+  .fc-title{font-size:clamp(1.4rem,5.5vw,2.2rem);}
+  .fc-sub{font-size:0.82rem;}
+  footer{padding:28px 16px; gap:10px;}
+  .f-copy{font-size:0.62rem;}
+  .cmd-search{padding:12px 14px; gap:10px;}
+  .cmd-search input{font-size:0.92rem;}
+  .l-status-msg{min-width:0; font-size:0.48rem; letter-spacing:0.9px;}
+  .ti:nth-child(odd){padding-right:28px;}
+  .ti:nth-child(even){padding-left:28px;}
+}
+
+/* ── Short / landscape viewports (max-height:600px): let hero + sections breathe ── */
+@media(max-height:600px){
+  #hero{padding-top:70px; padding-bottom:40px; box-sizing:border-box;}
+  .h-name{font-size:clamp(2rem,6vw,3.6rem);}
+  .h-role{font-size:clamp(1rem,2.5vw,1.6rem);}
+  #terminal{max-height:80vh;}
+  .cmd-box{max-height:82vh;}
+}
 </style>
 </head>
 <body>
