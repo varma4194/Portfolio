@@ -316,7 +316,7 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(125,211,252,0.35);}
 #story-card.cool .sc-icon{filter:drop-shadow(0 0 14px rgba(56,189,248,0.45));}
 .sc-location{font-size:1.55rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.1;}
 .sc-subtitle{font-size:.92rem;color:rgba(255,255,255,0.52);margin-top:4px;font-style:italic;padding-left:56px;}
-.sc-body{padding:22px 30px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:rgba(255,107,53,0.35) transparent;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;}
+.sc-body{padding:22px 30px;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:rgba(255,107,53,0.35) transparent;-webkit-overflow-scrolling:touch;overscroll-behavior-y:auto;overscroll-behavior-x:contain;touch-action:pan-y;}
 .sc-body::-webkit-scrollbar{width:3px;}
 .sc-body::-webkit-scrollbar-thumb{background:rgba(255,107,53,0.35);border-radius:2px;}
 .sc-story{font-size:1.02rem;line-height:1.78;color:rgba(240,240,240,0.85);margin-bottom:18px;}
@@ -917,10 +917,12 @@ function setAtmosphere(mood, idx){
 }
 
 /* ═══ CHAPTER SWITCH ═══ */
-let activeCh   = -1;
+let activeCh    = -1;
 let isSwitching = false;
+let journeyEnded = false;   /* true once outro has entered viewport — blocks chapter re-shows */
 
 function switchChapter(newIdx){
+  if(journeyEnded) return;                         /* don't resurrect card after outro entered */
   if(newIdx === activeCh || isSwitching) return;
   isSwitching = true;
 
@@ -1028,17 +1030,22 @@ ScrollTrigger.create({
   trigger:'#outro',
   start:'top 92%',
   onEnter:()=>{
+    journeyEnded = true;
     ['loc-badge','alt-pill','ch-dots','music-player','trip-pill','scroll-down-btn','story-card'].forEach(id=>{
       const el = document.getElementById(id); if(el) el.classList.remove('vis');
     });
     gsap.killTweensOf(card);
-    gsap.set(card,{opacity:0});
+    gsap.set(card,{opacity:0,pointerEvents:'none'});
+    card.innerHTML = '';
+    isSwitching = false;
+    activeCh = -1;
   },
   onLeaveBack:()=>{
+    journeyEnded = false;
     ['loc-badge','alt-pill','ch-dots','music-player','trip-pill','scroll-down-btn','story-card'].forEach(id=>{
       const el = document.getElementById(id); if(el) el.classList.add('vis');
     });
-    gsap.set(card,{opacity:1});
+    gsap.set(card,{opacity:1,pointerEvents:''});
   }
 });
 
