@@ -4,6 +4,122 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spiti Valley — The Journey Is the Destination | Ravi Varma</title>
+
+<!-- PAGE-PORTAL-TRANSITION: start -->
+<script>
+(function(){ if(sessionStorage.getItem('portalIn')){ document.documentElement.classList.add('portal-pending'); } })();
+</script>
+<style>
+html.portal-pending{ background:#0a0908 !important; }
+html.portal-pending body{ visibility:hidden; }
+html.portal-pending body .page-portal{ visibility:visible; }
+html.portal-pending::before{
+  content:''; position:fixed; inset:0;
+  background:#0a0908; z-index:99998; pointer-events:none;
+}
+.page-portal{
+  position:fixed; inset:0; z-index:99999;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:#0a0908; gap:22px;
+  opacity:1; pointer-events:auto;
+}
+.page-portal.exit{ opacity:0; transition: opacity 0.6s ease; pointer-events:none; }
+.page-portal .pp-orb{
+  position:relative; width:140px; height:140px;
+  display:flex; align-items:center; justify-content:center;
+}
+.page-portal .pp-orb .pp-wave{
+  position:absolute; inset:0;
+  border-radius:50%;
+  border:1px solid var(--pp-c1,#ff9a3c);
+  opacity:0; will-change:transform,opacity;
+  animation: pp-wave 2.4s cubic-bezier(0.16,1,0.3,1) infinite;
+}
+.page-portal .pp-orb .pp-wave:nth-child(2){ animation-delay:0.8s; }
+.page-portal .pp-orb .pp-wave:nth-child(3){ animation-delay:1.6s; }
+.page-portal .pp-orb .pp-core{
+  width:22px; height:22px; border-radius:50%;
+  background: var(--pp-c1,#ff9a3c);
+  box-shadow: 0 0 20px var(--pp-c1,#ff9a3c), 0 0 50px var(--pp-c2,#ffb347), 0 0 90px -10px var(--pp-c1,#ff9a3c);
+  animation: pp-breath 1.8s ease-in-out infinite;
+  will-change:transform,opacity;
+}
+.page-portal .pp-text{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.68rem; letter-spacing:3px; text-transform:uppercase;
+  color: var(--pp-eye, rgba(255,179,71,0.65));
+}
+.page-portal .pp-name{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:clamp(2rem,6vw,3.6rem); font-weight:800; letter-spacing:-1.5px;
+  color:#f5e6c8; text-align:center; line-height:1.05; padding:0 20px;
+}
+.page-portal .pp-name .pp-accent{
+  background: var(--pp-accent, linear-gradient(135deg,#ff9a3c,#ffb347));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.page-portal .pp-tagline{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:0.95rem; color:rgba(245,230,200,0.55);
+  text-align:center; max-width:80%; padding:0 20px;
+}
+@keyframes pp-wave{ 0%{ transform:scale(0.25); opacity:0; } 20%{ opacity:0.55; } 100%{ transform:scale(1); opacity:0; } }
+@keyframes pp-breath{ 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.18); opacity:0.88; } }
+.page-portal.theme-personal{ --pp-c1:#ff9a3c; --pp-c2:#ffb347; --pp-eye:rgba(255,179,71,0.7); --pp-accent:linear-gradient(135deg,#ff9a3c,#ffb347,#ffd700); background:radial-gradient(circle at 50% 50%, #1a0f06 0%, #0a0504 70%); }
+.page-portal.theme-portfolio{ --pp-c1:#ff6b35; --pp-c2:#f7931e; --pp-eye:rgba(247,147,30,0.7); --pp-accent:linear-gradient(135deg,#ff6b35,#f7931e); background:radial-gradient(circle at 50% 50%, #12090a 0%, #070405 70%); }
+.page-portal.theme-ladakh{ --pp-c1:#8ec5fc; --pp-c2:#e0c3fc; --pp-eye:rgba(142,197,252,0.8); --pp-accent:linear-gradient(135deg,#8ec5fc,#e0c3fc,#a8e6ff); background:radial-gradient(circle at 50% 50%, #0a1628 0%, #030810 70%); }
+.page-portal.theme-spiti{ --pp-c1:#ff9a3c; --pp-c2:#c0392b; --pp-eye:rgba(255,154,60,0.8); --pp-accent:linear-gradient(135deg,#ff9a3c,#e67e22,#c0392b); background:radial-gradient(circle at 50% 50%, #18100a 0%, #080402 70%); }
+</style>
+<script>
+(function(){
+  var THEMES = {
+    personal:  { cls:'theme-personal',  eye:"entering ravi's world",    name:'Beyond the <span class="pp-accent">Screen.</span>',     tag:'Buckle up. This is the good stuff.' },
+    portfolio: { cls:'theme-portfolio', eye:'back to the code',         name:'Ravi <span class="pp-accent">Varma.</span>',            tag:'Where the shipping happens.' },
+    ladakh:    { cls:'theme-ladakh',    eye:'heading north',            name:'Into <span class="pp-accent">Ladakh.</span>',           tag:'Land of high passes. Route that changed everything.' },
+    spiti:     { cls:'theme-spiti',     eye:'into the cold desert',     name:'Into <span class="pp-accent">Spiti Valley.</span>',     tag:'Middle Land. Last villages on earth.' }
+  };
+  function build(key){
+    var t = THEMES[key]; if(!t) return null;
+    var el = document.createElement('div');
+    el.className = 'page-portal ' + t.cls;
+    el.innerHTML = '<div class="pp-orb"><div class="pp-wave"></div><div class="pp-wave"></div><div class="pp-wave"></div><div class="pp-core"></div></div>'
+                 + '<div class="pp-text">'+t.eye+'</div>'
+                 + '<div class="pp-name">'+t.name+'</div>'
+                 + '<div class="pp-tagline">'+t.tag+'</div>';
+    return el;
+  }
+  var pending = sessionStorage.getItem('portalIn');
+  if(pending){
+    sessionStorage.removeItem('portalIn');
+    var showIn = function(){
+      var el = build(pending);
+      if(!el){ document.documentElement.classList.remove('portal-pending'); return; }
+      document.body.appendChild(el);
+      void el.offsetHeight;
+      document.documentElement.classList.remove('portal-pending');
+      setTimeout(function(){
+        el.classList.add('exit');
+        setTimeout(function(){ el.remove(); }, 700);
+      }, 650);
+    };
+    if(document.readyState==='loading'){
+      document.addEventListener('DOMContentLoaded', showIn);
+    } else { showIn(); }
+  }
+  var navigating = false;
+  window.pagePortal = function(key, url){
+    if(navigating) return false;
+    navigating = true;
+    var el = build(key);
+    if(!el){ window.location.href = url; return false; }
+    document.body.appendChild(el);
+    sessionStorage.setItem('portalIn', key);
+    setTimeout(function(){ window.location.href = url; }, 550);
+    return false;
+  };
+})();
+</script>
+<!-- PAGE-PORTAL-TRANSITION: end -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -362,7 +478,7 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(125,211,252,0.35);}
 
 <nav id="top-nav">
   <span class="nav-eye">🏔️ Spiti Valley · Trip Log · 2024</span>
-  <a href="new_portfolio1.html?personal=1" class="nav-back"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+  <a href="personal.html" class="nav-back" onclick="return pagePortal('personal','personal.html')"><i class="fas fa-arrow-left"></i> Back to Ravi's World</a>
 </nav>
 
 <div id="cur-dot"></div>
@@ -514,7 +630,7 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(125,211,252,0.35);}
       <div><span class="ous-val">∞</span><span class="ous-lab">Stories</span></div>
     </div>
     <div class="ou-btns">
-      <a href="new_portfolio1.html?personal=1" class="btn-main"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+      <a href="personal.html" class="btn-main" onclick="return pagePortal('personal','personal.html')"><i class="fas fa-arrow-left"></i> Back to Ravi's World</a>
       <a href="ladakh.html" class="btn-ghost">Ladakh Trip <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
