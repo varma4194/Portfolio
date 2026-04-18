@@ -240,11 +240,12 @@ body.cg #cursor-ring { width:52px; height:52px; border-color:rgba(255,107,53,0.2
 .l-sys.bl { bottom:96px; left:32px; }
 .l-sys.br { bottom:96px; right:32px; }
 @media(max-width:640px){
-  .l-sys{ font-size:0.5rem; letter-spacing:1.8px; padding:6px 11px; }
-  .l-sys.tl,.l-sys.tr{ top:18px; }
-  .l-sys.bl,.l-sys.br{ bottom:86px; }
-  .l-sys.tl,.l-sys.bl{ left:16px; }
-  .l-sys.tr,.l-sys.br{ right:16px; }
+  .l-sys{ font-size:0.46rem; letter-spacing:1.4px; padding:5px 9px; }
+  .l-sys.tl,.l-sys.tr{ top:16px; }
+  /* Lift the LAT/LON coord chips well above the status pill so they don't collide with the "Initializing runtime…" text */
+  .l-sys.bl,.l-sys.br{ bottom:130px; }
+  .l-sys.tl,.l-sys.bl{ left:12px; }
+  .l-sys.tr,.l-sys.br{ right:12px; }
 }
 
 /* ── Name (dead center, premium reveal) ── */
@@ -330,8 +331,9 @@ body.cg #cursor-ring { width:52px; height:52px; border-color:rgba(255,107,53,0.2
   transition: opacity 0.25s var(--ease), color 0.3s var(--ease);
 }
 @media(max-width:640px){
-  .l-status{ padding:8px 16px; bottom:58px; }
-  .l-status-msg{ font-size:0.62rem; min-width:180px; letter-spacing:1.5px; }
+  .l-status{ padding:7px 14px; bottom:54px; gap:9px; max-width:calc(100vw - 32px); }
+  .l-status-msg{ font-size:0.56rem; min-width:0; letter-spacing:1.3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .l-status-ring{ width:10px; height:10px; }
 }
 
 /* ── Progress bar (hairline, bottom) ── */
@@ -1504,6 +1506,21 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 #cmd-shortcut-btn:hover { background:rgba(30,30,30,0.9); color:var(--ink); border-color:rgba(255,255,255,0.2); transform:translateY(-1px); }
 #cmd-shortcut-btn i { font-size:0.78rem; color:var(--ink3); }
 #cmd-shortcut-btn kbd { padding:2px 6px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12); border-radius:5px; font-size:0.6rem; color:var(--ink3); }
+/* ── Mobile: collapse both floating corner buttons to matching compact icon chips ── */
+@media(max-width:640px){
+  #term-btn, #cmd-shortcut-btn{
+    bottom:16px; padding:0; gap:0;
+    width:40px; height:40px; min-width:40px;
+    border-radius:50%;
+    display:inline-flex; align-items:center; justify-content:center;
+    font-size:0.8rem;
+  }
+  #term-btn{ right:14px; }
+  #cmd-shortcut-btn{ left:14px; }
+  #term-btn .term-label, #cmd-shortcut-btn .cmd-label{ display:none; }
+  #cmd-shortcut-btn kbd{ display:none; }
+  #term-btn i, #cmd-shortcut-btn i{ font-size:0.82rem; margin:0; }
+}
 #terminal {
   position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.95);
   z-index:8000; width:580px; max-width:92vw;
@@ -2352,9 +2369,9 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
 <!-- Terminal -->
 <div id="term-backdrop" onclick="toggleTerm()"></div>
-<button id="term-btn" onclick="toggleTerm()"><i class="fas fa-terminal"></i> Terminal</button>
+<button id="term-btn" onclick="toggleTerm()"><i class="fas fa-terminal"></i><span class="term-label">&nbsp;Terminal</span></button>
 <!-- FIX 3: command search bottom-left -->
-<button id="cmd-shortcut-btn" onclick="openCmd()"><i class="fas fa-search"></i> Search &nbsp;<kbd>⌘K</kbd></button>
+<button id="cmd-shortcut-btn" onclick="openCmd()"><i class="fas fa-search"></i><span class="cmd-label">&nbsp;Search &nbsp;<kbd>⌘K</kbd></span></button>
 <div id="terminal">
   <div class="term-head"><div class="term-dots"><span></span><span></span><span></span></div><span class="term-title">ravi@portfolio ~/</span><button class="term-x" onclick="toggleTerm()">✕</button></div>
   <div id="term-out"></div>
