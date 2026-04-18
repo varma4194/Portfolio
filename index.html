@@ -38,7 +38,7 @@
 
 /* ═══════════════ RESET ═══════════════ */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { overflow-x:hidden; }
+html { overflow-x:hidden; -webkit-text-size-adjust:100%; }
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg);
@@ -47,6 +47,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: none;
+}
+/* MOBILE-SCROLL-FIX: allow the browser to handle vertical panning natively.
+   Without this, Lenis + iOS touch can get stuck on the hero. */
+@media(max-width:900px), (hover:none) and (pointer:coarse) {
+  html, body { touch-action: pan-y !important; -webkit-overflow-scrolling: touch; overscroll-behavior-y: auto; }
+  #hero, #hcanvas, .hero-glow, .hc { touch-action: pan-y !important; }
 }
 /* Lenis requires this */
 html.lenis { height: auto; }
@@ -1007,6 +1013,11 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
   background:#1a1008;
   display:none;
   overflow:hidden; /* Lenis controls scroll — do NOT set overflow:scroll */
+}
+/* MOBILE-SCROLL-FIX: on touch devices, use native scroll inside the personal world */
+@media(max-width:900px), (hover:none) and (pointer:coarse) {
+  #flip-world { overflow-y:auto !important; -webkit-overflow-scrolling:touch; touch-action:pan-y; }
+  #fw-content { transform:none !important; will-change:auto; }
 }
 /* Lenis translates this inner element for smooth scroll */
 #fw-content {
@@ -2327,16 +2338,25 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
 <script>
 /* ═══════════ LENIS SMOOTH SCROLL ═══════════ */
+/* MOBILE-SCROLL-FIX: detect touch / narrow viewports — on these we use
+   NATIVE scroll (desktop still gets buttery Lenis smooth-scroll). */
+const IS_TOUCH = (window.matchMedia('(hover:none) and (pointer:coarse)').matches) ||
+                 (window.matchMedia('(max-width:900px)').matches) ||
+                 ('ontouchstart' in window && window.innerWidth < 1024);
+
 /* ── Portfolio smooth scroll ── */
 const lenis = new Lenis({
   duration: 1.6,
   easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   orientation: 'vertical',
-  smoothWheel: true,
+  smoothWheel: !IS_TOUCH,
   wheelMultiplier: 0.85,
   touchMultiplier: 1.5,
+  syncTouch: false,     /* let native touch scrolling happen */
+  smoothTouch: false,   /* legacy prop, same effect */
   infinite: false,
 });
+if (IS_TOUCH) { lenis.stop(); /* disable on mobile, native scroll takes over */ }
 
 /* ── Personal world smooth scroll (same feel, different wrapper) ── */
 const fwWrapper = document.getElementById('flip-world');
@@ -2346,26 +2366,27 @@ const lenisPersonal = new Lenis({
   content:  fwContent,
   duration: 1.6,
   easing:   t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
+  smoothWheel: !IS_TOUCH,
   wheelMultiplier: 0.85,
   touchMultiplier: 1.5,
+  syncTouch: false,
+  smoothTouch: false,
   infinite: false,
 });
 lenisPersonal.stop(); /* paused until personal world is open */
 
-/* Single RAF loop ticks both Lenis instances */
-function raf(time) {
-  lenis.raf(time);
-  lenisPersonal.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-// Hook GSAP ScrollTrigger into the portfolio Lenis
+/* GSAP ticker drives Lenis — single loop, no duplicate RAF.
+   (The previous code was ticking Lenis twice per frame, which on iOS
+    could stomp scrollTop mid-frame and freeze the page.) */
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add(time => lenis.raf(time * 1000));
+gsap.ticker.add(time => { lenis.raf(time * 1000); lenisPersonal.raf(time * 1000); });
 gsap.ticker.lagSmoothing(0);
+/* MOBILE-SCROLL-FIX: when Lenis is stopped, ScrollTrigger needs native
+   scroll events to keep pins and timelines in sync. */
+if(IS_TOUCH){
+  window.addEventListener('scroll', ()=>ScrollTrigger.update(), {passive:true});
+}
 
 /* ═══════════ LOADER GLOBE ═══════════ */
 (function(){
@@ -2644,24 +2665,30 @@ setTimeout(()=>{
     pill.style.transform=`translateX(${er.left-nr.left-5}px)`;
   }
   setTimeout(()=>{ const f=document.querySelector('.ni.on'); if(f)movePill(f); },3700);
-  lenis.on('scroll',({scroll})=>{
-    const sy=scroll+window.innerHeight*0.35;
+  /* MOBILE-SCROLL-FIX: also listen to native scroll, so nav pill works
+     even when Lenis is disabled on touch devices. */
+  function updPill(scrollY){
+    const sy=scrollY+window.innerHeight*0.35;
     let cur='hero';
     secs.forEach(id=>{ const el=document.getElementById(id); if(el&&el.offsetTop<=sy) cur=id; });
     nis.forEach(it=>{ const m=it.dataset.s===cur; it.classList.toggle('on',m); if(m)movePill(it); });
-  });
+  }
+  lenis.on('scroll',({scroll})=>updPill(scroll));
+  window.addEventListener('scroll',()=>updPill(window.scrollY||window.pageYOffset),{passive:true});
   window.addEventListener('resize',()=>{ const a=document.querySelector('.ni.on'); if(a)movePill(a); });
 })();
 
-/* ═══════════ SMOOTH SCROLL (via Lenis) ═══════════ */
-window.goto = function(sel){
-  const el=document.querySelector(sel);
-  if(el) lenis.scrollTo(el, {offset:0, duration:1.4, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
-};
+/* ═══════════ SMOOTH SCROLL (Lenis on desktop, native on mobile) ═══════════ */
+function smoothTo(el){
+  if(!el) return;
+  if(IS_TOUCH){ el.scrollIntoView({behavior:'smooth',block:'start'}); }
+  else       { lenis.scrollTo(el,{offset:0,duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))}); }
+}
+window.goto = function(sel){ smoothTo(document.querySelector(sel)); };
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const h=a.getAttribute('href');
-    if(h.length>1){ const t=document.querySelector(h); if(t){ e.preventDefault(); lenis.scrollTo(t,{duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))}); } }
+    if(h.length>1){ const t=document.querySelector(h); if(t){ e.preventDefault(); smoothTo(t); } }
   });
 });
 
@@ -2885,13 +2912,15 @@ window.flipToPersonal = function(){
   setTimeout(()=>{
     flipWorld.style.display='block';
     /* Reset personal scroll to top */
-    lenisPersonal.scrollTo(0, { immediate:true });
+    if(IS_TOUCH){ flipWorld.scrollTop = 0; }
+    else        { lenisPersonal.scrollTo(0, { immediate:true }); }
     flipWorld.classList.remove('flip-exit');
     flipWorld.classList.add('flip-enter');
     document.body.style.overflow='hidden';
     flipWorld.addEventListener('animationend', ()=>{
       flipWorld.classList.remove('flip-enter');
-      lenisPersonal.start(); /* Start personal Lenis AFTER animation */
+      /* MOBILE-SCROLL-FIX: native scroll inside personal world on touch */
+      if(!IS_TOUCH){ lenisPersonal.start(); }
     }, {once:true});
   }, 300);
   if(fwPortal){ fwPortal.classList.add('hide'); setTimeout(()=>{ fwPortal.style.display='none'; }, 3100); }
@@ -2901,7 +2930,7 @@ window.flipBack = function(){
   lenisPersonal.stop(); /* Pause personal Lenis */
   flipWorld.classList.add('flip-exit');
   document.body.style.overflow='';
-  lenis.start(); /* Resume portfolio Lenis */
+  if(!IS_TOUCH){ lenis.start(); } /* Resume portfolio Lenis (desktop only — mobile uses native) */
   /* Pause music if playing */
   if(typeof fwAudio !== 'undefined' && fwAudio){ fwAudio.pause(); fwPlaying=false; updatePlayerUI(); }
   flipWorld.addEventListener('animationend', ()=>{
