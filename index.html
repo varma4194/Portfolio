@@ -38,7 +38,7 @@
 
 /* ═══════════════ RESET ═══════════════ */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { overflow-x:hidden; -webkit-text-size-adjust:100%; }
+html { overflow-x:hidden; }
 body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--bg);
@@ -47,12 +47,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: none;
-}
-/* MOBILE-SCROLL-FIX: allow the browser to handle vertical panning natively.
-   Without this, Lenis + iOS touch can get stuck on the hero. */
-@media(max-width:900px), (hover:none) and (pointer:coarse) {
-  html, body { touch-action: pan-y !important; -webkit-overflow-scrolling: touch; overscroll-behavior-y: auto; }
-  #hero, #hcanvas, .hero-glow, .hc { touch-action: pan-y !important; }
 }
 /* Lenis requires this */
 html.lenis { height: auto; }
@@ -1193,7 +1187,24 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 .fw-cta-section { text-align:center; padding:60px 6%; border-top:1px solid rgba(255,200,100,0.1); }
 .fw-cta-text { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(1.5rem,4vw,2.8rem); font-weight:800; letter-spacing:-1.5px; color:#f5e6c8; margin-bottom:20px; line-height:1.1; }
 .fw-cta-text .warm { background:linear-gradient(135deg,#ff9a3c,#ffb347); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-@media(max-width:768px) { .fw-grid-3{grid-template-columns:1fr} .fw-grid-2{grid-template-columns:1fr} }
+@media(max-width:768px) {
+  .fw-grid-3{grid-template-columns:1fr}
+  .fw-grid-2{grid-template-columns:1fr}
+  /* MOBILE-ALIGN: tighten personal-world chrome so nothing collides or overflows */
+  .fw-nav{padding:12px 5%;}
+  .fw-nav-title{font-size:.9rem;}
+  .fw-back{padding:7px 12px;font-size:.72rem;gap:6px;}
+  .fw-hero{padding:80px 5% 50px;}
+  .fw-title{font-size:clamp(2.1rem,9vw,3.2rem);letter-spacing:-1.5px;}
+  .fw-subtitle{font-size:.92rem;padding:0 4px;}
+  .fw-sections{padding:0 5% 60px;}
+  .fw-section-title{font-size:.95rem;}
+  .fw-card{padding:18px;}
+  .fw-card-title{font-size:.95rem;}
+  .fw-card-body{font-size:.84rem;}
+  .fw-cta-section{padding:42px 5%;}
+  .fw-cta-text{letter-spacing:-1px;}
+}
 
 /* ═══════════════ COMMAND PALETTE ═══════════════ */
 #cmd-overlay {
@@ -1204,9 +1215,29 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 #cmd-overlay.open { display:flex; }
 .cmd-box {
   width:580px; max-width:92vw;
+  /* SCROLL FIX: cap height and use flex column so the result list can scroll */
+  max-height:min(72vh, calc(100vh - 20vh));
+  display:flex; flex-direction:column;
   background:#0f0f0f; border:1px solid rgba(255,255,255,0.14); border-radius:16px;
   overflow:hidden; box-shadow:0 32px 80px rgba(0,0,0,0.75);
   animation:cmdIn 0.22s var(--ease);
+}
+.cmd-search, .cmd-footer { flex-shrink:0; }
+#cmd-list {
+  flex:1 1 auto;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,0.18) transparent;
+}
+#cmd-list::-webkit-scrollbar { width:4px; }
+#cmd-list::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.18); border-radius:2px; }
+@media(max-width:768px){
+  #cmd-overlay { padding-top:8vh; padding-left:10px; padding-right:10px; }
+  .cmd-box { max-height:calc(100vh - 12vh); max-width:100%; width:100%; }
+  .cmd-footer { padding:8px 14px; gap:10px; flex-wrap:wrap; }
+  .cmd-hint { font-size:.58rem; }
 }
 @keyframes cmdIn { from{opacity:0;transform:scale(0.96) translateY(-10px)} to{opacity:1;transform:none} }
 .cmd-search { display:flex; align-items:center; gap:13px; padding:17px 19px; border-bottom:1px solid rgba(255,255,255,0.08); }
@@ -2338,10 +2369,10 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
 <script>
 /* ═══════════ LENIS SMOOTH SCROLL ═══════════ */
-/* MOBILE-SCROLL-FIX: detect touch / narrow viewports — on these we use
-   NATIVE scroll (desktop still gets buttery Lenis smooth-scroll). */
+/* Detect touch / narrow viewports — used ONLY for the personal world
+   (flip-world), which previously didn't scroll on mobile because Lenis
+   was transforming its content. The main page is always Lenis-driven. */
 const IS_TOUCH = (window.matchMedia('(hover:none) and (pointer:coarse)').matches) ||
-                 (window.matchMedia('(max-width:900px)').matches) ||
                  ('ontouchstart' in window && window.innerWidth < 1024);
 
 /* ── Portfolio smooth scroll ── */
@@ -2349,14 +2380,11 @@ const lenis = new Lenis({
   duration: 1.6,
   easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   orientation: 'vertical',
-  smoothWheel: !IS_TOUCH,
+  smoothWheel: true,
   wheelMultiplier: 0.85,
   touchMultiplier: 1.5,
-  syncTouch: false,     /* let native touch scrolling happen */
-  smoothTouch: false,   /* legacy prop, same effect */
   infinite: false,
 });
-if (IS_TOUCH) { lenis.stop(); /* disable on mobile, native scroll takes over */ }
 
 /* ── Personal world smooth scroll (same feel, different wrapper) ── */
 const fwWrapper = document.getElementById('flip-world');
@@ -2366,27 +2394,26 @@ const lenisPersonal = new Lenis({
   content:  fwContent,
   duration: 1.6,
   easing:   t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: !IS_TOUCH,
+  smoothWheel: true,
   wheelMultiplier: 0.85,
   touchMultiplier: 1.5,
-  syncTouch: false,
-  smoothTouch: false,
   infinite: false,
 });
 lenisPersonal.stop(); /* paused until personal world is open */
 
-/* GSAP ticker drives Lenis — single loop, no duplicate RAF.
-   (The previous code was ticking Lenis twice per frame, which on iOS
-    could stomp scrollTop mid-frame and freeze the page.) */
+/* Single RAF loop ticks both Lenis instances */
+function raf(time) {
+  lenis.raf(time);
+  lenisPersonal.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// Hook GSAP ScrollTrigger into the portfolio Lenis
 gsap.registerPlugin(ScrollTrigger);
 lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add(time => { lenis.raf(time * 1000); lenisPersonal.raf(time * 1000); });
+gsap.ticker.add(time => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
-/* MOBILE-SCROLL-FIX: when Lenis is stopped, ScrollTrigger needs native
-   scroll events to keep pins and timelines in sync. */
-if(IS_TOUCH){
-  window.addEventListener('scroll', ()=>ScrollTrigger.update(), {passive:true});
-}
 
 /* ═══════════ LOADER GLOBE ═══════════ */
 (function(){
@@ -2665,30 +2692,24 @@ setTimeout(()=>{
     pill.style.transform=`translateX(${er.left-nr.left-5}px)`;
   }
   setTimeout(()=>{ const f=document.querySelector('.ni.on'); if(f)movePill(f); },3700);
-  /* MOBILE-SCROLL-FIX: also listen to native scroll, so nav pill works
-     even when Lenis is disabled on touch devices. */
-  function updPill(scrollY){
-    const sy=scrollY+window.innerHeight*0.35;
+  lenis.on('scroll',({scroll})=>{
+    const sy=scroll+window.innerHeight*0.35;
     let cur='hero';
     secs.forEach(id=>{ const el=document.getElementById(id); if(el&&el.offsetTop<=sy) cur=id; });
     nis.forEach(it=>{ const m=it.dataset.s===cur; it.classList.toggle('on',m); if(m)movePill(it); });
-  }
-  lenis.on('scroll',({scroll})=>updPill(scroll));
-  window.addEventListener('scroll',()=>updPill(window.scrollY||window.pageYOffset),{passive:true});
+  });
   window.addEventListener('resize',()=>{ const a=document.querySelector('.ni.on'); if(a)movePill(a); });
 })();
 
-/* ═══════════ SMOOTH SCROLL (Lenis on desktop, native on mobile) ═══════════ */
-function smoothTo(el){
-  if(!el) return;
-  if(IS_TOUCH){ el.scrollIntoView({behavior:'smooth',block:'start'}); }
-  else       { lenis.scrollTo(el,{offset:0,duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))}); }
-}
-window.goto = function(sel){ smoothTo(document.querySelector(sel)); };
+/* ═══════════ SMOOTH SCROLL (via Lenis) ═══════════ */
+window.goto = function(sel){
+  const el=document.querySelector(sel);
+  if(el) lenis.scrollTo(el, {offset:0, duration:1.4, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+};
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const h=a.getAttribute('href');
-    if(h.length>1){ const t=document.querySelector(h); if(t){ e.preventDefault(); smoothTo(t); } }
+    if(h.length>1){ const t=document.querySelector(h); if(t){ e.preventDefault(); lenis.scrollTo(t,{duration:1.4,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))}); } }
   });
 });
 
@@ -2930,7 +2951,7 @@ window.flipBack = function(){
   lenisPersonal.stop(); /* Pause personal Lenis */
   flipWorld.classList.add('flip-exit');
   document.body.style.overflow='';
-  if(!IS_TOUCH){ lenis.start(); } /* Resume portfolio Lenis (desktop only — mobile uses native) */
+  lenis.start(); /* Resume portfolio Lenis */
   /* Pause music if playing */
   if(typeof fwAudio !== 'undefined' && fwAudio){ fwAudio.pause(); fwPlaying=false; updatePlayerUI(); }
   flipWorld.addEventListener('animationend', ()=>{
