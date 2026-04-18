@@ -372,6 +372,32 @@ a{color:inherit;text-decoration:none;}
   .fw-cta-text{letter-spacing:-1px;}
   .fw-cta-say-hello,.fw-cta-back{padding:12px 22px; font-size:0.82rem;}
 }
+/* ══ NARROW PHONES (<400px) — tighter padding, smaller collage, lower trip CTA on its own line ══ */
+@media(max-width:400px){
+  .fw-hero{padding:42px 4% 28px;}
+  .fw-sections{padding:0 4% 44px;}
+  .fw-nav{padding:10px 4%;}
+  .fw-card{padding:14px;}
+  .fw-card-ico{font-size:1.65rem; margin-bottom:10px;}
+  .fw-card-title{font-size:0.88rem;}
+  .fw-card-body{font-size:0.78rem; line-height:1.6;}
+  .fw-section-title{font-size:0.82rem; margin:28px 0 14px; gap:8px;}
+  .trip-collage{grid-template-rows:110px 110px; height:220px;}
+  .trip-info{padding:14px 16px; gap:10px;}
+  .trip-title{font-size:0.98rem;}
+  .trip-kicker{font-size:0.6rem;}
+  .trip-route{font-size:0.7rem;}
+  .trip-stat-val{font-size:0.92rem;}
+  .trip-stat-lab{font-size:0.55rem;}
+  .fw-cta-section{padding:32px 5%;}
+  .fw-cta-text{font-size:clamp(1.4rem,5vw,2rem);}
+  .fw-cta-say-hello,.fw-cta-back{padding:10px 18px; font-size:0.74rem;}
+}
+/* ══ SHORT VIEWPORTS — keep hero usable when device is in landscape ══ */
+@media(max-height:560px){
+  .fw-hero{padding:32px 5% 24px;}
+  .fw-title{font-size:clamp(1.8rem,6vw,2.6rem);}
+}
 </style>
 </head>
 <body>
