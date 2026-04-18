@@ -1712,11 +1712,6 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
       <a href="#projects" class="bf"><i class="fas fa-briefcase"></i> View My Work</a>
       <button onclick="openContactModal()" class="bg"><i class="fas fa-paper-plane"></i> Get In Touch</button>
     </div>
-    <div class="h-other-side" onclick="flipToPersonal()">
-      <span class="h-os-dot"></span>
-      <span>Life beyond the terminal</span>
-      <span class="h-os-arrow">↗</span>
-    </div>
   </div>
   <div class="h-stats">
     <div><div class="sn">5+</div><div class="sl">Years</div></div>
@@ -2174,82 +2169,92 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 
     <!-- ── LADAKH ── -->
     <div class="fw-section-title"><i class="fas fa-mountain"></i>&nbsp; Ladakh — The Roof of the World</div>
-    <div class="fw-grid-2" style="margin-bottom:20px">
-      <div class="fw-photo-card" style="aspect-ratio:16/10">
-         <img src="ravi7.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="fw-photo-card" style="aspect-ratio:16/10">
-       <img src="ravi9.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-    </div>
-    <div class="fw-grid-3" style="margin-bottom:20px">
-      <div class="fw-photo-card">
- <img src="ravi3.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="fw-photo-card">
- <img src="ravi12.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="fw-photo-card">
- <img src="ravi10.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-    </div>
-    <div class="fw-grid-3" style="margin-bottom:60px">
-      <div class="fw-card">
-        <span class="fw-card-ico">🏔️</span>
-        <div class="fw-card-title">Khardung La — Top of the World</div>
-        <div class="fw-card-body">Rode to one of the world's highest motorable roads at over 18,000 feet. The air is thin, the views are impossible, and your body reminds you very clearly that you are not supposed to be this high up.</div>
-        <span class="fw-card-tag">18,379 ft above sea level</span>
-      </div>
-      <div class="fw-card">
-        <span class="fw-card-ico">🏞️</span>
-        <div class="fw-card-title">Pangong Lake — On the Edge of Two Countries</div>
-        <div class="fw-card-body">Pangong stretches across the India–China border. Standing there at sunset, watching the water change from blue to green to silver — it hits different when you realise this lake doesn't care about borders.</div>
-        <span class="fw-card-tag">4,350m · 134 km long</span>
-      </div>
-      <div class="fw-card">
-        <span class="fw-card-ico">🏡</span>
-        <div class="fw-card-title">'MAN' Village — Where the World Ends</div>
-        <div class="fw-card-body">Near Pangong, the village of Man is one of the most remote places I've ever stepped foot in. A handful of houses, no signal, no traffic — just mountains, silence, and the warmest hosts you'll ever meet.</div>
-        <span class="fw-card-tag">Most remote I've been</span>
-      </div>
+
+    <!-- Ladakh Trip Card — links to immersive journey page -->
+    <div style="margin-bottom:60px">
+      <a href="ladakh.html" style="display:block;text-decoration:none;cursor:pointer">
+        <div style="position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(255,179,71,0.2);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.4)"
+             onmouseover="this.style.transform='translateY(-6px) scale(1.01)';this.style.borderColor='rgba(255,107,53,0.5)';this.style.boxShadow='0 20px 60px rgba(255,107,53,0.15)'"
+             onmouseout="this.style.transform='translateY(0) scale(1)';this.style.borderColor='rgba(255,179,71,0.2)';this.style.boxShadow='0 8px 40px rgba(0,0,0,0.4)'">
+          <!-- Photo collage header -->
+          <div style="display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:180px 120px;gap:3px;height:300px">
+            <div style="grid-row:span 2;overflow:hidden">
+              <img src="ravi7.jpeg" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s" alt="Ladakh">
+            </div>
+            <div style="overflow:hidden"><img src="ravi9.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Ladakh"></div>
+            <div style="overflow:hidden"><img src="ravi10.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Khardung La"></div>
+            <div style="overflow:hidden"><img src="ravi3.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Leh"></div>
+            <div style="overflow:hidden"><img src="ravi12.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Pangong"></div>
+          </div>
+          <!-- Info strip -->
+          <div style="padding:24px 28px;background:linear-gradient(135deg,rgba(12,12,12,0.98),rgba(20,12,8,0.98));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(255,107,53,0.7);text-transform:uppercase;margin-bottom:8px">Trip 01 · Ladakh · 7 Days</div>
+              <div style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:#f4f4f4;margin-bottom:6px">The Roof of the World&nbsp;🏔️</div>
+              <div style="font-size:0.85rem;color:#707070;line-height:1.6">Leh → Khardung La → Nubra → Pangong → Man Village</div>
+            </div>
+            <div style="display:flex;gap:24px;flex-shrink:0">
+              <div style="text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#ffb347">5,602m</div>
+                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Peak</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#4fc3f7">~700km</div>
+                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Rode</div>
+              </div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:100px;background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(255,179,71,0.1));border:1px solid rgba(255,107,53,0.35);color:#ffb347;font-size:0.8rem;font-weight:700;white-space:nowrap;transition:background 0.2s">
+              🏍️&nbsp; Ride the Route →
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
 
     <!-- ── SPITI VALLEY ── -->
-    <div class="fw-section-title"><i class="fas fa-route"></i>&nbsp; Spiti Valley — The Adventure That Tested Everything</div>
-      <div class="fw-photo-card">
- <img src="ravi13.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-    </div>
-<div class="fw-photo-card">
- <img src="ravi11.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-<div class="fw-photo-card">
- <img src="ravi16.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-<div class="fw-photo-card">
- <img src="ravi14.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
-      </div>
-      <div class="fw-photo-card">
- <img src="ravi6.jpeg" alt="My bike" style="width:100%;height:100%;object-fit:cover;">
+    <div class="fw-section-title"><i class="fas fa-route"></i>&nbsp; Spiti Valley — The Journey Itself Is the Destination</div>
+
+    <!-- Spiti Trip Card — links to immersive journey page -->
+    <div style="margin-bottom:40px">
+      <a href="spiti.html" style="display:block;text-decoration:none;cursor:pointer">
+        <div style="position:relative;border-radius:20px;overflow:hidden;border:1px solid rgba(125,211,252,0.22);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),border-color 0.3s,box-shadow 0.3s;box-shadow:0 8px 40px rgba(0,0,0,0.4)"
+             onmouseover="this.style.transform='translateY(-6px) scale(1.01)';this.style.borderColor='rgba(56,189,248,0.5)';this.style.boxShadow='0 20px 60px rgba(56,189,248,0.15)'"
+             onmouseout="this.style.transform='translateY(0) scale(1)';this.style.borderColor='rgba(125,211,252,0.22)';this.style.boxShadow='0 8px 40px rgba(0,0,0,0.4)'">
+          <!-- Photo collage header — mirror layout vs. Ladakh for subtle distinction -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 2fr;grid-template-rows:180px 120px;gap:3px;height:300px">
+            <div style="overflow:hidden"><img src="ravi11.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Spiti water crossing"></div>
+            <div style="overflow:hidden"><img src="ravi14.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Kunzum Pass"></div>
+            <div style="grid-row:span 2;overflow:hidden">
+              <img src="ravi13.jpeg" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s" alt="Kaza valley">
+            </div>
+            <div style="overflow:hidden"><img src="ravi16.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Key Monastery"></div>
+            <div style="overflow:hidden"><img src="ravi6.jpeg" style="width:100%;height:100%;object-fit:cover" alt="Spiti roads"></div>
+          </div>
+          <!-- Info strip -->
+          <div style="padding:24px 28px;background:linear-gradient(135deg,rgba(12,12,12,0.98),rgba(10,18,26,0.98));display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:3px;color:rgba(56,189,248,0.8);text-transform:uppercase;margin-bottom:8px">Trip 02 · Spiti Valley · 8 Days</div>
+              <div style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:#f4f4f4;margin-bottom:6px">The Journey Is the Destination&nbsp;🏞️</div>
+              <div style="font-size:0.85rem;color:#707070;line-height:1.6">Delhi → Manali → Kunzum La → Kaza → Hikkim → Key Monastery</div>
+            </div>
+            <div style="display:flex;gap:24px;flex-shrink:0">
+              <div style="text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#7dd3fc">4,551m</div>
+                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Kunzum</div>
+              </div>
+              <div style="text-align:center">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:500;color:#ffb347">~900km</div>
+                <div style="font-size:0.58rem;letter-spacing:2px;color:#404040;text-transform:uppercase;margin-top:3px">Rode</div>
+              </div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:10px;padding:11px 22px;border-radius:100px;background:linear-gradient(135deg,rgba(56,189,248,0.15),rgba(125,211,252,0.1));border:1px solid rgba(56,189,248,0.35);color:#7dd3fc;font-size:0.8rem;font-weight:700;white-space:nowrap;transition:background 0.2s">
+              🏍️&nbsp; Ride the Route →
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
 
-    <!-- Spiti story cards -->
-    <div style="margin-bottom:20px">
-      <div class="fw-writing-card">
-        <div class="fw-writing-title">No Signal. No People. No Problem.</div>
-        <div class="fw-writing-meta">Spiti Valley · Solo Ride</div>
-        <div class="fw-writing-excerpt">For stretches that lasted hours, there was nothing — no mobile signal, no other vehicles, no signs of human life. Just you, the bike, and 500-metre drops on one side. You stop overthinking things real fast when that's your only option.</div>
-      </div>
-      <div class="fw-writing-card">
-        <div class="fw-writing-title">The Water Crossing That Should Have Ended the Trip</div>
-        <div class="fw-writing-meta">Spiti Valley · River Crossing</div>
-        <div class="fw-writing-excerpt">Spiti has river crossings that aren't on any map. The water is glacial, the current is stronger than it looks, and your bike is not waterproof. We made it across. Barely. There were a few moments where "turning back" felt like the sensible call — but sensible wasn't what we were there for.</div>
-      </div>
-      <div class="fw-writing-card">
-        <div class="fw-writing-title">Midnight. Stuck. Towing. And Still Smiling.</div>
-        <div class="fw-writing-meta">Spiti Valley · Night Ride</div>
-        <div class="fw-writing-excerpt">The bike gave up halfway up a pass after sunset. We towed it in the dark on roads that had no guardrails and barely any width. We reached the guesthouse well past midnight, soaked and exhausted, and had the best chai of our lives. Some of the best trips aren't the ones that go to plan.</div>
-      </div>
-    </div>
 
     <div class="fw-grid-3" style="margin-bottom:60px">
       <div class="fw-card">
