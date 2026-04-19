@@ -7,7 +7,13 @@
 
 <!-- PAGE-PORTAL-TRANSITION: start -->
 <script>
-(function(){ if(sessionStorage.getItem('portalIn')){ document.documentElement.classList.add('portal-pending'); } })();
+(function(){
+  if(sessionStorage.getItem('portalIn')){ document.documentElement.classList.add('portal-pending'); }
+  var t=localStorage.getItem('ravi-theme');
+  if(t==='light'||(t==null&&window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches)){
+    document.documentElement.classList.add('light-mode');
+  }
+})();
 </script>
 <style>
 html.portal-pending{ background:#0a0908 !important; }
@@ -69,6 +75,19 @@ html.portal-pending::before{
 .page-portal.theme-portfolio{ --pp-c1:#ff6b35; --pp-c2:#f7931e; --pp-eye:rgba(247,147,30,0.7); --pp-accent:linear-gradient(135deg,#ff6b35,#f7931e); background:radial-gradient(circle at 50% 50%, #12090a 0%, #070405 70%); }
 .page-portal.theme-ladakh{ --pp-c1:#8ec5fc; --pp-c2:#e0c3fc; --pp-eye:rgba(142,197,252,0.8); --pp-accent:linear-gradient(135deg,#8ec5fc,#e0c3fc,#a8e6ff); background:radial-gradient(circle at 50% 50%, #0a1628 0%, #030810 70%); }
 .page-portal.theme-spiti{ --pp-c1:#ff9a3c; --pp-c2:#c0392b; --pp-eye:rgba(255,154,60,0.8); --pp-accent:linear-gradient(135deg,#ff9a3c,#e67e22,#c0392b); background:radial-gradient(circle at 50% 50%, #18100a 0%, #080402 70%); }
+
+/* ══ LIGHT MODE — page portals ══ */
+html.light-mode.portal-pending{ background:#f5ede0 !important; }
+html.light-mode.portal-pending::before{ background:#f5ede0; }
+html.light-mode .page-portal{ background:#f5ede0; }
+html.light-mode .page-portal.theme-personal{ background:radial-gradient(circle at 50% 50%, #f0e6d4 0%, #e8dcc8 70%); }
+html.light-mode .page-portal.theme-portfolio{ background:radial-gradient(circle at 50% 50%, #f2ede6 0%, #ebe4da 70%); }
+html.light-mode .page-portal.theme-ladakh{ background:radial-gradient(circle at 50% 50%, #e0ecf8 0%, #d4e4f4 70%); }
+html.light-mode .page-portal.theme-spiti{ background:radial-gradient(circle at 50% 50%, #f0ebe2 0%, #e8e0d4 70%); }
+html.light-mode .page-portal .pp-name{ color:#1a1008; }
+html.light-mode .page-portal.theme-ladakh .pp-name{ color:#0d1a28; }
+html.light-mode .page-portal .pp-tagline{ color:rgba(26,16,8,0.5); }
+html.light-mode .page-portal.theme-ladakh .pp-tagline{ color:rgba(13,26,40,0.5); }
 </style>
 <script>
 (function(){
@@ -86,6 +105,23 @@ html.portal-pending::before{
                  + '<div class="pp-text">'+t.eye+'</div>'
                  + '<div class="pp-name">'+t.name+'</div>'
                  + '<div class="pp-tagline">'+t.tag+'</div>';
+    // Apply light-mode inline styles — bulletproof, overrides all CSS
+    var savedTheme=localStorage.getItem('ravi-theme');
+    var isLight=savedTheme==='light'||(savedTheme==null&&window.matchMedia&&window.matchMedia('(prefers-color-scheme:light)').matches);
+    if(isLight||document.documentElement.classList.contains('light-mode')){
+      var lp={
+        personal:{bg:'radial-gradient(circle at 50% 50%, #f0e6d4 0%, #e8dcc8 70%)',txt:'#1a1008',tag:'rgba(26,16,8,0.5)'},
+        portfolio:{bg:'radial-gradient(circle at 50% 50%, #f2ede6 0%, #ebe4da 70%)',txt:'#1a1008',tag:'rgba(26,16,8,0.5)'},
+        ladakh:{bg:'radial-gradient(circle at 50% 50%, #dde8f5 0%, #cfdff0 70%)',txt:'#0d1a28',tag:'rgba(13,26,40,0.5)'},
+        spiti:{bg:'radial-gradient(circle at 50% 50%, #f0ebe2 0%, #e8e0d4 70%)',txt:'#18100a',tag:'rgba(24,16,10,0.5)'}
+      }[key];
+      if(lp){
+        el.style.background=lp.bg;
+        var nm=el.querySelector('.pp-name'); if(nm) nm.style.color=lp.txt;
+        var tg=el.querySelector('.pp-tagline'); if(tg) tg.style.color=lp.tag;
+        var pt=el.querySelector('.pp-text'); if(pt) pt.style.color=lp.tag;
+      }
+    }
     return el;
   }
   var pending = sessionStorage.getItem('portalIn');
@@ -527,6 +563,123 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(125,211,252,0.35);}
   .sc-location{font-size:1.7rem;}
   .sc-photo{width:120px;height:120px;}
 }
+
+/* ══ THEME TOGGLE BUTTON ══ */
+.theme-toggle{
+  width:40px;height:40px;border-radius:50%;
+  background:rgba(255,179,71,0.1);
+  border:1px solid rgba(255,179,71,0.25);
+  color:#ffb347;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  padding:0;flex-shrink:0;
+  transition:background .3s,border-color .3s,transform .25s;
+  position:relative;overflow:hidden;pointer-events:all;
+}
+.theme-toggle:hover{background:rgba(255,179,71,0.2);transform:scale(1.1);}
+.theme-toggle svg{width:17px;height:17px;position:absolute;
+  transition:opacity .35s,transform .45s cubic-bezier(.34,1.56,.64,1);}
+.tt-moon{opacity:1;transform:rotate(0deg) scale(1);}
+.tt-sun{opacity:0;transform:rotate(90deg) scale(.45);}
+html.light-mode .tt-moon{opacity:0;transform:rotate(-90deg) scale(.45);}
+html.light-mode .tt-sun{opacity:1;transform:rotate(0deg) scale(1);}
+/* ══ VIEW TRANSITION RIPPLE ══ */
+@keyframes vt-ripple{
+  from{clip-path:circle(0% at var(--vt-x,calc(100% - 28px)) var(--vt-y,28px));}
+  to{clip-path:circle(150vmax at var(--vt-x,calc(100% - 28px)) var(--vt-y,28px));}
+}
+::view-transition-old(root){animation:none;mix-blend-mode:normal;}
+::view-transition-new(root){
+  animation:vt-ripple .55s cubic-bezier(.4,0,.2,1) both;
+  z-index:10000;mix-blend-mode:normal;
+}
+@media(max-width:768px){.theme-toggle{width:36px;height:36px;}.theme-toggle svg{width:15px;height:15px;}}
+
+/* ══ LIGHT MODE — spiti.html ══ */
+html.light-mode{
+  --bg:#f2ede5;--bg1:#ece5db;--bg2:#e4dbd0;--bg3:#d8cfc3;
+  --ink:#18100a;--ink2:#504035;--ink3:#907a68;
+  --border:rgba(24,16,10,0.08);--border2:rgba(24,16,10,0.15);
+}
+html.light-mode body{background:var(--bg);color:var(--ink);}
+html.light-mode ::-webkit-scrollbar-thumb{background:rgba(120,80,40,0.3);}
+html.light-mode #top-nav{background:linear-gradient(to bottom,rgba(242,237,229,0.92) 0%,transparent 100%);}
+html.light-mode .nav-eye{color:rgba(125,211,252,0.8);}
+html.light-mode .nav-back{background:rgba(242,237,229,0.9);border-color:rgba(24,16,10,0.15);color:var(--ink2);}
+html.light-mode .nav-back:hover{border-color:rgba(125,211,252,0.55);color:#38bdf8;}
+html.light-mode .theme-toggle{background:rgba(24,16,10,0.06);border-color:rgba(24,16,10,0.16);color:var(--ink2);}
+html.light-mode .theme-toggle:hover{background:rgba(24,16,10,0.1);}
+html.light-mode #atmosphere{opacity:0.06;}
+
+/* ══ MOBILE: coordinates badge overflow fix ══ */
+@media(max-width:480px){
+  #loc-badge{ white-space:normal; flex-wrap:wrap; gap:4px 8px; justify-content:center; text-align:center; padding:6px 14px; }
+  #lb-coords{ display:none; }
+  #lb-loc-name{ font-size:.8rem; }
+}
+@media(max-width:768px){
+  #loc-badge{ max-width:calc(100vw - 20px); overflow:hidden; }
+  #lb-coords{ max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+}
+html.light-mode #loc-badge{background:rgba(242,237,229,0.92);border-color:var(--border2);}
+html.light-mode #lb-loc-name{color:var(--ink);}
+html.light-mode #lb-coords{color:var(--ink3);}
+html.light-mode #alt-pill{background:rgba(242,237,229,0.92);border-color:var(--border2);}
+html.light-mode #trip-pill{background:rgba(242,237,229,0.92);border-color:var(--border2);}
+html.light-mode #ap-lab{color:var(--ink3);}
+html.light-mode #ap-tmp{color:var(--ink2);border-top-color:var(--border);}
+html.light-mode .ch-dot{background:var(--ink3);}
+html.light-mode #lightbox{background:rgba(242,237,229,0.96);}
+
+html.light-mode .sc-panel{background:rgba(242,237,229,0.95);border-color:var(--border2);}
+html.light-mode .sc-ch-title{color:var(--ink);}
+html.light-mode .sc-ch-sub{color:var(--ink3);}
+html.light-mode .sc-tag{background:rgba(24,16,10,0.06);color:var(--ink3);}
+html.light-mode #ch-nav{background:rgba(242,237,229,0.92);border-color:var(--border2);}
+html.light-mode .sc-nav-btn{background:rgba(24,16,10,0.06);border-color:var(--border2);color:var(--ink2);}
+html.light-mode .sc-nav-btn:hover{border-color:rgba(125,211,252,0.5);color:#38bdf8;}
+/* ══ SPITI — comprehensive light mode story card fixes ══ */
+html.light-mode #story-card{
+  background:linear-gradient(135deg,rgba(242,237,229,0.92),rgba(235,228,218,0.96));
+  border-color:rgba(24,16,10,0.12);
+  border-left-color:var(--ice);
+  box-shadow:0 20px 60px rgba(0,0,0,0.15),0 0 0 1px rgba(24,16,10,0.06),inset 0 1px 0 rgba(255,255,255,0.6);
+}
+html.light-mode .sc-head{border-bottom-color:rgba(24,16,10,0.08);}
+html.light-mode .sc-head::after{opacity:.5;}
+html.light-mode .sc-meta-sep{color:var(--ink3);}
+html.light-mode .sc-location{color:var(--ink);}
+html.light-mode .sc-subtitle{color:rgba(24,16,10,0.55);}
+html.light-mode .sc-story{color:rgba(24,16,10,0.82);}
+html.light-mode .sc-pull{color:var(--ink);background:linear-gradient(90deg,rgba(125,211,252,0.08),transparent);border-left-color:var(--ice);}
+html.light-mode .sc-photo{border-color:rgba(24,16,10,0.12);}
+html.light-mode .sc-photo:hover{border-color:rgba(125,211,252,0.55);}
+html.light-mode .sc-foot{border-top-color:rgba(24,16,10,0.08);}
+html.light-mode .sc-pd{background:var(--ink3);}
+html.light-mode .sc-stat{background:rgba(125,211,252,0.08);border-color:rgba(125,211,252,0.2);}
+html.light-mode .sc-body::-webkit-scrollbar-thumb{background:rgba(24,16,10,0.2);}
+html.light-mode #scroll-down-btn{background:rgba(242,237,229,0.9);border-color:rgba(125,211,252,0.5);color:var(--ice);}
+html.light-mode .leaflet-tile-pane{filter:brightness(1.0) saturate(1.0);}
+html.light-mode #map-vignette{background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(242,237,229,0.35) 100%);}
+html.light-mode .ou-sub{color:var(--ink2);}
+html.light-mode #outro{background:var(--bg);border-top-color:var(--border);}
+html.light-mode .btn-ghost{background:rgba(0,0,0,0.04);border-color:var(--border2);color:var(--ink2);}
+html.light-mode .btn-ghost:hover{border-color:rgba(0,0,0,0.22);color:var(--ink);}
+html.light-mode #lightbox{background:rgba(0,0,0,0.88);}
+html.light-mode #lb-close{background:rgba(0,0,0,0.12);border-color:rgba(0,0,0,0.18);color:#1a1a1a;}
+html.light-mode #atmosphere{opacity:0.04;}
+html.light-mode #trip-pill{background:rgba(242,237,229,0.94);border-color:var(--border2);}
+html.light-mode #music-player #mp-wrap{background:rgba(242,237,229,0.94);border-color:rgba(24,16,10,0.14);}
+html.light-mode .h-title{color:var(--ink);}
+html.light-mode .h-sub{color:var(--ink2);}
+html.light-mode .h-eye{color:rgba(125,211,252,0.8);}
+html.light-mode .hst-val{color:var(--ice);}
+html.light-mode .hst-lab{color:var(--ink3);}
+html.light-mode .h-cta{background:linear-gradient(135deg,var(--ice3),var(--ice));color:#000;}
+html.light-mode #outro .ou-h{color:var(--ink);}
+html.light-mode .ou-eye{color:rgba(125,211,252,0.75);}
+html.light-mode .ous-val{color:var(--ice);}
+html.light-mode .ous-lab{color:var(--ink3);}
+
 </style>
 </head>
 <body>
@@ -536,7 +689,13 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(125,211,252,0.35);}
 
 <nav id="top-nav">
   <span class="nav-eye">🏔️ Spiti Valley · Trip Log · 2024</span>
+  <div style="display:flex;align-items:center;gap:10px;">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+  <svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+</button>
   <a href="personal.html" class="nav-back" onclick="return pagePortal('personal','personal.html')"><i class="fas fa-arrow-left"></i> Back to Ravi's World</a>
+  </div>
 </nav>
 
 <div id="cur-dot"></div>
@@ -801,7 +960,15 @@ const map = L.map('map',{
   dragging:false,scrollWheelZoom:false,
   doubleClickZoom:false,touchZoom:false,keyboard:false,
 });
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
+var TILE_DARK  = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+var TILE_LIGHT = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+var activeTileLayer = L.tileLayer(
+  document.documentElement.classList.contains('light-mode') ? TILE_LIGHT : TILE_DARK,
+  {maxZoom:19, attribution:''}
+).addTo(map);
+function swapMapTiles(isLight){
+  activeTileLayer.setUrl(isLight ? TILE_LIGHT : TILE_DARK);
+}
 
 /* ── SMOOTH the waypoint list with a Catmull-Rom spline for cleaner lines ── */
 function smoothPath(pts,samples=10){
@@ -1275,5 +1442,44 @@ document.addEventListener('keydown',e=>{
 
 function startJourney(){lenis.scrollTo('#journey-scroll',{offset:10,duration:1.8});}
 </script>
+
+<script>
+/* ── THEME TOGGLE ── */
+(function(){
+  var KEY='ravi-theme', html=document.documentElement;
+  var saved=localStorage.getItem(KEY);
+  if(saved==='light') html.classList.add('light-mode');
+  else if(saved==='dark') { /* stay dark */ }
+  else if(window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches) html.classList.add('light-mode');
+  function doToggle(btn){
+    var r=btn.getBoundingClientRect();
+    html.style.setProperty('--vt-x',(r.left+r.width/2).toFixed(1)+'px');
+    html.style.setProperty('--vt-y',(r.top+r.height/2).toFixed(1)+'px');
+    if(document.startViewTransition){
+      var t=document.startViewTransition(function(){
+        html.classList.toggle('light-mode');
+        localStorage.setItem(KEY,html.classList.contains('light-mode')?'light':'dark');
+      });
+      t.finished.then(function(){
+        if(typeof swapMapTiles==='function') swapMapTiles(html.classList.contains('light-mode'));
+      });
+    } else {
+      html.classList.toggle('light-mode');
+      localStorage.setItem(KEY,html.classList.contains('light-mode')?'light':'dark');
+      if(typeof swapMapTiles==='function') swapMapTiles(html.classList.contains('light-mode'));
+    }
+  }
+  window.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('.theme-toggle').forEach(function(btn){
+      btn.addEventListener('click',function(){ doToggle(this); });
+    });
+    // Sync map tiles with current theme on load
+    if(typeof swapMapTiles==='function'){
+      swapMapTiles(document.documentElement.classList.contains('light-mode'));
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
