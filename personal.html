@@ -405,7 +405,7 @@ a{color:inherit;text-decoration:none;}
 <!-- ══ NAV ══ -->
 <div class="fw-nav">
   <div class="fw-nav-title">Ravi <span>Beyond Code</span></div>
-  <a class="fw-back" href="new_portfolio1.html" onclick="return pagePortal('portfolio','new_portfolio1.html')"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+  <a class="fw-back" href="index.html" onclick="return pagePortal('portfolio','index.html')"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -576,7 +576,7 @@ a{color:inherit;text-decoration:none;}
   <div class="fw-cta-text">Got a route suggestion?<br><span class="warm">Let's talk about it.</span></div>
   <div class="fw-cta-btns">
     <a href="mailto:rvgottumukkala98@gmail.com" class="fw-cta-say-hello"><i class="fas fa-envelope"></i> Say hello</a>
-    <a href="new_portfolio1.html" class="fw-cta-back" onclick="return pagePortal('portfolio','new_portfolio1.html')"><i class="fas fa-code"></i> Back to Portfolio</a>
+    <a href="index.html" class="fw-cta-back" onclick="return pagePortal('portfolio','index.html')"><i class="fas fa-code"></i> Back to Portfolio</a>
   </div>
 </div>
 
@@ -701,9 +701,9 @@ a{color:inherit;text-decoration:none;}
     /* Don't fire during an in-flight portal transition */
     if(document.querySelector('.page-portal')) return;
     if(typeof window.pagePortal === 'function'){
-      window.pagePortal('portfolio','new_portfolio1.html');
+      window.pagePortal('portfolio','index.html');
     } else {
-      window.location.href = 'new_portfolio1.html';
+      window.location.href = 'index.html';
     }
   });
 })();
