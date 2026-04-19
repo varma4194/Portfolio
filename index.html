@@ -3279,9 +3279,13 @@ gsap.ticker.lagSmoothing(0);
   requestAnimationFrame(draw);
   window.addEventListener('resize', resize);
 
-  /* If user already entered this session (e.g. came back from personal page) — auto-dismiss */
+  /* Return visit — auto-dismiss after globe fully renders (globe entrance ends at ~1925ms) */
   if(sessionStorage.getItem('ravi-entered')){
-    setTimeout(function(){ _dismissLoader(false); }, 1400);
+    // Hide the loading status pill immediately — returning user doesn't need fake messages
+    var sc = document.getElementById('lstatus');
+    if(sc) sc.style.display = 'none';
+    // Dismiss 400ms after globe is fully in (TOTAL=3500 × GLOBE_IN=0.55 = 1925ms)
+    setTimeout(function(){ _dismissLoader(false); }, 2400);
   } else {
     /* First visit — show enter button after loading sequence completes */
     setTimeout(()=>{
