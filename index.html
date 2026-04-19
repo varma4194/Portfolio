@@ -3279,20 +3279,26 @@ gsap.ticker.lagSmoothing(0);
   requestAnimationFrame(draw);
   window.addEventListener('resize', resize);
 
-  /* Show enter button after loading sequence completes (status pill fades at 3200ms) */
-  setTimeout(()=>{
-    var el=document.getElementById('l-enter');
-    if(el) el.classList.add('vis');
-  }, 3400);
+  /* If user already entered this session (e.g. came back from personal page) — auto-dismiss */
+  if(sessionStorage.getItem('ravi-entered')){
+    setTimeout(function(){ _dismissLoader(false); }, 1400);
+  } else {
+    /* First visit — show enter button after loading sequence completes */
+    setTimeout(()=>{
+      var el=document.getElementById('l-enter');
+      if(el) el.classList.add('vis');
+    }, 3400);
+  }
 
   /* No auto-dismiss — loader waits until the user explicitly clicks ENTER */
 })();
 
-/* Called when user clicks the enter prompt OR auto at end */
+/* Called when user clicks the enter prompt */
 window._siteEntered = false;
 window.enterSite = function(){
   if(window._siteEntered) return;
   window._siteEntered = true;
+  sessionStorage.setItem('ravi-entered','1'); // remember within this session
   _dismissLoader(true);   // true = play sound
 };
 function _dismissLoader(withSound){
@@ -3926,4 +3932,3 @@ window.copyEmail = function(btn){
 
 </body>
 </html>
-
