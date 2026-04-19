@@ -485,7 +485,7 @@ html.light-mode .le-tap-hint { color:rgba(140,70,10,0.38); }
 
 /* ══ LIGHT MODE NUDGE TOAST ══ */
 #theme-nudge {
-  position:fixed; bottom:28px; right:28px; z-index:9500;
+  position:fixed; bottom:88px; right:28px; z-index:9500;
   display:flex; align-items:center; gap:12px;
   padding:14px 16px 14px 18px;
   background:rgba(14,10,6,0.92);
@@ -3316,25 +3316,23 @@ function _dismissLoader(withSound){
   }, 500);
 }
 
-/* ── Light mode nudge — appears 4s after entering, if no preference set ── */
+/* ── Light mode nudge — appears every page load, auto-dismisses after 7s ── */
 function _initThemeNudge(){
-  // Don't show if already in light mode or user has explicitly set a theme
+  // Only skip if user is already in light mode or has explicitly set a theme
   if(localStorage.getItem('ravi-theme')) return;
   if(document.documentElement.classList.contains('light-mode')) return;
-  if(sessionStorage.getItem('ravi-nudge-seen')) return;
   var nudge = document.getElementById('theme-nudge');
   if(!nudge) return;
-  var _nudgeTimer = setTimeout(function(){
+  setTimeout(function(){
+    nudge.classList.remove('out');
     nudge.classList.add('vis');
-    // Auto-dismiss after 9s
-    setTimeout(function(){ if(nudge.classList.contains('vis')) nudgeDismiss(); }, 9000);
-  }, 4000);
+    setTimeout(function(){ if(nudge.classList.contains('vis')) nudgeDismiss(); }, 7000);
+  }, 3500);
 }
 window.nudgeDismiss = function(e){
   if(e) e.stopPropagation();
   var nudge = document.getElementById('theme-nudge');
   if(nudge){ nudge.classList.remove('vis'); nudge.classList.add('out'); }
-  sessionStorage.setItem('ravi-nudge-seen','1');
 };
 window.nudgeSwitch = function(e){
   if(e) e.stopPropagation();
