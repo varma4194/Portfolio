@@ -242,8 +242,22 @@ body.cg #cur-ring{width:50px;height:50px;border-color:rgba(125,211,252,0.35);}
 #lightbox.open{opacity:1;pointer-events:all;}
 #lightbox img{max-width:90vw;max-height:88vh;border-radius:16px;object-fit:contain;box-shadow:0 40px 100px rgba(0,0,0,0.7);transform:scale(0.94);transition:transform .35s var(--ease);}
 #lightbox.open img{transform:scale(1);}
-#lb-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);color:white;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;}
-#lb-close:hover{background:rgba(255,107,53,0.35);}
+#lb-close{
+  position:fixed;
+  top:max(20px, env(safe-area-inset-top, 0px) + 16px);
+  right:max(20px, env(safe-area-inset-right, 0px) + 16px);
+  z-index:99000;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);
+  color:rgba(255,255,255,0.92);font-size:1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .2s;
+}
+#lb-close:hover{background:rgba(255,107,53,0.40);transform:scale(1.08);}
+@media(max-width:640px){
+  #lb-close{width:40px;height:40px;font-size:0.88rem;}
+  #lightbox{padding:16px;}
+}
 
 /* ══ NAV ══ */
 #top-nav{position:fixed;top:0;left:0;right:0;z-index:8000;padding:20px 40px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;background:linear-gradient(to bottom,rgba(7,7,7,0.85) 0%,transparent 100%);}
@@ -665,7 +679,7 @@ html.light-mode #outro{background:var(--bg);border-top-color:var(--border);}
 html.light-mode .btn-ghost{background:rgba(0,0,0,0.04);border-color:var(--border2);color:var(--ink2);}
 html.light-mode .btn-ghost:hover{border-color:rgba(0,0,0,0.22);color:var(--ink);}
 html.light-mode #lightbox{background:rgba(0,0,0,0.88);}
-html.light-mode #lb-close{background:rgba(0,0,0,0.12);border-color:rgba(0,0,0,0.18);color:#1a1a1a;}
+html.light-mode #lb-close{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.28);color:rgba(255,255,255,0.92);}
 html.light-mode #atmosphere{opacity:0.04;}
 html.light-mode #trip-pill{background:rgba(242,237,229,0.94);border-color:var(--border2);}
 html.light-mode #music-player #mp-wrap{background:rgba(242,237,229,0.94);border-color:rgba(24,16,10,0.14);}
