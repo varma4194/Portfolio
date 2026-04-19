@@ -538,8 +538,8 @@ html.light-mode .le-tap-hint { color:rgba(140,70,10,0.38); }
 @media(max-width:640px){
   #theme-nudge { bottom:18px; right:14px; left:14px; max-width:none; }
 }
-/* Don't show if already in light mode */
-html.light-mode #theme-nudge { display:none !important; }
+/* Light mode — dark toast still looks great as contrast, just keep it */
+html.light-mode #theme-nudge { display:flex; }
 .l-bar-f {
   height:100%; width:0;
   background:linear-gradient(to right, transparent, var(--o), var(--o3), transparent);
@@ -3316,13 +3316,26 @@ function _dismissLoader(withSound){
   }, 500);
 }
 
-/* ── Light mode nudge — appears every page load, auto-dismisses after 7s ── */
+/* ── Theme nudge — shows every load, adapts to current mode ── */
 function _initThemeNudge(){
-  // Only skip if user is already in light mode or has explicitly set a theme
-  if(localStorage.getItem('ravi-theme')) return;
-  if(document.documentElement.classList.contains('light-mode')) return;
   var nudge = document.getElementById('theme-nudge');
   if(!nudge) return;
+  var isLight = document.documentElement.classList.contains('light-mode');
+
+  // Update icon, title, sub based on current mode
+  var icon  = nudge.querySelector('.tn-icon');
+  var title = nudge.querySelector('.tn-title');
+  var sub   = nudge.querySelector('.tn-sub');
+  if(isLight){
+    if(icon)  icon.textContent  = '◑';
+    if(title) title.textContent = 'Try Dark Mode';
+    if(sub)   sub.textContent   = 'designed for both themes';
+  } else {
+    if(icon)  icon.textContent  = '◐';
+    if(title) title.textContent = 'Try Light Mode';
+    if(sub)   sub.textContent   = 'designed for both themes';
+  }
+
   setTimeout(function(){
     nudge.classList.remove('out');
     nudge.classList.add('vis');
@@ -3336,9 +3349,14 @@ window.nudgeDismiss = function(e){
 };
 window.nudgeSwitch = function(e){
   if(e) e.stopPropagation();
-  document.documentElement.classList.add('light-mode');
-  document.documentElement.classList.remove('dark-mode');
-  localStorage.setItem('ravi-theme','light');
+  var isLight = document.documentElement.classList.contains('light-mode');
+  if(isLight){
+    document.documentElement.classList.remove('light-mode');
+    localStorage.setItem('ravi-theme','dark');
+  } else {
+    document.documentElement.classList.add('light-mode');
+    localStorage.setItem('ravi-theme','light');
+  }
   nudgeDismiss();
 };
 
