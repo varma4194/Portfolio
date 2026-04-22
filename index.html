@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ravi Varma Gottumukkala — Full Stack Engineer</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
 <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CP7H4RMDGR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -163,6 +166,9 @@ html.light-mode .page-portal.theme-ladakh .pp-tagline{ color:rgba(13,26,40,0.5);
     return false;
   };
 })();
+// Always start at the top — disable browser scroll restoration
+if('scrollRestoration' in history) history.scrollRestoration='manual';
+window.scrollTo(0,0);
 </script>
 <!-- PAGE-PORTAL-TRANSITION: end -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -549,6 +555,12 @@ html.light-mode .le-tap-hint { color:rgba(140,70,10,0.38); }
 }
 /* Light mode — dark toast still looks great as contrast, just keep it */
 html.light-mode #theme-nudge { display:flex; }
+
+/* Kafka icon SVG is black — invert it in dark mode so it's visible */
+html:not(.light-mode) .tm-pill img[src*="apachekafka"],
+html:not(.light-mode) .ab-exp-pill img[src*="apachekafka"] {
+  filter: invert(1) brightness(1.1);
+}
 .l-bar-f {
   height:100%; width:0;
   background:linear-gradient(to right, transparent, var(--o), var(--o3), transparent);
@@ -1783,7 +1795,8 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
   opacity:0; animation: none;
 }
 #term-btn:hover { background:rgba(255,107,53,0.18); color:var(--o); border-color:rgba(255,107,53,0.35); box-shadow:0 4px 32px rgba(255,107,53,0.18), inset 0 1px 0 rgba(255,255,255,0.06); transform:translateY(-1px); }
-#term-btn .tk { display:none; }
+#term-btn .tk { display:inline-flex; align-items:center; margin-left:2px; }
+#term-btn .tk kbd { padding:1px 6px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-bottom-width:2px; border-radius:4px; font-size:0.65rem; color:var(--ink3); font-family:'JetBrains Mono',monospace; line-height:1.6; }
 /* FIX 3: command search shortcut also bottom-left (just above terminal button) */
 #cmd-shortcut-btn {
   position:fixed; bottom:24px; left:24px; z-index:600;
@@ -1813,7 +1826,7 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
   }
   #term-btn{ right:14px; }
   #cmd-shortcut-btn{ left:14px; }
-  #term-btn .term-label, #cmd-shortcut-btn .cmd-label{ display:none; }
+  #term-btn .term-label, #term-btn .tk, #cmd-shortcut-btn .cmd-label{ display:none; }
   #cmd-shortcut-btn kbd{ display:none; }
   #term-btn i, #cmd-shortcut-btn i{ font-size:0.82rem; margin:0; }
 }
@@ -1837,7 +1850,7 @@ footer { padding:36px 6%; background:var(--bg); border-top:1px solid var(--borde
 .term-title { font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--ink3); }
 .term-x { background:none; border:none; color:var(--ink3); cursor:pointer; font-size:0.85rem; padding:3px 7px; transition:all 0.2s; border-radius:5px; }
 .term-x:hover { color:var(--ink); background:rgba(255,255,255,0.07); }
-#term-out { font-family:'JetBrains Mono',monospace; font-size:0.78rem; line-height:1.78; color:var(--ink2); padding:18px; min-height:180px; max-height:300px; overflow-y:auto; }
+#term-out { font-family:'JetBrains Mono',monospace; font-size:0.78rem; line-height:1.78; color:var(--ink2); padding:18px; min-height:180px; max-height:300px; overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain; }
 #term-out .ok{color:#64ffda;} #term-out .hi{color:var(--o);} #term-out .dm{color:var(--ink3);} #term-out .er{color:#ff6b6b;}
 .term-row { display:flex; align-items:center; gap:9px; padding:12px 18px; border-top:1px solid rgba(255,255,255,0.05); }
 .term-row .tp { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--o); }
@@ -2431,6 +2444,21 @@ html.light-mode #cmd-list::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.18);}
 html.light-mode #term-backdrop{background:rgba(200,190,175,0.45);}
 html.light-mode #terminal{background:rgba(245,240,232,0.97);border-color:rgba(0,0,0,0.12);box-shadow:0 32px 80px rgba(0,0,0,0.15);}
 html.light-mode .term-head{background:rgba(0,0,0,0.03);border-bottom-color:rgba(0,0,0,0.08);}
+html.light-mode .term-title{color:rgba(60,40,20,0.55);}
+html.light-mode .term-x{color:rgba(60,40,20,0.45);}
+html.light-mode .term-x:hover{color:rgba(60,40,20,0.85);background:rgba(0,0,0,0.06);}
+html.light-mode .term-row{border-top-color:rgba(0,0,0,0.08);}
+html.light-mode .term-row .tp{color:var(--o);}
+html.light-mode #term-input{color:rgba(30,20,10,0.9);}
+html.light-mode #term-input::placeholder{color:rgba(80,60,40,0.4);}
+/* Terminal output text — readable on cream background */
+html.light-mode #term-out{color:rgba(40,28,16,0.85);}
+html.light-mode #term-out .ok{color:#1a7a4a;}   /* teal→dark green */
+html.light-mode #term-out .hi{color:#c94a00;}   /* orange→dark orange */
+html.light-mode #term-out .dm{color:rgba(80,60,40,0.55);}
+html.light-mode #term-out .er{color:#c0392b;}   /* keep red, just slightly deeper */
+/* Shortcut kbd badge in light mode */
+html.light-mode #term-btn .tk kbd{background:rgba(0,0,0,0.06);border-color:rgba(0,0,0,0.18);color:rgba(80,60,40,0.65);}
 /* About section */
 html.light-mode .ab-card{background:var(--bg2);border-color:var(--border);}
 html.light-mode .ab-exp-pill{background:rgba(0,0,0,0.03);border-color:var(--border2);}
@@ -2810,13 +2838,13 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
   <div class="wrap">
     <div class="eyebrow rv">Experience</div>
     <div class="sec-title rv">The <span class="gr">Journey</span> So Far</div>
-    <p class="sec-sub rv">From TCS to Equinix — building real systems, shipping real products.</p>
+    <p class="sec-sub rv">Five years building real systems, shipping real products.</p>
     <div class="tl-zigzag" id="tl-wrap">
       <div id="tl-line"></div>
       <div id="tl-dot"></div>
       <div class="ti">
         <div class="tdot"></div>
-        <div class="tdate">MAR 2026 — PRESENT &nbsp;<span style="background:rgba(34,197,94,0.12);color:#22c55e;font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:2px 8px;border-radius:100px;border:1px solid rgba(34,197,94,0.25);">Full-Time</span></div>
+        <div class="tdate">MAR 2026 — PRESENT</div>
         <div class="trole"><span class="gr">Senior Associate Engineer</span></div>
         <div class="tco">Equinix <span class="tm">· Individual Contributor · San Jose, CA</span></div>
         <p class="tdesc">Converted to full-time as a Senior Associate Engineer — Individual Contributor on the <strong style="color:var(--ink)">Global Network Console</strong> team. Collaborate with cross-functional teams to design and implement solutions for reserving and provisioning Fabric Virtual Connections (VCs). Leading the design of a distributed locking mechanism using Redis to eliminate race conditions in concurrent VC provisioning workflows, ensuring consistency and reliability at high throughput.</p>
@@ -2827,8 +2855,8 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
         <div class="tdate">FEB 2025 — MAR 2026 &nbsp;<span style="background:rgba(255,107,53,0.1);color:var(--o);font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:2px 8px;border-radius:100px;border:1px solid rgba(255,107,53,0.2);">Contract</span></div>
         <div class="trole"><span class="gr">Full Stack Engineer</span></div>
         <div class="tco">Equinix <span class="tm">· via Amiseq · San Jose, CA</span></div>
-        <p class="tdesc">Owned backend services for core network provisioning — Java, Spring Boot, REST APIs at scale. Built Spring Batch jobs handling millions of records. Architected a configurable validation engine that cut processing errors significantly. Event-driven async with Kafka &amp; RabbitMQ. Temporal Workflows for product provisioning with retry/failure handling. Redis caching and Elasticsearch query optimization for latency reduction.</p>
-        <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Spring Batch</span><span class="ttag">Kafka</span><span class="ttag">RabbitMQ</span><span class="ttag">Temporal</span><span class="ttag">Redis</span><span class="ttag">Elasticsearch</span></div>
+        <p class="tdesc">Owned backend services for core network provisioning — Java, Spring Boot, REST APIs at scale. Built Spring Batch jobs handling millions of records. Architected a configurable validation engine that cut processing errors significantly. Event-driven async with Kafka &amp; RabbitMQ. Temporal Workflows for product provisioning with retry/failure handling. Redis caching and Elasticsearch query optimization for latency reduction. Built Grafana dashboards surfacing API traffic patterns and granular telemetry across critical provisioning touch points — giving the team real-time visibility into system health, latency spikes, and failure hotspots.</p>
+        <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Spring Batch</span><span class="ttag">Kafka</span><span class="ttag">RabbitMQ</span><span class="ttag">Temporal</span><span class="ttag">Redis</span><span class="ttag">Elasticsearch</span><span class="ttag">Grafana</span></div>
       </div>
       <div class="ti">
         <div class="tdot"></div>
@@ -2845,6 +2873,14 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
         <div class="tco">Tata Consultancy Services <span class="tm">· India</span></div>
         <p class="tdesc">Led the full invoicing application — Angular + Spring Boot. Custom auditing with Hibernate/JPA and PL/SQL on Oracle, improved transaction efficiency 30–50%. Kafka microservices, ReactJS UI, automated CI/CD with Gradle and Jenkins.</p>
         <div class="ttags"><span class="ttag">Angular</span><span class="ttag">ReactJS</span><span class="ttag">Spring Boot</span><span class="ttag">Kafka</span><span class="ttag">Oracle</span><span class="ttag">Hibernate/JPA</span><span class="ttag">Jenkins</span><span class="ttag">Gradle</span></div>
+      </div>
+      <div class="ti">
+        <div class="tdot"></div>
+        <div class="tdate">APR 2020 — OCT 2020</div>
+        <div class="trole"><span class="gr">Software Engineer</span></div>
+        <div class="tco">IT Services Company <span class="tm">· India &nbsp;·&nbsp; Start of Career</span></div>
+        <p class="tdesc">First professional role — got hands dirty building Java-based backend modules and REST APIs as part of an enterprise application team. Worked across microservices, picked up Spring framework fundamentals, and learned what production-grade code actually looks like under real deadlines.</p>
+        <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring</span><span class="ttag">REST APIs</span><span class="ttag">Microservices</span><span class="ttag">Maven</span></div>
       </div>
     </div>
   </div>
@@ -2877,7 +2913,7 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
           <p class="proj-desc">Built at a hackathon at Equinix. A VS Code extension that statically analyzes HTML/JSX code in real-time and flags WCAG accessibility violations — missing alt text, poor color contrast, missing ARIA labels — with inline diagnostics and one-click auto-fixes. Helps developers ship accessible UIs without leaving their editor.</p>
           <div class="ttags"><span class="ttag">TypeScript</span><span class="ttag">VS Code API</span><span class="ttag">AST Parsing</span><span class="ttag">WCAG</span><span class="ttag">Accessibility</span><span class="ttag">Hackathon</span></div>
         </div>
-        <div class="proj-lks"><a href="#" class="proj-btn"><i class="fab fa-github"></i></a><a href="#" class="proj-btn"><i class="fas fa-arrow-up-right-from-square"></i></a></div>
+        <div class="proj-lks"><a href="https://github.com/varma4194/accesslens" target="_blank" class="proj-btn"><i class="fab fa-github"></i></a></div>
       </div>
       <div class="proj-item rv" style="--d:.08s">
         <div class="proj-year">2025</div>
@@ -2886,7 +2922,7 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
           <p class="proj-desc">An autonomous multi-agent system that performs intelligent code review as a GitHub Action. The orchestrator agent breaks pull requests into chunks, delegates to specialized sub-agents (security scanner, performance analyzer, test coverage assessor), and synthesizes a structured report with prioritized recommendations — all before human review.</p>
           <div class="ttags"><span class="ttag">Python</span><span class="ttag">LangGraph</span><span class="ttag">OpenAI</span><span class="ttag">GitHub Actions</span><span class="ttag">Multi-Agent</span><span class="ttag">RAG</span></div>
         </div>
-        <div class="proj-lks"><a href="#" class="proj-btn"><i class="fab fa-github"></i></a><a href="#" class="proj-btn"><i class="fas fa-arrow-up-right-from-square"></i></a></div>
+        <div class="proj-lks"><a href="https://github.com/varma4194/codeguard" target="_blank" class="proj-btn"><i class="fab fa-github"></i></a></div>
       </div>
       <div class="proj-item rv" style="--d:.12s">
         <div class="proj-year">2024</div>
@@ -2898,13 +2934,40 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
         <div class="proj-lks"><a href="#" class="proj-btn"><i class="fab fa-github"></i></a><a href="#" class="proj-btn"><i class="fas fa-arrow-up-right-from-square"></i></a></div>
       </div>
       <div class="proj-item rv" style="--d:.16s">
-        <div class="proj-year">2023</div>
+        <div class="proj-year">2026</div>
         <div>
-          <div class="proj-title">Full-Stack E-Commerce Platform</div>
-          <p class="proj-desc">End-to-end commerce platform with Angular + Spring Boot, Elasticsearch-powered product search with auto-complete and faceted filtering. AWS infra: S3, CloudFront, Route 53, EC2, ALB, VPC. Fully automated CI/CD via GitHub Actions with zero-downtime deployments.</p>
-          <div class="ttags"><span class="ttag">Angular</span><span class="ttag">Spring Boot</span><span class="ttag">Elasticsearch</span><span class="ttag">AWS S3</span><span class="ttag">CloudFront</span><span class="ttag">GitHub Actions</span></div>
+          <div class="proj-title">Spring Boot Rate Limiter</div>
+          <p class="proj-desc">A drop-in rate limiting library for Spring Boot. Add a single <code>@RateLimit</code> annotation to any endpoint and it enforces per-user or per-IP request limits using a Redis sliding window counter. No config headaches — works out of the box and handles bursts cleanly.</p>
+          <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Redis</span><span class="ttag">AOP</span><span class="ttag">Open Source</span></div>
         </div>
-        <div class="proj-lks"><a href="#" class="proj-btn"><i class="fab fa-github"></i></a><a href="#" class="proj-btn"><i class="fas fa-arrow-up-right-from-square"></i></a></div>
+        <div class="proj-lks"><a href="https://github.com/varma4194/spring-rate-limiter" target="_blank" class="proj-btn"><i class="fab fa-github"></i></a></div>
+      </div>
+      <div class="proj-item rv" style="--d:.20s">
+        <div class="proj-year">2026</div>
+        <div>
+          <div class="proj-title">Kafka DLQ Monitor</div>
+          <p class="proj-desc">A lightweight Spring Boot app for keeping an eye on Kafka dead letter topics. Failed messages show up in a simple web UI — you can see the error, retry the message, or discard it. Built out of a real pain point: DLT messages were piling up with no easy way to inspect or reprocess them without writing ad-hoc consumers.</p>
+          <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Kafka</span><span class="ttag">Kafka AdminClient</span><span class="ttag">Vanilla JS</span></div>
+        </div>
+        <div class="proj-lks"><a href="https://github.com/varma4194/kafka-dlq-monitor" target="_blank" class="proj-btn"><i class="fab fa-github"></i></a></div>
+      </div>
+      <div class="proj-item rv" style="--d:.24s">
+        <div class="proj-year">2026</div>
+        <div>
+          <div class="proj-title">Spring Batch Job Monitor</div>
+          <p class="proj-desc">A small dashboard for Spring Batch jobs. Reads straight from Batch's metadata tables and shows execution history, step-level status, duration, and exit codes — all in one page. Useful when log-diving isn't cutting it anymore and you want a quick overview of what ran and what didn't.</p>
+          <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Spring Batch</span><span class="ttag">REST API</span><span class="ttag">Vanilla JS</span></div>
+        </div>
+        <div class="proj-lks"><a href="https://github.com/varma4194/spring-batch-monitor" target="_blank" class="proj-btn"><i class="fab fa-github"></i></a></div>
+      </div>
+      <div class="proj-item rv" style="--d:.28s">
+        <div class="proj-year">2026</div>
+        <div>
+          <div class="proj-title">Feature Flags for Spring Boot</div>
+          <p class="proj-desc">Lightweight feature flag library. Annotate any Spring bean method with <code>@FeatureFlag("flag-name")</code> and toggle it on or off from Redis or a config file — no redeploy needed. Useful for safely rolling out a risky change or killing a broken feature path in production without waking everyone up.</p>
+          <div class="ttags"><span class="ttag">Java</span><span class="ttag">Spring Boot</span><span class="ttag">Redis</span><span class="ttag">AOP</span><span class="ttag">Open Source</span></div>
+        </div>
+        <div class="proj-lks"><a href="https://github.com/varma4194/feature-flag-spring" target="_blank" class="proj-btn"><i class="fab fa-github"></i></a></div>
       </div>
     </div>
   </div>
@@ -3044,7 +3107,7 @@ html:not(.light-mode) #cmd-shortcut-btn:not(:hover){
 
 <!-- Terminal -->
 <div id="term-backdrop" onclick="toggleTerm()"></div>
-<button id="term-btn" onclick="toggleTerm()"><i class="fas fa-terminal"></i><span class="term-label">&nbsp;Terminal</span></button>
+<button id="term-btn" onclick="toggleTerm()"><i class="fas fa-terminal"></i><span class="term-label">&nbsp;Terminal</span><span class="tk"><kbd>`</kbd></span></button>
 <!-- FIX 3: command search bottom-left -->
 <button id="cmd-shortcut-btn" onclick="openCmd()"><i class="fas fa-search"></i><span class="cmd-label">&nbsp;Search &nbsp;<kbd>⌘K</kbd></span></button>
 <div id="terminal">
@@ -3493,7 +3556,7 @@ document.documentElement.style.overflow='hidden';
 
 /* ═══════════ TYPEWRITER ═══════════ */
 (function(){
-  const words=['Full Stack Engineer','Backend Architect','Cloud Engineer','React Developer','Problem Solver'];
+  const words=['Full Stack Engineer','Backend Architect','React Developer','Problem Solver'];
   const el=document.getElementById('hero-role');
   let wi=0,ci=0,typing=true;
   function step(){
@@ -3507,8 +3570,8 @@ document.documentElement.style.overflow='hidden';
 
 /* ═══════════ RIBBON MARQUEES ═══════════ */
 (function(){
-  const r1=['Full Stack Engineer','Cloud Native Builder','Problem Solver','Performance Optimizer','Microservices Architect','API Designer','AWS Specialist','Open Source Contributor'];
-  const r2=['Java Champion','Spring Boot Expert','React Developer','Kafka Integrator','5+ Years Experience','2× AWS Certified','Redis Distributed Locking','Hackathon Winner'];
+  const r1=['Full Stack Engineer','Problem Solver','Performance Optimizer','Microservices Architect','API Designer','Open Source Contributor'];
+  const r2=['Spring Boot Expert','React Developer','Kafka Integrator','5+ Years Experience','2× AWS Certified','Distributed Systems','Hackathon Winner'];
   function buildRib(id,items){
     const row=document.getElementById(id);
     if(!row)return;
@@ -3544,11 +3607,8 @@ document.documentElement.style.overflow='hidden';
     {n:'Jenkins',   img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg',f:415},
     {n:'Git',       img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',f:392},
     {n:'MySQL',     img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',f:349},
-    {n:'PostgreSQL',img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',f:330},
-    {n:'MongoDB',   img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',f:294},
     {n:'DynamoDB',  img:'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dynamodb/dynamodb-original.svg',f:262},
     {n:'GCP',       img:'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg',f:294},
-    {n:'Terraform', img:'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/terraform/terraform-original.svg',f:330},
     {n:'Grafana',   img:'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg',f:349},
     {n:'Postman',   img:'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg',f:392},
   ];
@@ -3765,32 +3825,83 @@ window.closeMob=()=>document.getElementById('mob-menu').classList.remove('open')
   const term=document.getElementById('terminal'),out=document.getElementById('term-out'),inp=document.getElementById('term-input');
   let open=false,hist=[],hi=-1;
   const cmds={
-    help:()=>['<span class="ok">Commands:</span>','  <span class="hi">about</span>     intro','  <span class="hi">skills</span>    tech stack','  <span class="hi">work</span>      experience','  <span class="hi">contact</span>   reach me','  <span class="hi">resume</span>    open PDF','  <span class="hi">clear</span>     wipe screen','<span class="dm">press ` to toggle this terminal</span>'],
-    about:()=>['<span class="hi">Ravi Varma Gottumukkala</span>','Full Stack Engineer · 5+ years','Full-Time @ Equinix · San Jose, CA','MS CS — UMBC · 2× AWS Certified'],
-    skills:()=>['<span class="hi">Stack:</span>','  backend   Java, Spring Boot, Spring Batch','  frontend  React, Angular, Node.js','  cloud     AWS (EKS,ECS,Lambda,S3), K8s','  data      Kafka, RabbitMQ, Redis, ES','  devops    Jenkins, GitHub Actions'],
-    work:()=>['<span class="hi">Career:</span>','  2026–now   Full Stack (FTE) @ Equinix','  2025–2026  Full Stack (contract) @ Equinix','  2023–2025  App Dev    @ UMBC','  2020–2022  App Dev    @ TCS'],
-    contact:()=>['<span class="hi">Contact:</span>','  email  rvgottumukkala98@gmail.com','  phone  +1 (667) 464-8539','  li     linkedin.com/in/ravi-varma-g'],
-    resume:()=>{window.open('Resume_eqx_2.pdf','_blank');return['<span class="ok">Opening…</span>']},
-    clear:()=>{out.innerHTML='';return null},
-    ls:()=>['hero  about  skills  experience  projects  contact'],
+    help:()=>['<span class="ok">Available commands:</span>','','  <span class="hi">about</span>      who I am','  <span class="hi">skills</span>     tech stack','  <span class="hi">work</span>       experience timeline','  <span class="hi">projects</span>   things I built','  <span class="hi">contact</span>    reach me','  <span class="hi">resume</span>     open PDF','  <span class="hi">github</span>     open GitHub profile','  <span class="hi">linkedin</span>   open LinkedIn','  <span class="hi">blog</span>       personal stories &amp; rides','  <span class="hi">theme</span>      toggle dark/light mode','  <span class="hi">uptime</span>     how long this page has been open','  <span class="hi">ping</span>       latency check 😄','  <span class="hi">coffee</span>     important system info','  <span class="hi">sudo</span>       try it...','  <span class="hi">open &lt;section&gt;</span>  jump to a section','  <span class="hi">clear</span>      wipe screen','','<span class="dm">press ` to toggle · Ctrl+K for command palette</span>'],
+    about:()=>['<span class="hi">Ravi Varma Gottumukkala</span>','Full Stack Engineer · 5+ years','Full-Time @ Equinix · San Jose, CA','MS CS — UMBC · 2× AWS Certified','','Coffee-fueled. Kafka-brained. Occasionally rides motorcycles into the Himalayas.'],
+    skills:()=>['<span class="hi">Stack:</span>','  backend   Java, Spring Boot, Spring Batch','  frontend  React, Angular, Node.js','  cloud     AWS (EKS, ECS, Lambda, S3), K8s','  data      Kafka, RabbitMQ, Redis, Elasticsearch','  devops    Jenkins, GitHub Actions, Grafana','  tools     Temporal, Docker, Git'],
+    work:()=>['<span class="hi">Career:</span>','  2026–now   Full Stack (FTE)      @ Equinix','  2025–2026  Full Stack (contract)  @ Equinix','  2023–2025  Application Dev        @ UMBC','  2020–2022  Application Dev        @ TCS','  2020       Software Engineer      @ IT Services Co.','','<span class="dm">type `open experience` to jump there</span>'],
+    projects:()=>['<span class="hi">Things I Built:</span>','  — Cross-connect ordering engine (Spring Batch, millions of records)','  — Configurable validation engine for network provisioning','  — Event-driven async pipeline (Kafka, RabbitMQ, Temporal)','  — Spring Boot Rate Limiter  (Redis, @RateLimit annotation)','  — Kafka DLQ Monitor  (inspect + retry dead letter messages)','  — Portfolio v4 (this one — yes, it has a terminal)','','<span class="dm">type `open projects` to see them all</span>'],
+    contact:()=>['<span class="hi">Get in touch:</span>','  email   rvgottumukkala98@gmail.com','  phone   +1 (667) 464-8539','  github  github.com/rvgottumukkala','  li      linkedin.com/in/ravi-varma-g','','<span class="dm">type `open contact` to scroll there</span>'],
+    resume:()=>{window.open('Resume_eqx_2.pdf','_blank');return['<span class="ok">✓ Opening resume in new tab…</span>']},
+    github:()=>{window.open('https://github.com/rvgottumukkala','_blank');return['<span class="ok">✓ Opening GitHub…</span>']},
+    linkedin:()=>{window.open('https://linkedin.com/in/ravi-varma-g','_blank');return['<span class="ok">✓ Opening LinkedIn…</span>']},
+    blog:()=>{window.location.href='personal.html';return['<span class="ok">→ Heading to personal page…</span>']},
+    theme:()=>{document.documentElement.classList.toggle('light-mode');const lm=document.documentElement.classList.contains('light-mode');localStorage.setItem('theme',lm?'light':'dark');return[`<span class="ok">✓ Switched to ${lm?'light':'dark'} mode</span>`]},
+    open:(arg)=>{
+      const map={hero:'#hero',about:'#about',skills:'#skills',experience:'#experience',projects:'#projects',contact:'#contact'};
+      const target=map[arg];
+      if(target){const el=document.querySelector(target);if(el){el.scrollIntoView({behavior:'smooth'});return[`<span class="ok">✓ Jumping to #${arg}…</span>`];}};
+      return[`<span class="er">Unknown section: ${arg}</span>`,'  try: hero, about, skills, experience, projects, contact'];
+    },
+    uptime:()=>{const s=Math.floor((Date.now()-window._pageLoadTime)/1000);const m=Math.floor(s/60);const sec=s%60;return[`<span class="hi">Page uptime:</span> ${m}m ${sec}s`,"You've been here a while. I respect that."]},
+    ping:()=>['PING ravi.dev','64 bytes from ravi.dev: icmp_seq=1 ttl=64 time=0.042ms','64 bytes from ravi.dev: icmp_seq=2 ttl=64 time=0.039ms','64 bytes from ravi.dev: icmp_seq=3 ttl=64 time=0.041ms','<span class="ok">3 packets transmitted, 3 received, 0% packet loss</span>'],
+    coffee:()=>['<span class="hi">☕ Coffee Status Report</span>','  cups today:    ██████░░░░  3 / 5','  current mood:  caffeinated and dangerous','  next meeting:  fueled and ready','<span class="dm">this terminal runs on espresso and Sprint tickets</span>'],
+    sudo:()=>['<span class="er">Nice try.</span>','sudo: you are not in the sudoers file.','This incident will be reported (to absolutely no one).'],
+    ls:()=>['hero/  about/  skills/  experience/  projects/  contact/','<span class="dm">tip: `open &lt;section&gt;` jumps to any of these</span>'],
     pwd:()=>['/home/ravi/portfolio'],
-    whoami:()=>['ravi'],
-    date:()=>[new Date().toLocaleString()],
-    hi:()=>['<span class="hi">hey 👋 — type `help`</span>'],
-    hello:()=>['<span class="hi">hello! type `help` to explore</span>']
+    whoami:()=>['ravi — full stack engineer, distributed systems nerd, mountain motorcyclist'],
+    date:()=>[new Date().toLocaleString()+' (your local time)'],
+    hi:()=>['<span class="hi">hey 👋</span>  — type <span class="hi">help</span> to see what this thing can do'],
+    hello:()=>['<span class="hi">hello!</span> — type <span class="hi">help</span> to explore'],
+    clear:()=>{out.innerHTML='';return null}
   };
+  // Track page load time for uptime command
+  if(!window._pageLoadTime) window._pageLoadTime = Date.now();
   function print(lines){if(!lines)return;lines.forEach(l=>{const d=document.createElement('div');d.innerHTML=l;out.appendChild(d)});out.scrollTop=out.scrollHeight;}
-  function run(cmd){const t=cmd.trim().toLowerCase();const d=document.createElement('div');d.innerHTML=`<span class="hi">$</span> ${cmd}`;out.appendChild(d);if(!t)return;hist.unshift(cmd);hi=-1;const fn=cmds[t];fn?print(fn()):print([`<span class="er">not found: ${t}</span> — try 'help'`]);out.scrollTop=out.scrollHeight;}
+  function run(cmd){
+    const t=cmd.trim().toLowerCase();
+    const d=document.createElement('div');d.innerHTML=`<span class="hi">$</span> ${cmd}`;out.appendChild(d);
+    if(!t)return;
+    hist.unshift(cmd);hi=-1;
+    const parts=t.split(/\s+/);
+    const fn=cmds[parts[0]];
+    if(fn){
+      // pass remaining args for multi-word commands like `open skills`
+      print(fn(parts[1]));
+    } else {
+      print([`<span class="er">not found: ${t}</span> — try <span class="hi">help</span>`]);
+    }
+    out.scrollTop=out.scrollHeight;
+  }
+  // Lock body scroll when terminal is open so only #term-out scrolls
+  function lockBodyScroll(){
+    window._termScrollY=window.scrollY;
+    document.body.style.overflow='hidden';
+    document.body.style.position='fixed';
+    document.body.style.top=-window._termScrollY+'px';
+    document.body.style.width='100%';
+  }
+  function unlockBodyScroll(){
+    document.body.style.overflow='';
+    document.body.style.position='';
+    document.body.style.top='';
+    document.body.style.width='';
+    window.scrollTo(0,window._termScrollY||0);
+  }
+  // Stop wheel/touch events on the terminal from bubbling to the page
+  term.addEventListener('wheel',function(e){e.stopPropagation();},{passive:true});
+  out.addEventListener('touchmove',function(e){e.stopPropagation();},{passive:true});
   window.toggleTerm=function(){
     open=!open;
     const bd=document.getElementById('term-backdrop');
     if(open){
+      lockBodyScroll();
       term.style.display='block';
       setTimeout(()=>{term.classList.add('open');bd.classList.add('open');},10);
       if(!out.children.length)print(['<span class="hi">ravi.dev terminal</span>','<span class="dm">type help to start · press backtick to close</span>','']);
       setTimeout(()=>inp.focus(),100);
     } else {
       term.classList.remove('open');bd.classList.remove('open');
+      unlockBodyScroll();
       setTimeout(()=>{term.style.display='none';},260);
     }
   };
