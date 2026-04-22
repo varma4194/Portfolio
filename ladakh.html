@@ -157,7 +157,13 @@ html.light-mode .page-portal.theme-ladakh .pp-tagline{ color:rgba(13,26,40,0.5);
   var navigating = false;
   // bfcache fix: reset navigating flag when page is restored from browser cache (mobile back button)
   window.addEventListener('pageshow', function(e){
-    if(e.persisted){ navigating = false; sessionStorage.removeItem('portalIn'); }
+    if(e.persisted){
+      navigating = false;
+      sessionStorage.removeItem('portalIn');
+      document.documentElement.classList.remove('portal-pending');
+      var stuck = document.querySelector('.page-portal');
+      if(stuck) stuck.parentNode.removeChild(stuck);
+    }
   });
   window.pagePortal = function(key, url){
     if(navigating) return false;
